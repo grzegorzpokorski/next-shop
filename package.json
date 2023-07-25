@@ -11,6 +11,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix --quiet",
     "format": "pnpm prettier . --write"
   },
   "dependencies": {
@@ -19,7 +20,6 @@
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.14",
     "eslint": "8.45.0",
-    "eslint-config-next": "13.4.12",
     "next": "13.4.12",
     "postcss": "8.4.27",
     "react": "18.2.0",
@@ -29,6 +29,10 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
+    "@typescript-eslint/eslint-plugin": "^6.2.0",
+    "@typescript-eslint/parser": "^6.2.0",
+    "eslint-config-next": "13.4.12",
+    "eslint-config-prettier": "^8.8.0",
     "prettier": "^3.0.0"
   }
 }
