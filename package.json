@@ -12,7 +12,8 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix --quiet",
-    "format": "pnpm prettier . --write"
+    "format": "pnpm prettier . --write",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@types/node": "20.4.4",
@@ -33,6 +34,8 @@
     "@typescript-eslint/parser": "^6.2.0",
     "eslint-config-next": "13.4.12",
     "eslint-config-prettier": "^8.8.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "prettier": "^3.0.0"
   }
 }
