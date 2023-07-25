@@ -13,7 +13,9 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix --quiet",
     "format": "pnpm prettier . --write",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test:watch": "vitest",
+    "test:once": "vitest run"
   },
   "dependencies": {
     "@types/node": "20.4.4",
@@ -30,12 +32,19 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/testing-library__jest-dom": "^5.14.9",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
+    "@vitejs/plugin-react": "^4.0.3",
     "eslint-config-next": "13.4.12",
     "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.3",
+    "jsdom": "^22.1.0",
     "lint-staged": "^13.2.3",
-    "prettier": "^3.0.0"
+    "prettier": "^3.0.0",
+    "vitest": "^0.33.0"
   }
 }
