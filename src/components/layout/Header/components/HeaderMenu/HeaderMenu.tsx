@@ -33,9 +33,15 @@ export const HeaderMenu = () => {
         role="list"
         id={menuId}
       >
-        <HeaderMenuItem href="/test">All items</HeaderMenuItem>
-        <HeaderMenuItem href="/test">Keyboards</HeaderMenuItem>
-        <HeaderMenuItem href="/test">Mouses</HeaderMenuItem>
+        <HeaderMenuItem href="/test" onClick={() => setIsMobileMenuOpen(false)}>
+          All items
+        </HeaderMenuItem>
+        <HeaderMenuItem href="/test" onClick={() => setIsMobileMenuOpen(false)}>
+          Keyboards
+        </HeaderMenuItem>
+        <HeaderMenuItem href="/test" onClick={() => setIsMobileMenuOpen(false)}>
+          Mouses
+        </HeaderMenuItem>
       </ul>
     </nav>
   );

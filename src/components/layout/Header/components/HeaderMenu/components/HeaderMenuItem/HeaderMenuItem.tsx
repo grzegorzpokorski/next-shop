@@ -4,12 +4,15 @@ import { Link } from "@/components/ui/Link/Link";
 type Props = {
   children: ReactNode;
   href: string;
+  onClick: () => void;
 };
 
-export const HeaderMenuItem = ({ children, href }: Props) => {
+export const HeaderMenuItem = ({ children, href, onClick }: Props) => {
   return (
     <li>
-      <Link href={href}>{children}</Link>
+      <Link href={href} onClick={onClick}>
+        {children}
+      </Link>
     </li>
   );
 };
