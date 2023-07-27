@@ -1,20 +1,28 @@
 "use client";
 
-import { useState, useId } from "react";
 import { twMerge } from "tailwind-merge";
+import ReactFocusLock from "react-focus-lock";
+import { useIsAboveBreakpoint } from "@/hooks/useIsAboveBreakpoint";
+import { useHeaderMenu } from "@/components/layout/Header/components/HeaderMenu/hooks/useHeaderMenu";
 import { HeaderMenuItem } from "@/components/layout/Header/components/HeaderMenu/components/HeaderMenuItem/HeaderMenuItem";
 import { HeaderMenuToggler } from "@/components/layout/Header/components/HeaderMenu/components/HeaderMenuToggler/HeaderMenuToggler";
 
 export const HeaderMenu = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const menuId = useId();
+  const { closeMobileMenu, isMobileMenuOpen, toggleMobileMenu } =
+    useHeaderMenu();
+  const isAboveBreakpoint = useIsAboveBreakpoint({ breakpoint: 768 });
 
   return (
-    <nav className="order-1 md:order-2 md:mx-auto relative">
+    <ReactFocusLock
+      as="nav"
+      disabled={!isMobileMenuOpen || isAboveBreakpoint}
+      returnFocus
+      className="order-1 md:order-2 md:mx-auto relative"
+    >
       <HeaderMenuToggler
-        onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+        onClick={toggleMobileMenu}
         isOpen={isMobileMenuOpen}
-        menuId={menuId}
+        menuId="menu"
       />
       <ul
         className={twMerge(
@@ -31,18 +39,18 @@ export const HeaderMenu = () => {
           "list-none gap-6 overflow-y-auto w-full lg:w-auto text-center",
         )}
         role="list"
-        id={menuId}
+        id="menu"
       >
-        <HeaderMenuItem href="/test" onClick={() => setIsMobileMenuOpen(false)}>
+        <HeaderMenuItem href="/test" onClick={closeMobileMenu}>
           All items
         </HeaderMenuItem>
-        <HeaderMenuItem href="/test" onClick={() => setIsMobileMenuOpen(false)}>
+        <HeaderMenuItem href="/test" onClick={closeMobileMenu}>
           Keyboards
         </HeaderMenuItem>
-        <HeaderMenuItem href="/test" onClick={() => setIsMobileMenuOpen(false)}>
+        <HeaderMenuItem href="/test" onClick={closeMobileMenu}>
           Mouses
         </HeaderMenuItem>
       </ul>
-    </nav>
+    </ReactFocusLock>
   );
 };
