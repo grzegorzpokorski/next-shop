@@ -14,7 +14,7 @@ export const Header = () => {
           </div>
           <HeaderMenu />
           <div className="order-3 flex flex-row justify-end">
-            <Button variant="outline">
+            <Button variant="outline" size="icon">
               <FaShoppingCart />
               <span className="sr-only">open cart</span>
             </Button>

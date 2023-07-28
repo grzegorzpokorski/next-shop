@@ -12,6 +12,7 @@ export const HeaderMenuToggler = ({ onClick, isOpen, menuId }: Props) => {
   return (
     <Button
       variant="outline"
+      size="icon"
       className={twMerge("relative z-50 md:hidden")}
       onClick={onClick}
       aria-expanded={isOpen}
