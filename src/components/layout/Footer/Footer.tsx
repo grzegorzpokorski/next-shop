@@ -6,7 +6,7 @@ import { Link } from "@/components/ui/Link/Link";
 
 export const Footer = () => {
   return (
-    <footer className="py-6 border-t-2 bg-white dark:bg-neutral-900">
+    <footer className="py-6 border-t bg-white dark:bg-neutral-900">
       <Container as="div">
         <div className="flex flex-row justify-between items-center">
           <p className="text-sm">

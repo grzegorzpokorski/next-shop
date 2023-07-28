@@ -1,0 +1,142 @@
+[
+  {
+    "id": 0,
+    "name": "Logitech M330 silent",
+    "slug": "logitech-m330-silent",
+    "price": 149.99,
+    "category": "mysz",
+    "image": {
+      "url": "/images/logitech-m330-silent-bg-transparent.png",
+      "height": 532,
+      "width": 600,
+      "alt": "czarna myszka logitech m330 silent ukazana z góry"
+    },
+    "availableAmount": 1
+  },
+  {
+    "id": 1,
+    "name": "Logitech MX Keys for mac",
+    "slug": "logitech-mx-keys-mac",
+    "price": 492,
+    "category": "klawiatura",
+    "image": {
+      "url": "/images/logitech-mx-keys-mac-bg-transparent.png",
+      "height": 514,
+      "width": 580,
+      "alt": "szaro-grafitowa klawiatura logitech mx keys mac ukazana z profilu"
+    },
+    "availableAmount": 5
+  },
+  {
+    "id": 2,
+    "name": "Logitech MX Keys mini rose",
+    "slug": "logitech-mx-keys-mini-rose",
+    "price": 499,
+    "category": "klawiatura",
+    "image": {
+      "url": "/images/logitech-mx-keys-mini-rose-bg-transparent.png",
+      "height": 514,
+      "width": 580,
+      "alt": "różowa klawiatura Logitech MX Keys mini rose ukazana pod kątem"
+    },
+    "availableAmount": 2
+  },
+  {
+    "id": 3,
+    "name": "Logitech MX Keys Plus",
+    "slug": "logitech-mx-keys-plus",
+    "price": 599,
+    "category": "klawiatura",
+    "image": {
+      "url": "/images/logitech-mx-keys-plus-bg-transparent.png",
+      "height": 514,
+      "width": 580,
+      "alt": "klawiatura Logitech MX Keys Plus ukazana pod katem z podkładką na nadgarstki i nadajnikem"
+    },
+    "availableAmount": 5
+  },
+  {
+    "id": 4,
+    "name": "Logitech MX Keys",
+    "slug": "logitech-mx-keys",
+    "price": 463,
+    "category": "klawiatura",
+    "image": {
+      "url": "/images/logitech-mx-keys-bg-transparent.png",
+      "height": 514,
+      "width": 580,
+      "alt": "klawiatura Logitech MX Keys ukazana pod kątem z nadajnikiem"
+    },
+    "availableAmount": 20
+  },
+  {
+    "id": 5,
+    "name": "Logitech MX Master 3S (grafitowy)",
+    "slug": "logitech-mx-master-3s-grafit",
+    "price": 499,
+    "category": "mysz",
+    "image": {
+      "url": "/images/logitech-mx-master-3s-grafit-bg-transparent.png",
+      "height": 514,
+      "width": 580,
+      "alt": "mysz Logitech mx master 3s w kolorze grafitowym o ergonomicznym kształcie ukazana od góry"
+    },
+    "availableAmount": 20
+  },
+  {
+    "id": 6,
+    "name": "Logitech MX Master 3S (jasnoszary)",
+    "slug": "logitech-mx-master-3s-szary",
+    "price": 499,
+    "category": "mysz",
+    "image": {
+      "url": "/images/logitech-mx-master-3s-szary-bg-transparent.png",
+      "height": 514,
+      "width": 580,
+      "alt": "mysz Logitech mx master 3s w kolorze jasnoszarym o ergonomicznym kształcie ukazana od góry"
+    },
+    "availableAmount": 20
+  },
+  {
+    "id": 7,
+    "name": "Logitech MX Mechanical Mini",
+    "slug": "logitech-mx-mechanical-mini",
+    "price": 639,
+    "category": "klawiatura",
+    "image": {
+      "url": "/images/logitech-mx-mechanical-mini-bg-transparent.png",
+      "height": 514,
+      "width": 580,
+      "alt": "grafitowa klawiatura Logitech mx mechanical mini ukazana pod katem z nadajnikiem"
+    },
+    "availableAmount": 0
+  },
+  {
+    "id": 8,
+    "name": "Logitech MX Mechanical",
+    "slug": "logitech-mx-mechanical",
+    "price": 699,
+    "category": "klawiatura",
+    "image": {
+      "url": "/images/logitech-mx-mechanical-bg-transparent.png",
+      "height": 514,
+      "width": 580,
+      "alt": "grafitowa klawiatura Logitech mx mechanical ukazana pod kątem z nadajnikiem"
+    },
+    "availableAmount": 15
+  },
+  {
+    "id": 9,
+    "name": "Klawiatura Logitech MX Keys Mini (szary)",
+    "slug": "mx-keys-mini-mac",
+    "price": 489,
+    "category": "klawiatura",
+    "image": {
+      "url": "/images/mx-keys-mini-mac-bg-transparent.png",
+      "height": 514,
+      "width": 580,
+      "alt": "jasnoszara klawiatura Logitech mx keys mini dla urządzeń mac ukazana pod kątem"
+    },
+    "availableAmount": 3
+  }
+]

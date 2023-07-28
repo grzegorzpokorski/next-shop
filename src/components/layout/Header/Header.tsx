@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button/Button";
 
 export const Header = () => {
   return (
-    <header className="bg-white dark:bg-neutral-900">
+    <header className="bg-white dark:bg-neutral-900 border-b">
       <Container as="div">
         <div className="grid grid-cols-3 items-center justify-center h-20">
           <div className="flex mx-auto md:m-0 order-2 md:order-1">
