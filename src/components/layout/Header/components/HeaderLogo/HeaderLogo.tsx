@@ -15,7 +15,13 @@ export const HeaderLogo = ({ children }: Props) => {
 
   return (
     <Link href={isHome ? "#" : "/"} variant="logo">
-      {isHome ? <Heading as="h1">{children}</Heading> : children}
+      {isHome ? (
+        <Heading as="h1" variant="default">
+          {children}
+        </Heading>
+      ) : (
+        children
+      )}
     </Link>
   );
 };

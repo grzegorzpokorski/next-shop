@@ -15,7 +15,7 @@ type HeadingProps = {
 const baseStyles = twMerge("font-bold");
 
 const variants = {
-  default: "",
+  default: "font-bold",
 } as const;
 
 const sizes = {
@@ -25,7 +25,7 @@ const sizes = {
 export const Heading = ({
   as: Tag,
   children,
-  variant,
+  variant = "default",
   size,
   id,
 }: HeadingProps) => {

@@ -11,11 +11,12 @@ const linkVariants = {
   default: twMerge(
     "text-neutral-600 hover:text-neutral-800",
     "hover:underline underline-offset-2",
-    "dark:text-neutral-100 dark:hover:text-neutral-300",
+    "dark:text-neutral-100 dark:hover:text-neutral-400",
   ),
   logo: twMerge(
+    "font-bold",
     "text-neutral-600 hover:text-neutral-800",
-    "dark:text-neutral-100 dark:hover:text-neutral-300",
+    "dark:text-neutral-100 dark:hover:text-neutral-400",
   ),
 } as const;
 
