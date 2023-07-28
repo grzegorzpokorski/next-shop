@@ -9,14 +9,13 @@ const transitionStyles = "transition-colors motion-reduce:transition-none";
 
 const linkVariants = {
   default: twMerge(
-    "text-slate-800 hover:text-indigo-500",
+    "text-neutral-600 hover:text-neutral-800",
     "hover:underline underline-offset-2",
-    "dark:text-neutral-400 dark:hover:text-indigo-300",
+    "dark:text-neutral-100 dark:hover:text-neutral-300",
   ),
   logo: twMerge(
-    "text-lg font-bold",
-    "text-slate-800 hover:text-indigo-500",
-    "dark:text-neutral-200 dark:hover:text-indigo-300",
+    "text-neutral-600 hover:text-neutral-800",
+    "dark:text-neutral-100 dark:hover:text-neutral-300",
   ),
 } as const;
 

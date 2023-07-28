@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button/Button";
 
 export const Header = () => {
   return (
-    <header className="bg-white dark:bg-neutral-900 border-b dark:border-neutral-800">
+    <header className="bg-white dark:bg-neutral-900">
       <Container as="div">
         <div className="grid grid-cols-3 items-center justify-center h-20">
           <div className="flex mx-auto md:m-0 order-2 md:order-1">
@@ -14,7 +14,7 @@ export const Header = () => {
           </div>
           <HeaderMenu />
           <div className="order-3 flex flex-row justify-end">
-            <Button variant="outline-indigo">
+            <Button variant="outline">
               <FaShoppingCart />
               <span className="sr-only">open cart</span>
             </Button>

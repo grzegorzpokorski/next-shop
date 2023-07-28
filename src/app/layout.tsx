@@ -22,8 +22,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pl">
-      <body className={`${poppins.variable} bg-slate-100 dark:bg-neutral-800`}>
+    <html lang="pl" suppressHydrationWarning>
+      <body
+        className={`${poppins.variable} bg-neutral-100 dark:bg-neutral-900`}
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
           {children}
