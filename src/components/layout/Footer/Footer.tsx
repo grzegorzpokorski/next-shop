@@ -9,7 +9,7 @@ export const Footer = () => {
     <footer className="py-6 border-t bg-white dark:bg-neutral-900">
       <Container as="div">
         <div className="flex flex-row justify-between items-center">
-          <p className="text-sm">
+          <p className="text-sm flex-1">
             &copy; {new Date().getFullYear()} next-shop. All rights reserved.
             Created by{" "}
             <Link href="https://github.com/grzegorzpokorski">
