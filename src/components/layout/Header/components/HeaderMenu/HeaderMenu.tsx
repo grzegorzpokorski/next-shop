@@ -28,7 +28,7 @@ export const HeaderMenu = () => {
         className={twMerge(
           "fixed md:relative z-30 md:auto",
           "inset-0 py-16 md:py-0 border-t-2 md:border-0",
-          "bg-white",
+          "bg-white dark:bg-neutral-900 md:bg-transparent",
           "list-none flex flex-row gap-4",
           "flex flex-col items-center justify-center md:flex-row",
           "overflow-y-auto",

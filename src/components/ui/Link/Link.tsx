@@ -11,8 +11,13 @@ const linkVariants = {
   default: twMerge(
     "text-slate-800 hover:text-indigo-500",
     "hover:underline underline-offset-2",
+    "dark:text-neutral-400 dark:hover:text-indigo-300",
   ),
-  logo: twMerge("text-lg font-bold", "text-slate-800 hover:text-indigo-500"),
+  logo: twMerge(
+    "text-lg font-bold",
+    "text-slate-800 hover:text-indigo-500",
+    "dark:text-neutral-200 dark:hover:text-indigo-300",
+  ),
 } as const;
 
 export type LinkProps = {
