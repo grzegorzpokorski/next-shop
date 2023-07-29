@@ -27,7 +27,7 @@ export const HeaderMenu = () => {
       <ul
         className={twMerge(
           "fixed md:relative z-30 md:auto",
-          "inset-0 py-16 md:py-0",
+          "inset-0 h-screen md:h-auto py-16 md:py-0",
           "bg-white dark:bg-neutral-900 md:bg-transparent",
           "list-none flex flex-row gap-4",
           "flex flex-col items-center justify-center md:flex-row",
@@ -41,14 +41,14 @@ export const HeaderMenu = () => {
         role="list"
         id="menu"
       >
-        <HeaderMenuItem href="/test" onClick={closeMobileMenu}>
-          All items
+        <HeaderMenuItem href="/products" onClick={closeMobileMenu}>
+          Cała oferta
         </HeaderMenuItem>
         <HeaderMenuItem href="/test" onClick={closeMobileMenu}>
-          Keyboards
+          Klawiatury
         </HeaderMenuItem>
         <HeaderMenuItem href="/test" onClick={closeMobileMenu}>
-          Mouses
+          Myszki
         </HeaderMenuItem>
       </ul>
     </ReactFocusLock>

@@ -1,14 +1,15 @@
 import "@/styles/globals.css";
 import { Poppins } from "next/font/google";
 import type { Metadata } from "next";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Header } from "@/components/layout/Header/Header";
 import { Footer } from "@/components/layout/Footer/Footer";
-import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { Main } from "@/components/layout/Main/Main";
 
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "700"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
@@ -28,7 +29,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
-          {children}
+          <Main>{children}</Main>
           <Footer />
         </ThemeProvider>
       </body>
