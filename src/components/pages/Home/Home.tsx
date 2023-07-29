@@ -1,11 +1,9 @@
-import data from "@/data/data.json";
-import { ProductsList } from "@/components/layout/ProductsList/ProductsList";
 import { Container } from "@/components/ui/Container/Container";
 
 export const Home = () => {
   return (
     <Container as="section">
-      <ProductsList products={data} />
+      <p className="my-4">home - tu będą bannery</p>
     </Container>
   );
 };
