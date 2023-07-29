@@ -41,13 +41,13 @@ export const HeaderMenu = () => {
         role="list"
         id="menu"
       >
-        <HeaderMenuItem href="/products" onClick={closeMobileMenu}>
-          Cała oferta
+        <HeaderMenuItem href="/offer" onClick={closeMobileMenu}>
+          Oferta
         </HeaderMenuItem>
-        <HeaderMenuItem href="/test" onClick={closeMobileMenu}>
+        <HeaderMenuItem href="/keyboards" onClick={closeMobileMenu}>
           Klawiatury
         </HeaderMenuItem>
-        <HeaderMenuItem href="/test" onClick={closeMobileMenu}>
+        <HeaderMenuItem href="/mice" onClick={closeMobileMenu}>
           Myszki
         </HeaderMenuItem>
       </ul>
