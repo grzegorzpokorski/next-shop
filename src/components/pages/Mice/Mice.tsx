@@ -8,9 +8,11 @@ export const Mice = () => {
   return (
     <>
       <PageHeader title="Myszki" />
-      <Container as="section">
+      <Container as="section" aria-labelledby="page-title">
         <header className="pt-8 pb-4">
-          <Heading as="h2">Myszki</Heading>
+          <Heading as="h2" id="page-title">
+            Myszki
+          </Heading>
         </header>
         <ProductsList
           products={data.filter((item) => item.category === "mysz")}

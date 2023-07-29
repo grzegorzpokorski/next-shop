@@ -8,9 +8,11 @@ export const Keyboards = () => {
   return (
     <>
       <PageHeader title="Klawiatury" />
-      <Container as="section">
+      <Container as="section" aria-labelledby="page-title">
         <header className="pt-8 pb-4">
-          <Heading as="h2">Klawiatury</Heading>
+          <Heading as="h2" id="page-title">
+            Klawiatury
+          </Heading>
         </header>
         <ProductsList
           products={data.filter((item) => item.category === "klawiatura")}

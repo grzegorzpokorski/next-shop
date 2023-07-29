@@ -138,5 +138,117 @@
       "alt": "jasnoszara klawiatura Logitech mx keys mini dla urządzeń mac ukazana pod kątem"
     },
     "availableAmount": 3
+  },
+  {
+    "id": 10,
+    "name": "Logitech POP Keys Daydream",
+    "slug": "logitech-pop-keys-daydream",
+    "price": 679,
+    "category": "klawiatura",
+    "image": {
+      "url": "/images/logitech-pop-keys-daydream-bg-transparent.png",
+      "height": 532,
+      "width": 600,
+      "alt": "Klawiatura mechaniczna Logitech POP Keys Daydream ukazana pod kątem"
+    },
+    "availableAmount": 3
+  },
+  {
+    "id": 11,
+    "name": "Logitech G213 Prodigy",
+    "slug": "logitech-g213-prodigy",
+    "price": 199,
+    "category": "klawiatura",
+    "image": {
+      "url": "/images/logitech-g213-prodigy-bg-transparent.png",
+      "height": 532,
+      "width": 600,
+      "alt": "Klawiatura membranowa Logitech G213 Prodigy ukazana pod kątem"
+    },
+    "availableAmount": 3
+  },
+  {
+    "id": 12,
+    "name": "Logitech M220 Silent - czerwony",
+    "slug": "logitech-m220-silent-czerwony",
+    "price": 119,
+    "category": "mysz",
+    "image": {
+      "url": "/images/logitech-m220-silent-czerwony-bg-transparent.png",
+      "height": 532,
+      "width": 600,
+      "alt": "mysz Logitech M220 Silent w kolorze czerwonym ukazana od góry"
+    },
+    "availableAmount": 20
+  },
+  {
+    "id": 13,
+    "name": "Logitech Signature M650 L - grafitowy",
+    "slug": "logitech-mysz-bezprzew-signature-m650-l-grafit",
+    "price": 169.99,
+    "category": "mysz",
+    "image": {
+      "url": "/images/logitech-mysz-bezprzew-signature-m650-l-grafit-bg-transparent.png",
+      "height": 532,
+      "width": 600,
+      "alt": "mysz Logitech Signature M650 L w kolorze grafitowym ukazana od góry"
+    },
+    "availableAmount": 20
+  },
+  {
+    "id": 14,
+    "name": "Logitech MX Ergo",
+    "slug": "logitech-mx-ergo",
+    "price": 389,
+    "category": "mysz",
+    "image": {
+      "url": "/images/logitech-mx-ergo-bg-transparent.png",
+      "height": 532,
+      "width": 600,
+      "alt": "mysz Logitech MX Ergo ukazana od góry"
+    },
+    "availableAmount": 20
+  },
+  {
+    "id": 15,
+    "name": "Logitech POP Mouse Heartbreaker",
+    "slug": "logitech-pop-mouse-heartbreaker",
+    "price": 139,
+    "category": "mysz",
+    "image": {
+      "url": "/images/logitech-pop-mouse-heartbreaker-bg-transparent.png",
+      "height": 532,
+      "width": 600,
+      "alt": "mysz Logitech POP Mouse Heartbreaker ukazana od góry"
+    },
+    "availableAmount": 20
+  },
+  {
+    "id": 16,
+    "name": "Logitech M705",
+    "slug": "logitech-m705",
+    "price": 149.99,
+    "category": "mysz",
+    "image": {
+      "url": "/images/logitech-m705-bg-transparent.png",
+      "height": 532,
+      "width": 600,
+      "alt": "mysz Logitech M705 ukazana od góry"
+    },
+    "availableAmount": 20
+  },
+  {
+    "id": 17,
+    "name": "Logitech MX Anywhere 2S - grafitowy",
+    "slug": "logitech-mx-anywhere-2s-grafitowy",
+    "price": 379,
+    "category": "mysz",
+    "image": {
+      "url": "/images/logitech-mx-anywhere-2s-grafitowy-bg-transparent.png",
+      "height": 532,
+      "width": 600,
+      "alt": "mysz Logitech MX Anywhere 2S w kolorze grafitowym ukazana od góry"
+    },
+    "availableAmount": 20
   }
 ]

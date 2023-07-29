@@ -8,9 +8,11 @@ export const Offer = () => {
   return (
     <>
       <PageHeader title="Wszystkie produkty" />
-      <Container as="section">
+      <Container as="section" aria-labelledby="page-title">
         <header className="pt-8 pb-4">
-          <Heading as="h2">Lista produktów</Heading>
+          <Heading as="h2" id="page-title">
+            Lista produktów
+          </Heading>
         </header>
         <ProductsList products={data} />
       </Container>
