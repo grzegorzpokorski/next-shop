@@ -1,4 +1,4 @@
-import { Product } from "@/components/layout/ProductsList/components/Product/Product";
+import { Product } from "@/components/ProductsList/components/Product/Product";
 import type data from "@/data/data.json";
 
 type Props = {
