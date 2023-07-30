@@ -25,7 +25,7 @@ export const Product = ({ product }: Props) => {
             alt={product.image.alt}
             className="relative h-full w-full object-contain transition motion-reduce:transition-none duration-300 ease-in-out motion-safe:hover:scale-105"
           />
-          <div className="absolute bottom-0 left-0 right-0 flex w-full px-4 pb-4 @container/label">
+          <div className="absolute bottom-0 left-0 right-0 flex w-full px-4 pb-4">
             <div className="flex w-full gap-4 items-center rounded border bg-white/70 p-1 font-medium text-black backdrop-blur-md text-xs dark:border-neutral-800 dark:bg-black/70 dark:text-white">
               <h3 className="inline leading-none tracking-tight mr-auto pl-2">
                 {product.name}
