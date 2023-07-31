@@ -1,0 +1,5 @@
+query GetProductBySlug($slug: String!) {
+  product(channel: "pl", slug: $slug) {
+    ...ProductDetails
+  }
+}

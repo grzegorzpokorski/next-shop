@@ -1,0 +1,25 @@
+overwrite: true
+schema: "${SALEOR_URL}"
+documents: "src/graphql/**/*.graphql"
+generates:
+  src/generated/:
+    preset: "client"
+    presetConfig:
+      fragmentMasking: false
+      dedupeFragments: true
+    config:
+      exportFragmentSpreadSubTypes: true
+      defaultScalarType: "unknown"
+      useTypeImports: true
+      dedupeFragments: true
+      skipTypename: true
+      documentMode: "string"
+      scalars:
+        _Any: "unknown"
+        Date: "string"
+        DateTime: "string"
+        Decimal: "number"
+        JSON: "unknown"
+        JSONString: "string"
+        PositiveDecimal: "number"
+    plugins: []
