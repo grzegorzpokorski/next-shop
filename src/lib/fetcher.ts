@@ -1,7 +1,7 @@
 import type { TypedDocumentString } from "@/generated/graphql";
 import { env } from "@/lib/env.mjs";
 
-const endpoint = env.SALEOR_URL;
+const endpoint = env.HYGRAPH_URL;
 
 type GraphQlError = {
   message: string;

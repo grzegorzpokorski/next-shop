@@ -1,0 +1,14 @@
+query GetProductsByCategorySlug(
+  $categorySlug: String!
+  $limit: Int!
+  $skip: Int!
+) {
+  products(
+    locales: pl
+    where: { category: { Category: { slug: $categorySlug } } }
+    first: $limit
+    skip: $skip
+  ) {
+    ...ProductSummary
+  }
+}

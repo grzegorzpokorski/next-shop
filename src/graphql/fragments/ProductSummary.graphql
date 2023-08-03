@@ -1,10 +1,7 @@
-fragment ProductDetails on Product {
+fragment ProductSummary on Product {
   id
   name
   slug
-  description {
-    html
-  }
   category {
     ...CategoryDetails
   }
@@ -14,6 +11,7 @@ fragment ProductDetails on Product {
     where: {
       mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]
     }
+    first: 1
   ) {
     id
     mimeType

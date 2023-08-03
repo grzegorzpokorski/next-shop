@@ -1,5 +1,5 @@
 query GetProductBySlug($slug: String!) {
-  product(channel: "pl", slug: $slug) {
+  product(where: { slug: $slug }, locales: pl) {
     ...ProductDetails
   }
 }

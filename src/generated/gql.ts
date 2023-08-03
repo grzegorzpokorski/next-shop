@@ -12,24 +12,64 @@ import * as types from "./graphql";
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-  "fragment ProductDetails on Product {\n  id\n  slug\n  name\n  isAvailableForPurchase\n  description\n  seoTitle\n  seoDescription\n  pricing {\n    priceRange {\n      start {\n        gross {\n          currency\n          amount\n        }\n      }\n      stop {\n        gross {\n          currency\n          amount\n        }\n      }\n    }\n  }\n  media {\n    url(size: 1080)\n    type\n    alt\n  }\n  collections {\n    name\n  }\n  updatedAt\n}":
+  "fragment CategoryDetails on Category {\n  id\n  name\n  slug\n}":
+    types.CategoryDetailsFragmentDoc,
+  'fragment ProductDetails on Product {\n  id\n  name\n  slug\n  description {\n    html\n  }\n  category {\n    ...CategoryDetails\n  }\n  price\n  currency\n  gallery(\n    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}\n  ) {\n    id\n    mimeType\n    url(transformation: {document: {output: {format: webp}}})\n    width\n    height\n    fileName\n  }\n  quantityAvailable\n  updatedAt\n  createdAt\n}':
     types.ProductDetailsFragmentDoc,
-  'query GetProductBySlug($slug: String!) {\n  product(channel: "pl", slug: $slug) {\n    ...ProductDetails\n  }\n}':
+  'fragment ProductSummary on Product {\n  id\n  name\n  slug\n  category {\n    ...CategoryDetails\n  }\n  price\n  currency\n  gallery(\n    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}\n    first: 1\n  ) {\n    id\n    mimeType\n    url(transformation: {document: {output: {format: webp}}})\n    width\n    height\n    fileName\n  }\n  quantityAvailable\n  updatedAt\n  createdAt\n}':
+    types.ProductSummaryFragmentDoc,
+  "query GetAllProducts($limit: Int!, $skip: Int!) {\n  products(locales: pl, first: $limit, skip: $skip) {\n    ...ProductSummary\n  }\n}":
+    types.GetAllProductsDocument,
+  "query GetCategories {\n  categories(first: 100) {\n    id\n    name\n    slug\n  }\n}":
+    types.GetCategoriesDocument,
+  "query GetProductBySlug($slug: String!) {\n  product(where: {slug: $slug}, locales: pl) {\n    ...ProductDetails\n  }\n}":
     types.GetProductBySlugDocument,
+  "query GetProductsByCategorySlug($categorySlug: String!, $limit: Int!, $skip: Int!) {\n  products(\n    locales: pl\n    where: {category: {Category: {slug: $categorySlug}}}\n    first: $limit\n    skip: $skip\n  ) {\n    ...ProductSummary\n  }\n}":
+    types.GetProductsByCategorySlugDocument,
 };
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "fragment ProductDetails on Product {\n  id\n  slug\n  name\n  isAvailableForPurchase\n  description\n  seoTitle\n  seoDescription\n  pricing {\n    priceRange {\n      start {\n        gross {\n          currency\n          amount\n        }\n      }\n      stop {\n        gross {\n          currency\n          amount\n        }\n      }\n    }\n  }\n  media {\n    url(size: 1080)\n    type\n    alt\n  }\n  collections {\n    name\n  }\n  updatedAt\n}",
+  source: "fragment CategoryDetails on Category {\n  id\n  name\n  slug\n}",
+): typeof import("./graphql").CategoryDetailsFragmentDoc;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: 'fragment ProductDetails on Product {\n  id\n  name\n  slug\n  description {\n    html\n  }\n  category {\n    ...CategoryDetails\n  }\n  price\n  currency\n  gallery(\n    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}\n  ) {\n    id\n    mimeType\n    url(transformation: {document: {output: {format: webp}}})\n    width\n    height\n    fileName\n  }\n  quantityAvailable\n  updatedAt\n  createdAt\n}',
 ): typeof import("./graphql").ProductDetailsFragmentDoc;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: 'query GetProductBySlug($slug: String!) {\n  product(channel: "pl", slug: $slug) {\n    ...ProductDetails\n  }\n}',
+  source: 'fragment ProductSummary on Product {\n  id\n  name\n  slug\n  category {\n    ...CategoryDetails\n  }\n  price\n  currency\n  gallery(\n    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}\n    first: 1\n  ) {\n    id\n    mimeType\n    url(transformation: {document: {output: {format: webp}}})\n    width\n    height\n    fileName\n  }\n  quantityAvailable\n  updatedAt\n  createdAt\n}',
+): typeof import("./graphql").ProductSummaryFragmentDoc;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "query GetAllProducts($limit: Int!, $skip: Int!) {\n  products(locales: pl, first: $limit, skip: $skip) {\n    ...ProductSummary\n  }\n}",
+): typeof import("./graphql").GetAllProductsDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "query GetCategories {\n  categories(first: 100) {\n    id\n    name\n    slug\n  }\n}",
+): typeof import("./graphql").GetCategoriesDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "query GetProductBySlug($slug: String!) {\n  product(where: {slug: $slug}, locales: pl) {\n    ...ProductDetails\n  }\n}",
 ): typeof import("./graphql").GetProductBySlugDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "query GetProductsByCategorySlug($categorySlug: String!, $limit: Int!, $skip: Int!) {\n  products(\n    locales: pl\n    where: {category: {Category: {slug: $categorySlug}}}\n    first: $limit\n    skip: $skip\n  ) {\n    ...ProductSummary\n  }\n}",
+): typeof import("./graphql").GetProductsByCategorySlugDocument;
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
