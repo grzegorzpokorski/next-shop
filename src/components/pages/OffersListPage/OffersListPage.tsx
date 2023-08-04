@@ -22,10 +22,15 @@ export const OffersListPage = ({
     <>
       <PageHeader title="Wszystkie produkty" />
       <Container as="section" aria-labelledby="page-title">
-        <header className="pt-8 pb-4">
+        <header className="flex justify-between items-center pt-8 pb-4">
           <Heading as="h2" id="page-title">
-            {title} ({products.length} z {count})
+            {title}
           </Heading>
+          <p className="text-neutral-500 text-sm">
+            {" "}
+            {products.length} {products.length > 1 ? "ofert" : "oferta"} z{" "}
+            {count}
+          </p>
         </header>
         <ProductsList products={products} />
       </Container>
