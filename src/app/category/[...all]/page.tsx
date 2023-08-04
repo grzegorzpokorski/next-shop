@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { OffersListPage } from "@/components/pages/OffersListPage/OffersListPage";
+import { ProductsListPage } from "@/components/pages/ProductsListPage/ProductsListPage";
 import { getProductsByCategorySlug } from "@/queries/getProductsByCategorySlug";
 import { env } from "@/lib/env.mjs";
 import { getCategoryNameBySlug } from "@/queries/getCategoryNameBySlug";
@@ -24,18 +24,18 @@ export default async function Page({
     limit: 8,
     skip: ((currentPage < 1 ? 1 : currentPage) - 1) * env.OFFERS_PER_PAGE,
   });
-
   const category = await getCategoryNameBySlug({ slug: categorySlug });
 
-  if (!category) return notFound();
+  if (!category || products.length === 0) return notFound();
 
   return (
-    <OffersListPage
+    <ProductsListPage
       products={products}
       currentPage={currentPage}
       lastPage={Math.ceil(count / env.OFFERS_PER_PAGE)}
       count={count}
       title={`Kategoria: ${category.name}`}
+      baseUrl={`/category/${category.name}`}
     />
   );
 }

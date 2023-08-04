@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { OffersListPage } from "@/components/pages/OffersListPage/OffersListPage";
+import { ProductsListPage } from "@/components/pages/ProductsListPage/ProductsListPage";
 import { getAllProducts } from "@/queries/getAllProducts";
 import { env } from "@/lib/env.mjs";
 
@@ -20,12 +20,13 @@ export default async function Page({ params: { page } }: Props) {
   });
 
   return (
-    <OffersListPage
+    <ProductsListPage
       products={products}
       currentPage={currentPage}
       lastPage={Math.ceil(count / env.OFFERS_PER_PAGE)}
       count={count}
       title="Wszystkie produkty"
+      baseUrl="/products"
     />
   );
 }

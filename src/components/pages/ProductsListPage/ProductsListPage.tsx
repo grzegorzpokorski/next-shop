@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { PageHeader } from "@/components/layout/PageHeader/PageHeader";
 import type { ProductSummaryFragment } from "@/generated/graphql";
+import { Pagination } from "@/components/Pagination/Pagination";
 
 type Props = {
   currentPage: number;
@@ -10,13 +11,16 @@ type Props = {
   products: ProductSummaryFragment[];
   title: string;
   count: number;
+  baseUrl: string;
 };
 
-export const OffersListPage = ({
-  /*currentPage,
-  lastPage,*/ products,
+export const ProductsListPage = ({
+  currentPage,
+  lastPage,
+  products,
   count,
   title,
+  baseUrl,
 }: Props) => {
   return (
     <>
@@ -32,7 +36,19 @@ export const OffersListPage = ({
             {count}
           </p>
         </header>
-        <ProductsList products={products} />
+        {products.length > 0 ? (
+          <ProductsList products={products} />
+        ) : (
+          <p>Brak produktów</p>
+        )}
+        <Pagination
+          pagination={{
+            currentPage: currentPage,
+            totalPages: lastPage,
+            searchParams: null,
+            baseUrl: baseUrl,
+          }}
+        />
       </Container>
     </>
   );
