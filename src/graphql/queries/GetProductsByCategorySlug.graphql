@@ -11,4 +11,11 @@ query GetProductsByCategorySlug(
   ) {
     ...ProductSummary
   }
+  productsConnection(
+    where: { category: { Category: { slug: $categorySlug } } }
+  ) {
+    aggregate {
+      count
+    }
+  }
 }

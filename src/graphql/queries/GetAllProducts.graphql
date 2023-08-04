@@ -2,4 +2,9 @@ query GetAllProducts($limit: Int!, $skip: Int!) {
   products(locales: pl, first: $limit, skip: $skip) {
     ...ProductSummary
   }
+  productsConnection {
+    aggregate {
+      count
+    }
+  }
 }

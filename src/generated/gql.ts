@@ -18,13 +18,15 @@ const documents = {
     types.ProductDetailsFragmentDoc,
   'fragment ProductSummary on Product {\n  id\n  name\n  slug\n  category {\n    ...CategoryDetails\n  }\n  price\n  currency\n  gallery(\n    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}\n    first: 1\n  ) {\n    id\n    mimeType\n    url(transformation: {document: {output: {format: webp}}})\n    width\n    height\n    fileName\n  }\n  quantityAvailable\n  updatedAt\n  createdAt\n}':
     types.ProductSummaryFragmentDoc,
-  "query GetAllProducts($limit: Int!, $skip: Int!) {\n  products(locales: pl, first: $limit, skip: $skip) {\n    ...ProductSummary\n  }\n}":
+  "query GetAllProducts($limit: Int!, $skip: Int!) {\n  products(locales: pl, first: $limit, skip: $skip) {\n    ...ProductSummary\n  }\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}":
     types.GetAllProductsDocument,
   "query GetCategories {\n  categories(first: 100) {\n    id\n    name\n    slug\n  }\n}":
     types.GetCategoriesDocument,
+  "query GetCategoryNameBySlug($categorySlug: String!) {\n  category(where: {slug: $categorySlug}) {\n    id\n    name\n    slug\n  }\n}":
+    types.GetCategoryNameBySlugDocument,
   "query GetProductBySlug($slug: String!) {\n  product(where: {slug: $slug}, locales: pl) {\n    ...ProductDetails\n  }\n}":
     types.GetProductBySlugDocument,
-  "query GetProductsByCategorySlug($categorySlug: String!, $limit: Int!, $skip: Int!) {\n  products(\n    locales: pl\n    where: {category: {Category: {slug: $categorySlug}}}\n    first: $limit\n    skip: $skip\n  ) {\n    ...ProductSummary\n  }\n}":
+  "query GetProductsByCategorySlug($categorySlug: String!, $limit: Int!, $skip: Int!) {\n  products(\n    locales: pl\n    where: {category: {Category: {slug: $categorySlug}}}\n    first: $limit\n    skip: $skip\n  ) {\n    ...ProductSummary\n  }\n  productsConnection(where: {category: {Category: {slug: $categorySlug}}}) {\n    aggregate {\n      count\n    }\n  }\n}":
     types.GetProductsByCategorySlugDocument,
 };
 
@@ -50,7 +52,7 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "query GetAllProducts($limit: Int!, $skip: Int!) {\n  products(locales: pl, first: $limit, skip: $skip) {\n    ...ProductSummary\n  }\n}",
+  source: "query GetAllProducts($limit: Int!, $skip: Int!) {\n  products(locales: pl, first: $limit, skip: $skip) {\n    ...ProductSummary\n  }\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}",
 ): typeof import("./graphql").GetAllProductsDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -62,13 +64,19 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
+  source: "query GetCategoryNameBySlug($categorySlug: String!) {\n  category(where: {slug: $categorySlug}) {\n    id\n    name\n    slug\n  }\n}",
+): typeof import("./graphql").GetCategoryNameBySlugDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
   source: "query GetProductBySlug($slug: String!) {\n  product(where: {slug: $slug}, locales: pl) {\n    ...ProductDetails\n  }\n}",
 ): typeof import("./graphql").GetProductBySlugDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "query GetProductsByCategorySlug($categorySlug: String!, $limit: Int!, $skip: Int!) {\n  products(\n    locales: pl\n    where: {category: {Category: {slug: $categorySlug}}}\n    first: $limit\n    skip: $skip\n  ) {\n    ...ProductSummary\n  }\n}",
+  source: "query GetProductsByCategorySlug($categorySlug: String!, $limit: Int!, $skip: Int!) {\n  products(\n    locales: pl\n    where: {category: {Category: {slug: $categorySlug}}}\n    first: $limit\n    skip: $skip\n  ) {\n    ...ProductSummary\n  }\n  productsConnection(where: {category: {Category: {slug: $categorySlug}}}) {\n    aggregate {\n      count\n    }\n  }\n}",
 ): typeof import("./graphql").GetProductsByCategorySlugDocument;
 
 export function graphql(source: string) {

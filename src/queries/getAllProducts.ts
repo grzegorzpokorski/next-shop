@@ -15,5 +15,8 @@ export const getAllProducts = async ({ limit, skip }: Args) => {
     },
   });
 
-  return result;
+  return {
+    products: result.products,
+    count: result.productsConnection.aggregate.count,
+  };
 };

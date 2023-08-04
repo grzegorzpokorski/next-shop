@@ -4647,12 +4647,21 @@ export type GetAllProductsQuery = {
       fileName: string;
     }>;
   }>;
+  productsConnection: { aggregate: { count: number } };
 };
 
 export type GetCategoriesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetCategoriesQuery = {
   categories: Array<{ id: string; name: string; slug: string }>;
+};
+
+export type GetCategoryNameBySlugQueryVariables = Exact<{
+  categorySlug: Scalars["String"]["input"];
+}>;
+
+export type GetCategoryNameBySlugQuery = {
+  category?: { id: string; name: string; slug: string } | null;
 };
 
 export type GetProductBySlugQueryVariables = Exact<{
@@ -4708,6 +4717,7 @@ export type GetProductsByCategorySlugQuery = {
       fileName: string;
     }>;
   }>;
+  productsConnection: { aggregate: { count: number } };
 };
 
 export class TypedDocumentString<TResult, TVariables>
@@ -4810,6 +4820,11 @@ export const GetAllProductsDocument = new TypedDocumentString(`
   products(locales: pl, first: $limit, skip: $skip) {
     ...ProductSummary
   }
+  productsConnection {
+    aggregate {
+      count
+    }
+  }
 }
     fragment CategoryDetails on Category {
   id
@@ -4854,6 +4869,18 @@ export const GetCategoriesDocument = new TypedDocumentString(`
     `) as unknown as TypedDocumentString<
   GetCategoriesQuery,
   GetCategoriesQueryVariables
+>;
+export const GetCategoryNameBySlugDocument = new TypedDocumentString(`
+    query GetCategoryNameBySlug($categorySlug: String!) {
+  category(where: {slug: $categorySlug}) {
+    id
+    name
+    slug
+  }
+}
+    `) as unknown as TypedDocumentString<
+  GetCategoryNameBySlugQuery,
+  GetCategoryNameBySlugQueryVariables
 >;
 export const GetProductBySlugDocument = new TypedDocumentString(`
     query GetProductBySlug($slug: String!) {
@@ -4904,6 +4931,11 @@ export const GetProductsByCategorySlugDocument = new TypedDocumentString(`
     skip: $skip
   ) {
     ...ProductSummary
+  }
+  productsConnection(where: {category: {Category: {slug: $categorySlug}}}) {
+    aggregate {
+      count
+    }
   }
 }
     fragment CategoryDetails on Category {

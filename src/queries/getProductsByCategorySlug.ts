@@ -21,5 +21,8 @@ export const getProductsByCategorySlug = async ({
     },
   });
 
-  return result.products;
+  return {
+    products: result.products,
+    count: result.productsConnection.aggregate.count,
+  };
 };
