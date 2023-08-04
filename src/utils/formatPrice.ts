@@ -1,8 +1,12 @@
-const CURRENCY_FORMATTER = new Intl.NumberFormat("pl-PL", {
-  currency: "PLN",
-  style: "currency",
-  minimumFractionDigits: 2,
-});
+type Args = {
+  price: number;
+  currency: string;
+};
 
-export const formatPrice = (number: number): string =>
-  CURRENCY_FORMATTER.format(number);
+export const formatPrice = ({ price, currency }: Args): string => {
+  return new Intl.NumberFormat("pl-PL", {
+    currency: currency,
+    style: "currency",
+    minimumFractionDigits: 2,
+  }).format(price);
+};
