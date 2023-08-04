@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { formatPrice } from "@/utils/formatPrice";
-import type data from "@/data/data.json";
+import type { ProductSummaryFragment } from "@/generated/graphql";
 
 type Props = {
-  product: (typeof data)[number];
+  product: ProductSummaryFragment;
 };
 
 export const Product = ({ product }: Props) => {
@@ -19,10 +19,10 @@ export const Product = ({ product }: Props) => {
       >
         <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-indigo-600 dark:hover:border-indigo-500 dark:bg-black relative border-neutral-200 dark:border-neutral-800">
           <Image
-            src={product.image.url}
-            width={product.image.width}
-            height={product.image.height}
-            alt={product.image.alt}
+            src={product.gallery[0].url}
+            width={product.gallery[0].width || 0}
+            height={product.gallery[0].height || 0}
+            alt={product.gallery[0].fileName}
             className="relative h-full w-full object-contain transition motion-reduce:transition-none duration-300 ease-in-out motion-safe:hover:scale-105"
             unoptimized
           />
@@ -32,7 +32,10 @@ export const Product = ({ product }: Props) => {
                 {product.name}
               </h3>
               <p className="flex-none rounded bg-indigo-600 p-2 text-white">
-                {formatPrice(product.price)}
+                {formatPrice({
+                  price: product.price,
+                  currency: product.currency,
+                })}
               </p>
             </div>
           </div>

@@ -44,10 +44,10 @@ export const HeaderMenu = () => {
         <HeaderMenuItem href="/offer" onClick={closeMobileMenu}>
           Oferta
         </HeaderMenuItem>
-        <HeaderMenuItem href="/keyboards" onClick={closeMobileMenu}>
+        <HeaderMenuItem href="/category/klawiatury" onClick={closeMobileMenu}>
           Klawiatury
         </HeaderMenuItem>
-        <HeaderMenuItem href="/mice" onClick={closeMobileMenu}>
+        <HeaderMenuItem href="/category/myszki" onClick={closeMobileMenu}>
           Myszki
         </HeaderMenuItem>
       </ul>

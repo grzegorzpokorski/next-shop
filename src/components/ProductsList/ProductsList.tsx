@@ -1,8 +1,8 @@
 import { Product } from "@/components/ProductsList/components/Product/Product";
-import type data from "@/data/data.json";
+import type { ProductSummaryFragment } from "@/generated/graphql";
 
 type Props = {
-  products: (typeof data)[number][];
+  products: ProductSummaryFragment[];
 };
 
 export const ProductsList = ({ products }: Props) => {
