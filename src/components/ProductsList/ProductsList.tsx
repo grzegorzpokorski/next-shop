@@ -4,7 +4,7 @@ import type { ProductSummaryFragment } from "@/generated/graphql";
 
 type Props = {
   products: ProductSummaryFragment[];
-  slider: boolean;
+  slider?: boolean;
 };
 
 export const ProductsList = ({ products, slider }: Props) => {
