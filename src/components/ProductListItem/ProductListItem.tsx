@@ -11,7 +11,7 @@ export const ProductListItem = ({ product }: Props) => {
   return (
     <li
       key={product.id}
-      className="aspect-square transition-opacity motion-reduce:transition-none motion-safe:animate-fadeIn w-full min-w-[300px] md:max-w-[calc((100%-16px*2)/2)] lg:max-w-[calc((100%-16px*3)/3)] xl:max-w-[calc((100%-16px*4)/4)]"
+      className="aspect-square transition-opacity motion-reduce:transition-none motion-safe:animate-fadeIn w-full min-w-[300px] md:w-[calc(100%/2-16px)] lg:w-[calc(100%/3-16px)] xl:w-[calc(100%/4-16px)]"
     >
       <Link
         href={`/product/${product.slug}`}

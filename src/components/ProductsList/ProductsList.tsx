@@ -11,8 +11,8 @@ export const ProductsList = ({ products, slider }: Props) => {
   return (
     <ul
       className={twMerge(
-        "list-none gap-4 py-4 flex",
-        slider ? "overflow-x-auto" : "flex-wrap",
+        "list-none py-4 flex justify-between gap-y-4",
+        slider ? "overflow-x-auto gap-x-4" : "flex-wrap",
       )}
       role="list"
     >
