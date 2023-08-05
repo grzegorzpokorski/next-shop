@@ -7,11 +7,11 @@ type Props = {
   product: ProductSummaryFragment;
 };
 
-export const Product = ({ product }: Props) => {
+export const ProductListItem = ({ product }: Props) => {
   return (
     <li
       key={product.id}
-      className="aspect-square transition-opacity motion-reduce:transition-none motion-safe:animate-fadeIn"
+      className="aspect-square transition-opacity motion-reduce:transition-none motion-safe:animate-fadeIn w-full min-w-[300px] md:max-w-[calc((100%-16px*2)/2)] lg:max-w-[calc((100%-16px*3)/3)] xl:max-w-[calc((100%-16px*4)/4)]"
     >
       <Link
         href={`/product/${product.slug}`}

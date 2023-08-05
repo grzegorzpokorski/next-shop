@@ -1,19 +1,24 @@
-import { Product } from "@/components/ProductsList/components/Product/Product";
+import { twMerge } from "tailwind-merge";
+import { ProductListItem } from "@/components/ProductListItem/ProductListItem";
 import type { ProductSummaryFragment } from "@/generated/graphql";
 
 type Props = {
   products: ProductSummaryFragment[];
+  slider: boolean;
 };
 
-export const ProductsList = ({ products }: Props) => {
+export const ProductsList = ({ products, slider }: Props) => {
   return (
     <ul
-      className="list-none grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4 py-4"
+      className={twMerge(
+        "list-none gap-4 py-4 flex",
+        slider ? "overflow-x-auto" : "flex-wrap",
+      )}
       role="list"
     >
       {products.length > 0 &&
         products.map((product) => {
-          return <Product key={product.id} product={product} />;
+          return <ProductListItem key={product.id} product={product} />;
         })}
     </ul>
   );
