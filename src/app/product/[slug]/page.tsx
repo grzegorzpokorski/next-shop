@@ -3,12 +3,21 @@ import { ProductPage } from "@/components/pages/ProductPage/ProductPage";
 import { getProductBySlug } from "@/queries/getProductBySlug";
 import { getProductsByCategorySlug } from "@/queries/getProductsByCategorySlug";
 import { shuffleArray } from "@/utils/shuffleArray";
+import { getAllProducts } from "@/queries/getAllProducts";
 
 type Props = {
   params: {
     slug: string;
   };
 };
+
+export async function generateStaticParams() {
+  const { products } = await getAllProducts({ limit: 100, skip: 0 });
+
+  return products.map((product) => ({
+    slug: product.slug,
+  }));
+}
 
 export default async function Page({ params: { slug } }: Props) {
   const product = await getProductBySlug({ slug });
