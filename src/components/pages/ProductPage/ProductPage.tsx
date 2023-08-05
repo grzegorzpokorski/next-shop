@@ -31,7 +31,7 @@ export const ProductPage = async ({ product, relatedProducts }: Props) => {
               priority
             />
           </div>
-          <div className="flex flex-col items-start gap-4 w-full md:w-1/2">
+          <div className="flex flex-col items-start justify-center gap-4 w-full md:w-1/2">
             <header className="mb-4">
               <Heading as="h1" size="4xl" id="product-title">
                 {product.name}
