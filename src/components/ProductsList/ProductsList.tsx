@@ -11,14 +11,16 @@ export const ProductsList = ({ products, slider }: Props) => {
   return (
     <ul
       className={twMerge(
-        "list-none py-4 flex justify-between gap-y-4",
-        slider ? "overflow-x-auto gap-x-4" : "flex-wrap",
+        "list-none py-4 gap-3 md:gap-4",
+        slider
+          ? "flex flex-row overflow-x-auto"
+          : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
       )}
       role="list"
     >
       {products.length > 0 &&
         products.map((product) => {
-          return <ProductListItem key={product.id} product={product} />;
+          return <ProductListItem key={product.id} product={product} slider />;
         })}
     </ul>
   );

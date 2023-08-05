@@ -1,17 +1,22 @@
 import Link from "next/link";
 import Image from "next/image";
-import { formatPrice } from "@/utils/formatPrice";
+import { twMerge } from "tailwind-merge";
 import type { ProductSummaryFragment } from "@/generated/graphql";
+import { PriceTag } from "@/components/PriceTag/PriceTag";
 
 type Props = {
   product: ProductSummaryFragment;
+  slider?: boolean;
 };
 
-export const ProductListItem = ({ product }: Props) => {
+export const ProductListItem = ({ product, slider }: Props) => {
   return (
     <li
       key={product.id}
-      className="aspect-square transition-opacity motion-reduce:transition-none motion-safe:animate-fadeIn w-full min-w-[300px] md:w-[calc(100%/2-16px)] lg:w-[calc(100%/3-16px)] xl:w-[calc(100%/4-16px)]"
+      className={twMerge(
+        "aspect-square transition-opacity motion-reduce:transition-none motion-safe:animate-fadeIn w-full",
+        slider && "min-w-[280px]",
+      )}
     >
       <Link
         href={`/product/${product.slug}`}
@@ -31,12 +36,7 @@ export const ProductListItem = ({ product }: Props) => {
               <h3 className="inline leading-none tracking-tight mr-auto pl-2">
                 {product.name}
               </h3>
-              <p className="flex-none rounded bg-indigo-600 p-2 text-white">
-                {formatPrice({
-                  price: product.price,
-                  currency: product.currency,
-                })}
-              </p>
+              <PriceTag currency={product.currency} price={product.price} />
             </div>
           </div>
         </div>
