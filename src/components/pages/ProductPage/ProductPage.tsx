@@ -21,13 +21,13 @@ export const ProductPage = async ({ product, relatedProducts }: Props) => {
     <div className="flex flex-col gap-8 py-8">
       <Container as="div" aria-labelledby="product-title">
         <div className="flex flex-col md:flex-row gap-8 bg-white dark:bg-black p-8 rounded-md border">
-          <div className="flex flex-col md:w-1/2 md:min-h-[500px]">
+          <div className="h-full w-full md:w-1/2 overflow-hidden">
             <Image
               src={product.gallery[0].url}
               alt={""}
               width={product.gallery[0].width || 0}
               height={product.gallery[0].height || 0}
-              className="w-auto h-auto max-h-[500px] m-auto"
+              className="relative m-auto object-contain"
               priority
             />
           </div>
