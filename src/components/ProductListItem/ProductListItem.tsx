@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 import type { ProductSummaryFragment } from "@/generated/graphql";
-import { PriceTag } from "@/components/PriceTag/PriceTag";
+import { formatPrice } from "@/utils/formatPrice";
 
 type Props = {
   product: ProductSummaryFragment;
@@ -36,7 +36,16 @@ export const ProductListItem = ({ product, slider }: Props) => {
               <h3 className="inline leading-none tracking-tight mr-auto pl-2">
                 {product.name}
               </h3>
-              <PriceTag currency={product.currency} price={product.price} />
+              <p
+                className={twMerge(
+                  "flex-none rounded bg-indigo-600 p-2 text-white",
+                )}
+              >
+                {formatPrice({
+                  price: product.price,
+                  currency: product.currency,
+                })}
+              </p>
             </div>
           </div>
         </div>
