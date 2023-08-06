@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { ProductsListPage } from "@/components/pages/ProductsListPage/ProductsListPage";
 import { getAllProducts } from "@/queries/getAllProducts";
 import { env } from "@/lib/env.mjs";
@@ -8,6 +9,19 @@ type Props = {
     page: string | undefined;
   };
 };
+
+export function generateMetadata({
+  params: { page },
+}: {
+  params: { page: string };
+}): Metadata {
+  return {
+    title: `Oferta`,
+    alternates: {
+      canonical: `/products/${page}`,
+    },
+  };
+}
 
 export default async function Page({ params: { page } }: Props) {
   const currentPage = typeof page === "undefined" ? 1 : parseInt(page);

@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { ProductsListPage } from "@/components/pages/ProductsListPage/ProductsListPage";
 import { getProductsByCategorySlug } from "@/queries/getProductsByCategorySlug";
 import { env } from "@/lib/env.mjs";
@@ -7,6 +8,36 @@ import { getCategoryNameBySlug } from "@/queries/getCategoryNameBySlug";
 type Props = {
   params: {
     all: string[];
+  };
+};
+
+export const generateMetadata = async ({
+  params: {
+    all: [categorySlug],
+  },
+}: Props): Promise<Metadata> => {
+  const category = await getCategoryNameBySlug({ slug: categorySlug });
+
+  if (!category) return notFound();
+
+  return {
+    title: category.name,
+    description: category.description,
+    alternates: {
+      canonical: `/category/${categorySlug}`,
+    },
+    openGraph: {
+      images: [
+        {
+          url: `/api/og?width=1200&height=630&subtitle=${encodeURIComponent(
+            "Finansowanie",
+          )}`,
+          width: 1200,
+          height: 630,
+          alt: "",
+        },
+      ],
+    },
   };
 };
 

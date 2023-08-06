@@ -733,6 +733,7 @@ export type Category = Node & {
   createdAt: Scalars["DateTime"]["output"];
   /** User that created this document */
   createdBy?: Maybe<User>;
+  description?: Maybe<Scalars["String"]["output"]>;
   /** Get the document in other stages */
   documentInStages: Array<Category>;
   /** List of Category versions */
@@ -843,6 +844,8 @@ export type CategoryConnection = {
 
 export type CategoryCreateInput = {
   createdAt?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** description input for default locale (pl) */
+  description?: InputMaybe<Scalars["String"]["input"]>;
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: InputMaybe<CategoryCreateLocalizationsInput>;
   /** name input for default locale (pl) */
@@ -854,6 +857,7 @@ export type CategoryCreateInput = {
 
 export type CategoryCreateLocalizationDataInput = {
   createdAt?: InputMaybe<Scalars["DateTime"]["input"]>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
   name: Scalars["String"]["input"];
   updatedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
 };
@@ -1007,6 +1011,8 @@ export type CategoryManyWhereInput = {
 export enum CategoryOrderByInput {
   CreatedAtAsc = "createdAt_ASC",
   CreatedAtDesc = "createdAt_DESC",
+  DescriptionAsc = "description_ASC",
+  DescriptionDesc = "description_DESC",
   IdAsc = "id_ASC",
   IdDesc = "id_DESC",
   NameAsc = "name_ASC",
@@ -1020,6 +1026,8 @@ export enum CategoryOrderByInput {
 }
 
 export type CategoryUpdateInput = {
+  /** description input for default locale (pl) */
+  description?: InputMaybe<Scalars["String"]["input"]>;
   /** Manage document localizations */
   localizations?: InputMaybe<CategoryUpdateLocalizationsInput>;
   /** name input for default locale (pl) */
@@ -1029,6 +1037,7 @@ export type CategoryUpdateInput = {
 };
 
 export type CategoryUpdateLocalizationDataInput = {
+  description?: InputMaybe<Scalars["String"]["input"]>;
   name?: InputMaybe<Scalars["String"]["input"]>;
 };
 
@@ -1065,8 +1074,24 @@ export type CategoryUpdateManyInlineInput = {
 };
 
 export type CategoryUpdateManyInput = {
-  /** No fields in updateMany data input */
-  _?: InputMaybe<Scalars["String"]["input"]>;
+  /** description input for default locale (pl) */
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  /** Optional updates to localizations */
+  localizations?: InputMaybe<CategoryUpdateManyLocalizationsInput>;
+};
+
+export type CategoryUpdateManyLocalizationDataInput = {
+  description?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type CategoryUpdateManyLocalizationInput = {
+  data: CategoryUpdateManyLocalizationDataInput;
+  locale: Locale;
+};
+
+export type CategoryUpdateManyLocalizationsInput = {
+  /** Localizations to update */
+  update?: InputMaybe<Array<CategoryUpdateManyLocalizationInput>>;
 };
 
 export type CategoryUpdateManyWithNestedWhereInput = {
@@ -1152,6 +1177,27 @@ export type CategoryWhereInput = {
     Array<InputMaybe<Scalars["DateTime"]["input"]>>
   >;
   createdBy?: InputMaybe<UserWhereInput>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values containing the given string. */
+  description_contains?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values ending with the given string. */
+  description_ends_with?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values that are contained in given list. */
+  description_in?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  description_not?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values not containing the given string. */
+  description_not_contains?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values that are not contained in given list. */
+  description_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars["String"]["input"]>>
+  >;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values starting with the given string. */
+  description_starts_with?: InputMaybe<Scalars["String"]["input"]>;
   documentInStages_every?: InputMaybe<CategoryWhereStageInput>;
   documentInStages_none?: InputMaybe<CategoryWhereStageInput>;
   documentInStages_some?: InputMaybe<CategoryWhereStageInput>;
@@ -1996,6 +2042,8 @@ export type Product = Node & {
   publishedBy?: Maybe<User>;
   quantityAvailable: Scalars["Int"]["output"];
   scheduledIn: Array<ScheduledOperation>;
+  seoDescription?: Maybe<Scalars["String"]["output"]>;
+  seoTitle?: Maybe<Scalars["String"]["output"]>;
   slug: Scalars["String"]["output"];
   /** System stage field */
   stage: Stage;
@@ -2186,6 +2234,10 @@ export type ProductCreateInput = {
   name: Scalars["String"]["input"];
   price: Scalars["Float"]["input"];
   quantityAvailable: Scalars["Int"]["input"];
+  /** seoDescription input for default locale (pl) */
+  seoDescription?: InputMaybe<Scalars["String"]["input"]>;
+  /** seoTitle input for default locale (pl) */
+  seoTitle?: InputMaybe<Scalars["String"]["input"]>;
   slug: Scalars["String"]["input"];
   updatedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
 };
@@ -2194,6 +2246,8 @@ export type ProductCreateLocalizationDataInput = {
   createdAt?: InputMaybe<Scalars["DateTime"]["input"]>;
   description: Scalars["RichTextAST"]["input"];
   name: Scalars["String"]["input"];
+  seoDescription?: InputMaybe<Scalars["String"]["input"]>;
+  seoTitle?: InputMaybe<Scalars["String"]["input"]>;
   updatedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
 };
 
@@ -2401,6 +2455,10 @@ export enum ProductOrderByInput {
   PublishedAtDesc = "publishedAt_DESC",
   QuantityAvailableAsc = "quantityAvailable_ASC",
   QuantityAvailableDesc = "quantityAvailable_DESC",
+  SeoDescriptionAsc = "seoDescription_ASC",
+  SeoDescriptionDesc = "seoDescription_DESC",
+  SeoTitleAsc = "seoTitle_ASC",
+  SeoTitleDesc = "seoTitle_DESC",
   SlugAsc = "slug_ASC",
   SlugDesc = "slug_DESC",
   UpdatedAtAsc = "updatedAt_ASC",
@@ -2419,12 +2477,18 @@ export type ProductUpdateInput = {
   name?: InputMaybe<Scalars["String"]["input"]>;
   price?: InputMaybe<Scalars["Float"]["input"]>;
   quantityAvailable?: InputMaybe<Scalars["Int"]["input"]>;
+  /** seoDescription input for default locale (pl) */
+  seoDescription?: InputMaybe<Scalars["String"]["input"]>;
+  /** seoTitle input for default locale (pl) */
+  seoTitle?: InputMaybe<Scalars["String"]["input"]>;
   slug?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type ProductUpdateLocalizationDataInput = {
   description?: InputMaybe<Scalars["RichTextAST"]["input"]>;
   name?: InputMaybe<Scalars["String"]["input"]>;
+  seoDescription?: InputMaybe<Scalars["String"]["input"]>;
+  seoTitle?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type ProductUpdateLocalizationInput = {
@@ -2467,10 +2531,16 @@ export type ProductUpdateManyInput = {
   localizations?: InputMaybe<ProductUpdateManyLocalizationsInput>;
   price?: InputMaybe<Scalars["Float"]["input"]>;
   quantityAvailable?: InputMaybe<Scalars["Int"]["input"]>;
+  /** seoDescription input for default locale (pl) */
+  seoDescription?: InputMaybe<Scalars["String"]["input"]>;
+  /** seoTitle input for default locale (pl) */
+  seoTitle?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type ProductUpdateManyLocalizationDataInput = {
   description?: InputMaybe<Scalars["RichTextAST"]["input"]>;
+  seoDescription?: InputMaybe<Scalars["String"]["input"]>;
+  seoTitle?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type ProductUpdateManyLocalizationInput = {
@@ -2674,6 +2744,46 @@ export type ProductWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  seoDescription?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values containing the given string. */
+  seoDescription_contains?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values ending with the given string. */
+  seoDescription_ends_with?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values that are contained in given list. */
+  seoDescription_in?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  seoDescription_not?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values not containing the given string. */
+  seoDescription_not_contains?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values not ending with the given string */
+  seoDescription_not_ends_with?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values that are not contained in given list. */
+  seoDescription_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars["String"]["input"]>>
+  >;
+  /** All values not starting with the given string. */
+  seoDescription_not_starts_with?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values starting with the given string. */
+  seoDescription_starts_with?: InputMaybe<Scalars["String"]["input"]>;
+  seoTitle?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values containing the given string. */
+  seoTitle_contains?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values ending with the given string. */
+  seoTitle_ends_with?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values that are contained in given list. */
+  seoTitle_in?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  seoTitle_not?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values not containing the given string. */
+  seoTitle_not_contains?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values not ending with the given string */
+  seoTitle_not_ends_with?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values that are not contained in given list. */
+  seoTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  /** All values not starting with the given string. */
+  seoTitle_not_starts_with?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values starting with the given string. */
+  seoTitle_starts_with?: InputMaybe<Scalars["String"]["input"]>;
   slug?: InputMaybe<Scalars["String"]["input"]>;
   /** All values containing the given string. */
   slug_contains?: InputMaybe<Scalars["String"]["input"]>;
@@ -4579,6 +4689,7 @@ export type CategoryDetailsFragment = {
   id: string;
   name: string;
   slug: string;
+  description?: string | null;
 };
 
 export type ProductDetailsFragment = {
@@ -4588,10 +4699,17 @@ export type ProductDetailsFragment = {
   price: number;
   currency: Currency;
   quantityAvailable: number;
+  seoTitle?: string | null;
+  seoDescription?: string | null;
   updatedAt: string;
   createdAt: string;
   description: { html: string };
-  category?: { id: string; name: string; slug: string } | null;
+  category?: {
+    id: string;
+    name: string;
+    slug: string;
+    description?: string | null;
+  } | null;
   gallery: Array<{
     id: string;
     mimeType?: string | null;
@@ -4611,7 +4729,12 @@ export type ProductSummaryFragment = {
   quantityAvailable: number;
   updatedAt: string;
   createdAt: string;
-  category?: { id: string; name: string; slug: string } | null;
+  category?: {
+    id: string;
+    name: string;
+    slug: string;
+    description?: string | null;
+  } | null;
   gallery: Array<{
     id: string;
     mimeType?: string | null;
@@ -4637,7 +4760,12 @@ export type GetAllProductsQuery = {
     quantityAvailable: number;
     updatedAt: string;
     createdAt: string;
-    category?: { id: string; name: string; slug: string } | null;
+    category?: {
+      id: string;
+      name: string;
+      slug: string;
+      description?: string | null;
+    } | null;
     gallery: Array<{
       id: string;
       mimeType?: string | null;
@@ -4653,7 +4781,12 @@ export type GetAllProductsQuery = {
 export type GetCategoriesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetCategoriesQuery = {
-  categories: Array<{ id: string; name: string; slug: string }>;
+  categories: Array<{
+    id: string;
+    name: string;
+    slug: string;
+    description?: string | null;
+  }>;
 };
 
 export type GetCategoryNameBySlugQueryVariables = Exact<{
@@ -4661,7 +4794,12 @@ export type GetCategoryNameBySlugQueryVariables = Exact<{
 }>;
 
 export type GetCategoryNameBySlugQuery = {
-  category?: { id: string; name: string; slug: string } | null;
+  category?: {
+    id: string;
+    name: string;
+    slug: string;
+    description?: string | null;
+  } | null;
 };
 
 export type GetProductBySlugQueryVariables = Exact<{
@@ -4676,10 +4814,17 @@ export type GetProductBySlugQuery = {
     price: number;
     currency: Currency;
     quantityAvailable: number;
+    seoTitle?: string | null;
+    seoDescription?: string | null;
     updatedAt: string;
     createdAt: string;
     description: { html: string };
-    category?: { id: string; name: string; slug: string } | null;
+    category?: {
+      id: string;
+      name: string;
+      slug: string;
+      description?: string | null;
+    } | null;
     gallery: Array<{
       id: string;
       mimeType?: string | null;
@@ -4707,7 +4852,12 @@ export type GetProductsByCategorySlugQuery = {
     quantityAvailable: number;
     updatedAt: string;
     createdAt: string;
-    category?: { id: string; name: string; slug: string } | null;
+    category?: {
+      id: string;
+      name: string;
+      slug: string;
+      description?: string | null;
+    } | null;
     gallery: Array<{
       id: string;
       mimeType?: string | null;
@@ -4743,6 +4893,7 @@ export const CategoryDetailsFragmentDoc = new TypedDocumentString(
   id
   name
   slug
+  description
 }
     `,
   { fragmentName: "CategoryDetails" },
@@ -4772,6 +4923,8 @@ export const ProductDetailsFragmentDoc = new TypedDocumentString(
     fileName
   }
   quantityAvailable
+  seoTitle
+  seoDescription
   updatedAt
   createdAt
 }
@@ -4779,6 +4932,7 @@ export const ProductDetailsFragmentDoc = new TypedDocumentString(
   id
   name
   slug
+  description
 }`,
   { fragmentName: "ProductDetails" },
 ) as unknown as TypedDocumentString<ProductDetailsFragment, unknown>;
@@ -4812,6 +4966,7 @@ export const ProductSummaryFragmentDoc = new TypedDocumentString(
   id
   name
   slug
+  description
 }`,
   { fragmentName: "ProductSummary" },
 ) as unknown as TypedDocumentString<ProductSummaryFragment, unknown>;
@@ -4830,6 +4985,7 @@ export const GetAllProductsDocument = new TypedDocumentString(`
   id
   name
   slug
+  description
 }
 fragment ProductSummary on Product {
   id
@@ -4861,24 +5017,30 @@ fragment ProductSummary on Product {
 export const GetCategoriesDocument = new TypedDocumentString(`
     query GetCategories {
   categories(first: 100) {
-    id
-    name
-    slug
+    ...CategoryDetails
   }
 }
-    `) as unknown as TypedDocumentString<
+    fragment CategoryDetails on Category {
+  id
+  name
+  slug
+  description
+}`) as unknown as TypedDocumentString<
   GetCategoriesQuery,
   GetCategoriesQueryVariables
 >;
 export const GetCategoryNameBySlugDocument = new TypedDocumentString(`
     query GetCategoryNameBySlug($categorySlug: String!) {
   category(where: {slug: $categorySlug}) {
-    id
-    name
-    slug
+    ...CategoryDetails
   }
 }
-    `) as unknown as TypedDocumentString<
+    fragment CategoryDetails on Category {
+  id
+  name
+  slug
+  description
+}`) as unknown as TypedDocumentString<
   GetCategoryNameBySlugQuery,
   GetCategoryNameBySlugQueryVariables
 >;
@@ -4892,6 +5054,7 @@ export const GetProductBySlugDocument = new TypedDocumentString(`
   id
   name
   slug
+  description
 }
 fragment ProductDetails on Product {
   id
@@ -4916,6 +5079,8 @@ fragment ProductDetails on Product {
     fileName
   }
   quantityAvailable
+  seoTitle
+  seoDescription
   updatedAt
   createdAt
 }`) as unknown as TypedDocumentString<
@@ -4942,6 +5107,7 @@ export const GetProductsByCategorySlugDocument = new TypedDocumentString(`
   id
   name
   slug
+  description
 }
 fragment ProductSummary on Product {
   id

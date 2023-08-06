@@ -23,6 +23,8 @@ fragment ProductDetails on Product {
     fileName
   }
   quantityAvailable
+  seoTitle
+  seoDescription
   updatedAt
   createdAt
 }

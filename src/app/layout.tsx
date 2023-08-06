@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Header } from "@/components/layout/Header/Header";
 import { Footer } from "@/components/layout/Footer/Footer";
 import { Main } from "@/components/layout/Main/Main";
+import { baseUrl } from "@/lib/constants";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -13,8 +14,29 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Next shop",
+  title: {
+    default: "Next Shop",
+    template: `Next Shop | %s`,
+  },
   description: "Next stunning shop written using next.js",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  metadataBase: new URL(baseUrl),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    images: [
+      {
+        url: "/api/og?width=1200&height=630",
+        width: 1200,
+        height: 630,
+        alt: "",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({

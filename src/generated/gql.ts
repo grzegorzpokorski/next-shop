@@ -12,17 +12,17 @@ import * as types from "./graphql";
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-  "fragment CategoryDetails on Category {\n  id\n  name\n  slug\n}":
+  "fragment CategoryDetails on Category {\n  id\n  name\n  slug\n  description\n}":
     types.CategoryDetailsFragmentDoc,
-  'fragment ProductDetails on Product {\n  id\n  name\n  slug\n  description {\n    html\n  }\n  category {\n    ...CategoryDetails\n  }\n  price\n  currency\n  gallery(\n    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}\n  ) {\n    id\n    mimeType\n    url(transformation: {document: {output: {format: webp}}})\n    width\n    height\n    fileName\n  }\n  quantityAvailable\n  updatedAt\n  createdAt\n}':
+  'fragment ProductDetails on Product {\n  id\n  name\n  slug\n  description {\n    html\n  }\n  category {\n    ...CategoryDetails\n  }\n  price\n  currency\n  gallery(\n    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}\n  ) {\n    id\n    mimeType\n    url(transformation: {document: {output: {format: webp}}})\n    width\n    height\n    fileName\n  }\n  quantityAvailable\n  seoTitle\n  seoDescription\n  updatedAt\n  createdAt\n}':
     types.ProductDetailsFragmentDoc,
   'fragment ProductSummary on Product {\n  id\n  name\n  slug\n  category {\n    ...CategoryDetails\n  }\n  price\n  currency\n  gallery(\n    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}\n    first: 1\n  ) {\n    id\n    mimeType\n    url(transformation: {document: {output: {format: webp}}})\n    width\n    height\n    fileName\n  }\n  quantityAvailable\n  updatedAt\n  createdAt\n}':
     types.ProductSummaryFragmentDoc,
   "query GetAllProducts($limit: Int!, $skip: Int!) {\n  products(locales: pl, first: $limit, skip: $skip) {\n    ...ProductSummary\n  }\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}":
     types.GetAllProductsDocument,
-  "query GetCategories {\n  categories(first: 100) {\n    id\n    name\n    slug\n  }\n}":
+  "query GetCategories {\n  categories(first: 100) {\n    ...CategoryDetails\n  }\n}":
     types.GetCategoriesDocument,
-  "query GetCategoryNameBySlug($categorySlug: String!) {\n  category(where: {slug: $categorySlug}) {\n    id\n    name\n    slug\n  }\n}":
+  "query GetCategoryNameBySlug($categorySlug: String!) {\n  category(where: {slug: $categorySlug}) {\n    ...CategoryDetails\n  }\n}":
     types.GetCategoryNameBySlugDocument,
   "query GetProductBySlug($slug: String!) {\n  product(where: {slug: $slug}, locales: pl) {\n    ...ProductDetails\n  }\n}":
     types.GetProductBySlugDocument,
@@ -34,13 +34,13 @@ const documents = {
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "fragment CategoryDetails on Category {\n  id\n  name\n  slug\n}",
+  source: "fragment CategoryDetails on Category {\n  id\n  name\n  slug\n  description\n}",
 ): typeof import("./graphql").CategoryDetailsFragmentDoc;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: 'fragment ProductDetails on Product {\n  id\n  name\n  slug\n  description {\n    html\n  }\n  category {\n    ...CategoryDetails\n  }\n  price\n  currency\n  gallery(\n    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}\n  ) {\n    id\n    mimeType\n    url(transformation: {document: {output: {format: webp}}})\n    width\n    height\n    fileName\n  }\n  quantityAvailable\n  updatedAt\n  createdAt\n}',
+  source: 'fragment ProductDetails on Product {\n  id\n  name\n  slug\n  description {\n    html\n  }\n  category {\n    ...CategoryDetails\n  }\n  price\n  currency\n  gallery(\n    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}\n  ) {\n    id\n    mimeType\n    url(transformation: {document: {output: {format: webp}}})\n    width\n    height\n    fileName\n  }\n  quantityAvailable\n  seoTitle\n  seoDescription\n  updatedAt\n  createdAt\n}',
 ): typeof import("./graphql").ProductDetailsFragmentDoc;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -58,13 +58,13 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "query GetCategories {\n  categories(first: 100) {\n    id\n    name\n    slug\n  }\n}",
+  source: "query GetCategories {\n  categories(first: 100) {\n    ...CategoryDetails\n  }\n}",
 ): typeof import("./graphql").GetCategoriesDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "query GetCategoryNameBySlug($categorySlug: String!) {\n  category(where: {slug: $categorySlug}) {\n    id\n    name\n    slug\n  }\n}",
+  source: "query GetCategoryNameBySlug($categorySlug: String!) {\n  category(where: {slug: $categorySlug}) {\n    ...CategoryDetails\n  }\n}",
 ): typeof import("./graphql").GetCategoryNameBySlugDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.

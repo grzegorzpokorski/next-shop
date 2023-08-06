@@ -1,7 +1,5 @@
 query GetCategories {
   categories(first: 100) {
-    id
-    name
-    slug
+    ...CategoryDetails
   }
 }
