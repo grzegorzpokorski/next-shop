@@ -16,7 +16,7 @@ type Props = {
 export const ProductPage = async ({ product, relatedProducts }: Props) => {
   return (
     <div className="flex flex-col gap-8 py-8">
-      <Container as="div" aria-labelledby="product-title">
+      <Container as="article" aria-labelledby="product-title">
         <div className="flex flex-col md:flex-row gap-8 bg-white dark:bg-black p-8 rounded-md border">
           <div className="h-full w-full md:w-1/2 overflow-hidden">
             <Image

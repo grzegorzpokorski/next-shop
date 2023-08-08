@@ -3,7 +3,10 @@ import { twMerge } from "tailwind-merge";
 
 type Props = {
   children: ReactNode;
-  as: keyof Pick<JSX.IntrinsicElements, "div" | "section" | "header">;
+  as: keyof Pick<
+    JSX.IntrinsicElements,
+    "div" | "section" | "header" | "article"
+  >;
   id?: string;
   hidden?: boolean;
 } & Pick<AriaAttributes, "aria-labelledby">;
