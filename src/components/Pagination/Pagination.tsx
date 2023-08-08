@@ -61,7 +61,7 @@ export const Pagination = ({ pagination }: Props) => {
         {pages.map((page, idx) =>
           page === QUESTIONS_PAGINATION_SEPARATOR ? (
             <li key={`${page.toString()}_${idx}`} aria-hidden="true">
-              <span className="iline-flex items-center justify-center text-secondary after:content-['…'] after:top-1/2 after:translate-y-1/2"></span>
+              <span className="iline-flex items-center justify-center after:content-['…'] after:top-1/2 after:translate-y-1/2"></span>
             </li>
           ) : (
             <li key={page}>
