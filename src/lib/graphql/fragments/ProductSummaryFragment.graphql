@@ -2,17 +2,9 @@ fragment ProductSummary on Product {
   id
   name
   slug
-  category {
-    ...CategoryDetails
-  }
   price
   currency
-  gallery(
-    where: {
-      mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]
-    }
-    first: 1
-  ) {
+  gallery(first: 1) {
     id
     mimeType
     url(transformation: { document: { output: { format: webp } } })
@@ -21,6 +13,9 @@ fragment ProductSummary on Product {
     fileName
   }
   quantityAvailable
+  category {
+    ...CategoryDetails
+  }
   updatedAt
   createdAt
 }

@@ -16,7 +16,7 @@ const documents = {
     types.CategoryDetailsFragmentDoc,
   'fragment ProductDetails on Product {\n  id\n  name\n  slug\n  description {\n    html\n  }\n  category {\n    ...CategoryDetails\n  }\n  price\n  currency\n  gallery(\n    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}\n  ) {\n    id\n    mimeType\n    url(transformation: {document: {output: {format: webp}}})\n    width\n    height\n    fileName\n  }\n  quantityAvailable\n  seoTitle\n  seoDescription\n  updatedAt\n  createdAt\n}':
     types.ProductDetailsFragmentDoc,
-  'fragment ProductSummary on Product {\n  id\n  name\n  slug\n  category {\n    ...CategoryDetails\n  }\n  price\n  currency\n  gallery(\n    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}\n    first: 1\n  ) {\n    id\n    mimeType\n    url(transformation: {document: {output: {format: webp}}})\n    width\n    height\n    fileName\n  }\n  quantityAvailable\n  updatedAt\n  createdAt\n}':
+  "fragment ProductSummary on Product {\n  id\n  name\n  slug\n  price\n  currency\n  gallery(first: 1) {\n    id\n    mimeType\n    url(transformation: {document: {output: {format: webp}}})\n    width\n    height\n    fileName\n  }\n  quantityAvailable\n  category {\n    ...CategoryDetails\n  }\n  updatedAt\n  createdAt\n}":
     types.ProductSummaryFragmentDoc,
   "query GetAllProducts($limit: Int!, $skip: Int!) {\n  products(locales: pl, first: $limit, skip: $skip) {\n    ...ProductSummary\n  }\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}":
     types.GetAllProductsDocument,
@@ -46,7 +46,7 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: 'fragment ProductSummary on Product {\n  id\n  name\n  slug\n  category {\n    ...CategoryDetails\n  }\n  price\n  currency\n  gallery(\n    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}\n    first: 1\n  ) {\n    id\n    mimeType\n    url(transformation: {document: {output: {format: webp}}})\n    width\n    height\n    fileName\n  }\n  quantityAvailable\n  updatedAt\n  createdAt\n}',
+  source: "fragment ProductSummary on Product {\n  id\n  name\n  slug\n  price\n  currency\n  gallery(first: 1) {\n    id\n    mimeType\n    url(transformation: {document: {output: {format: webp}}})\n    width\n    height\n    fileName\n  }\n  quantityAvailable\n  category {\n    ...CategoryDetails\n  }\n  updatedAt\n  createdAt\n}",
 ): typeof import("./graphql").ProductSummaryFragmentDoc;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.

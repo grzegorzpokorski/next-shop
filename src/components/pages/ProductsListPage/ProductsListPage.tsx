@@ -1,14 +1,14 @@
-import { ProductsList } from "@/components/ProductsList/ProductsList";
+import { ProductsList } from "@/components/blocks/ProductsList/ProductsList";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { PageHeader } from "@/components/layout/PageHeader/PageHeader";
-import type { ProductSummaryFragment } from "@/generated/graphql";
-import { Pagination } from "@/components/Pagination/Pagination";
+import { Pagination } from "@/components/blocks/Pagination/Pagination";
+import type { ProductWithSummary } from "@/lib/types";
 
 type Props = {
   currentPage: number;
   lastPage: number;
-  products: ProductSummaryFragment[];
+  products: ProductWithSummary[];
   title: string;
   count: number;
   baseUrl: string;

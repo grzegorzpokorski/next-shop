@@ -2,10 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 import { formatPrice } from "@/utils/formatPrice";
-import type { ProductSummaryFragment } from "@/generated/graphql";
+import type { ProductWithSummary } from "@/lib/types";
 
 type ProductsListProps = {
-  products: ProductSummaryFragment[];
+  products: ProductWithSummary[];
   slider?: boolean;
 };
 
@@ -22,21 +22,23 @@ export const ProductsList = ({ products, slider }: ProductsListProps) => {
     >
       {products.length > 0 &&
         products.map((product) => {
-          return <ProductListItem key={product.id} product={product} slider />;
+          return (
+            <ProductListItem key={product.name} product={product} slider />
+          );
         })}
     </ul>
   );
 };
 
 type ProductListItemProps = {
-  product: ProductSummaryFragment;
+  product: ProductWithSummary;
   slider?: boolean;
 };
 
 const ProductListItem = ({ product, slider }: ProductListItemProps) => {
   return (
     <li
-      key={product.id}
+      key={product.name}
       className={twMerge(
         "aspect-square transition-opacity motion-reduce:transition-none motion-safe:animate-fadeIn w-full",
         slider && "min-w-[280px]",
@@ -48,10 +50,10 @@ const ProductListItem = ({ product, slider }: ProductListItemProps) => {
       >
         <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-indigo-600 dark:hover:border-indigo-500 dark:bg-black relative border-neutral-200 dark:border-neutral-800">
           <Image
-            src={product.gallery[0].url}
-            width={product.gallery[0].width || 0}
-            height={product.gallery[0].height || 0}
-            alt={product.gallery[0].fileName}
+            src={product.thumbnail.url}
+            width={product.thumbnail.width}
+            height={product.thumbnail.height}
+            alt={product.thumbnail.alt}
             className="relative h-full w-full object-contain transition motion-reduce:transition-none duration-300 ease-in-out motion-safe:hover:scale-105"
             unoptimized
           />

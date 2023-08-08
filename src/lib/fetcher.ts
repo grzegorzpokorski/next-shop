@@ -1,4 +1,4 @@
-import type { TypedDocumentString } from "@/generated/graphql";
+import type { TypedDocumentString } from "@/lib/generated/graphql";
 import { env } from "@/lib/env.mjs";
 
 const endpoint = env.HYGRAPH_URL;

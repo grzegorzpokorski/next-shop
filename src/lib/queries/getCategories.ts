@@ -1,4 +1,4 @@
-import { GetCategoriesDocument } from "@/generated/graphql";
+import { GetCategoriesDocument } from "@/lib/generated/graphql";
 import { fetcher } from "@/lib/fetcher";
 
 export const getCategories = async () => {

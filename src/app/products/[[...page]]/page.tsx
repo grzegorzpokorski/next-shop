@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ProductsListPage } from "@/components/pages/ProductsListPage/ProductsListPage";
-import { getAllProducts } from "@/queries/getAllProducts";
+import { getAllProducts } from "@/lib/queries/getAllProducts";
 import { env } from "@/lib/env.mjs";
 
 type Props = {

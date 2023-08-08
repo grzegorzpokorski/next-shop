@@ -1,5 +1,6 @@
-import { GetProductsByCategorySlugDocument } from "@/generated/graphql";
+import { GetProductsByCategorySlugDocument } from "@/lib/generated/graphql";
 import { fetcher } from "@/lib/fetcher";
+import { reshapeProductWithSummary } from "@/lib/mappers";
 
 type Args = {
   limit: number;
@@ -22,7 +23,9 @@ export const getProductsByCategorySlug = async ({
   });
 
   return {
-    products: result.products,
+    products: result.products.map((product) =>
+      reshapeProductWithSummary(product),
+    ),
     count: result.productsConnection.aggregate.count,
   };
 };

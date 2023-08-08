@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ProductPage } from "@/components/pages/ProductPage/ProductPage";
-import { getProductBySlug } from "@/queries/getProductBySlug";
-import { getProductsByCategorySlug } from "@/queries/getProductsByCategorySlug";
+import { getProductBySlug } from "@/lib/queries/getProductBySlug";
+import { getProductsByCategorySlug } from "@/lib/queries/getProductsByCategorySlug";
 import { shuffleArray } from "@/utils/shuffleArray";
-import { getAllProducts } from "@/queries/getAllProducts";
+import { getAllProducts } from "@/lib/queries/getAllProducts";
 
 type Props = {
   params: {
@@ -31,13 +31,13 @@ export const generateMetadata = async ({
     description: product.seoDescription
       ? product.seoDescription
       : product.description.html || "",
-    openGraph: product.gallery[0]
+    openGraph: product.images[0]
       ? {
           images: [
             {
-              url: product.gallery[0].url,
-              height: product.gallery[0].height || 0,
-              width: product.gallery[0].width || 0,
+              url: product.images[0].url,
+              height: product.images[0].height,
+              width: product.images[0].width,
               alt: product.name,
             },
           ],
@@ -69,7 +69,7 @@ export default async function Page({ params: { slug } }: Props) {
     "@type": "Product",
     name: product.name,
     description: product.description,
-    image: product.gallery[0].url,
+    image: product.images[0].url,
     offers: {
       "@type": "AggregateOffer",
       availability:

@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ProductsListPage } from "@/components/pages/ProductsListPage/ProductsListPage";
-import { getProductsByCategorySlug } from "@/queries/getProductsByCategorySlug";
+import { getProductsByCategorySlug } from "@/lib/queries/getProductsByCategorySlug";
 import { env } from "@/lib/env.mjs";
-import { getCategoryNameBySlug } from "@/queries/getCategoryNameBySlug";
+import { getCategoryNameBySlug } from "@/lib/queries/getCategoryNameBySlug";
 
 type Props = {
   params: {

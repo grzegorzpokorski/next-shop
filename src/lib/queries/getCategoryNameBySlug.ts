@@ -1,4 +1,4 @@
-import { GetCategoryNameBySlugDocument } from "@/generated/graphql";
+import { GetCategoryNameBySlugDocument } from "@/lib/generated/graphql";
 import { fetcher } from "@/lib/fetcher";
 
 type Args = {

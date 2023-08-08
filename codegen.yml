@@ -1,8 +1,8 @@
 overwrite: true
 schema: "${HYGRAPH_URL}"
-documents: "src/graphql/**/*.graphql"
+documents: "src/lib/graphql/**/*.graphql"
 generates:
-  src/generated/:
+  src/lib/generated/:
     preset: "client"
     presetConfig:
       fragmentMasking: false

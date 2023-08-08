@@ -1,19 +1,16 @@
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 import { FaPlus } from "react-icons/fa";
-import { ProductsList } from "@/components/ProductsList/ProductsList";
+import { ProductsList } from "@/components/blocks/ProductsList/ProductsList";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
-import type {
-  ProductDetailsFragment,
-  ProductSummaryFragment,
-} from "@/generated/graphql";
 import { Button } from "@/components/ui/Button/Button";
 import { formatPrice } from "@/utils/formatPrice";
+import type { ProductWithDetails, ProductWithSummary } from "@/lib/types";
 
 type Props = {
-  product: ProductDetailsFragment;
-  relatedProducts: ProductSummaryFragment[];
+  product: ProductWithDetails;
+  relatedProducts: ProductWithSummary[];
 };
 
 export const ProductPage = async ({ product, relatedProducts }: Props) => {
@@ -23,10 +20,10 @@ export const ProductPage = async ({ product, relatedProducts }: Props) => {
         <div className="flex flex-col md:flex-row gap-8 bg-white dark:bg-black p-8 rounded-md border">
           <div className="h-full w-full md:w-1/2 overflow-hidden">
             <Image
-              src={product.gallery[0].url}
-              alt={""}
-              width={product.gallery[0].width || 0}
-              height={product.gallery[0].height || 0}
+              src={product.images[0].url}
+              alt={product.images[0].alt}
+              width={product.images[0].width}
+              height={product.images[0].height}
               className="relative m-auto object-contain"
               priority
             />

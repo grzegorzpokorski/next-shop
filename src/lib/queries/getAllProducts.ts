@@ -1,5 +1,6 @@
-import { GetAllProductsDocument } from "@/generated/graphql";
+import { GetAllProductsDocument } from "@/lib/generated/graphql";
 import { fetcher } from "@/lib/fetcher";
+import { reshapeProductWithSummary } from "@/lib/mappers";
 
 type Args = {
   limit: number;
@@ -16,7 +17,9 @@ export const getAllProducts = async ({ limit, skip }: Args) => {
   });
 
   return {
-    products: result.products,
+    products: result.products.map((product) =>
+      reshapeProductWithSummary(product),
+    ),
     count: result.productsConnection.aggregate.count,
   };
 };

@@ -4729,12 +4729,6 @@ export type ProductSummaryFragment = {
   quantityAvailable: number;
   updatedAt: string;
   createdAt: string;
-  category?: {
-    id: string;
-    name: string;
-    slug: string;
-    description?: string | null;
-  } | null;
   gallery: Array<{
     id: string;
     mimeType?: string | null;
@@ -4743,6 +4737,12 @@ export type ProductSummaryFragment = {
     height?: number | null;
     fileName: string;
   }>;
+  category?: {
+    id: string;
+    name: string;
+    slug: string;
+    description?: string | null;
+  } | null;
 };
 
 export type GetAllProductsQueryVariables = Exact<{
@@ -4760,12 +4760,6 @@ export type GetAllProductsQuery = {
     quantityAvailable: number;
     updatedAt: string;
     createdAt: string;
-    category?: {
-      id: string;
-      name: string;
-      slug: string;
-      description?: string | null;
-    } | null;
     gallery: Array<{
       id: string;
       mimeType?: string | null;
@@ -4774,6 +4768,12 @@ export type GetAllProductsQuery = {
       height?: number | null;
       fileName: string;
     }>;
+    category?: {
+      id: string;
+      name: string;
+      slug: string;
+      description?: string | null;
+    } | null;
   }>;
   productsConnection: { aggregate: { count: number } };
 };
@@ -4852,12 +4852,6 @@ export type GetProductsByCategorySlugQuery = {
     quantityAvailable: number;
     updatedAt: string;
     createdAt: string;
-    category?: {
-      id: string;
-      name: string;
-      slug: string;
-      description?: string | null;
-    } | null;
     gallery: Array<{
       id: string;
       mimeType?: string | null;
@@ -4866,6 +4860,12 @@ export type GetProductsByCategorySlugQuery = {
       height?: number | null;
       fileName: string;
     }>;
+    category?: {
+      id: string;
+      name: string;
+      slug: string;
+      description?: string | null;
+    } | null;
   }>;
   productsConnection: { aggregate: { count: number } };
 };
@@ -4942,15 +4942,9 @@ export const ProductSummaryFragmentDoc = new TypedDocumentString(
   id
   name
   slug
-  category {
-    ...CategoryDetails
-  }
   price
   currency
-  gallery(
-    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}
-    first: 1
-  ) {
+  gallery(first: 1) {
     id
     mimeType
     url(transformation: {document: {output: {format: webp}}})
@@ -4959,6 +4953,9 @@ export const ProductSummaryFragmentDoc = new TypedDocumentString(
     fileName
   }
   quantityAvailable
+  category {
+    ...CategoryDetails
+  }
   updatedAt
   createdAt
 }
@@ -4991,15 +4988,9 @@ fragment ProductSummary on Product {
   id
   name
   slug
-  category {
-    ...CategoryDetails
-  }
   price
   currency
-  gallery(
-    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}
-    first: 1
-  ) {
+  gallery(first: 1) {
     id
     mimeType
     url(transformation: {document: {output: {format: webp}}})
@@ -5008,6 +4999,9 @@ fragment ProductSummary on Product {
     fileName
   }
   quantityAvailable
+  category {
+    ...CategoryDetails
+  }
   updatedAt
   createdAt
 }`) as unknown as TypedDocumentString<
@@ -5113,15 +5107,9 @@ fragment ProductSummary on Product {
   id
   name
   slug
-  category {
-    ...CategoryDetails
-  }
   price
   currency
-  gallery(
-    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}
-    first: 1
-  ) {
+  gallery(first: 1) {
     id
     mimeType
     url(transformation: {document: {output: {format: webp}}})
@@ -5130,6 +5118,9 @@ fragment ProductSummary on Product {
     fileName
   }
   quantityAvailable
+  category {
+    ...CategoryDetails
+  }
   updatedAt
   createdAt
 }`) as unknown as TypedDocumentString<
