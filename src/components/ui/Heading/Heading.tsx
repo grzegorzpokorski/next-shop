@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
+import { cn } from "@/utils/cn";
 
 type HeadingProps = {
   as: keyof Pick<
@@ -35,7 +36,7 @@ export const Heading = ({
 }: HeadingProps) => {
   return (
     <Tag
-      className={twMerge(
+      className={cn(
         baseStyles,
         variant && variants[variant],
         size && sizes[size],
