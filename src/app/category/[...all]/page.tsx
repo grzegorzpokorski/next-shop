@@ -52,8 +52,8 @@ export default async function Page({
 
   const { products, count } = await getProductsByCategorySlug({
     categorySlug,
-    limit: 8,
-    skip: ((currentPage < 1 ? 1 : currentPage) - 1) * env.OFFERS_PER_PAGE,
+    limit: env.PRODUCTS_PER_PAGE,
+    skip: ((currentPage < 1 ? 1 : currentPage) - 1) * env.PRODUCTS_PER_PAGE,
   });
   const category = await getCategoryNameBySlug({ slug: categorySlug });
 
@@ -63,7 +63,7 @@ export default async function Page({
     <ProductsListPage
       products={products}
       currentPage={currentPage}
-      lastPage={Math.ceil(count / env.OFFERS_PER_PAGE)}
+      lastPage={Math.ceil(count / env.PRODUCTS_PER_PAGE)}
       count={count}
       title={`Kategoria: ${category.name}`}
       baseUrl={`/category/${category.name}`}
