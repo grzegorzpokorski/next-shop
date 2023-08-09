@@ -20,7 +20,7 @@ export const ProductPage = async ({ product, relatedProducts }: Props) => {
     <div className="flex flex-col gap-8 py-8">
       <Container as="article" aria-labelledby="product-title">
         <div className="flex flex-col md:flex-row gap-8 bg-white dark:bg-black p-8 rounded-md border">
-          <div className="h-full w-full md:w-1/2 overflow-hidden">
+          <div className="h-full w-full md:w-1/2 overflow-hidden md:sticky md:top-20">
             <Image
               src={product.images[0].url}
               alt={product.images[0].alt}
