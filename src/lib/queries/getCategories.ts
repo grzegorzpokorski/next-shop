@@ -1,3 +1,4 @@
+import { reshapeCategory } from "@/lib/mappers";
 import { GetCategoriesDocument } from "@/lib/generated/graphql";
 import { fetcher } from "@/lib/fetcher";
 
@@ -7,5 +8,5 @@ export const getCategories = async () => {
     variables: {},
   });
 
-  return result.categories;
+  return result.categories.map((category) => reshapeCategory(category));
 };

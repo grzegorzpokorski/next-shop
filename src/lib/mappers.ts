@@ -1,5 +1,6 @@
-import type { ProductWithDetails, ProductWithSummary } from "./types";
+import type { Category, ProductWithDetails, ProductWithSummary } from "./types";
 import type {
+  CategoryDetailsFragment,
   ProductDetailsFragment,
   ProductSummaryFragment,
 } from "@/lib/generated/graphql";
@@ -66,5 +67,15 @@ export const reshapeProductWithSummary = (
       : undefined,
     updatedAt: product.updatedAt,
     createdAt: product.createdAt,
+  };
+};
+
+export const reshapeCategory = (
+  category: CategoryDetailsFragment,
+): Category | undefined => {
+  return {
+    name: category.name,
+    slug: category.slug,
+    description: category.description ? category.description : undefined,
   };
 };

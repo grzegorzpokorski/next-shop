@@ -5,6 +5,12 @@ export type Image = {
   height: number;
 };
 
+export type Category = {
+  name: string;
+  slug: string;
+  description?: string;
+};
+
 export type ProductWithDetails = {
   name: string;
   slug: string;

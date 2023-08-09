@@ -64,8 +64,8 @@ export default async function Page({
       products={products}
       currentPage={currentPage}
       lastPage={Math.ceil(count / env.PRODUCTS_PER_PAGE)}
-      count={count}
       title={`Kategoria: ${category.name}`}
+      description={category.description}
       baseUrl={`/category/${category.name}`}
     />
   );

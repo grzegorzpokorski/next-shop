@@ -10,7 +10,7 @@ type Props = {
   lastPage: number;
   products: ProductWithSummary[];
   title: string;
-  count: number;
+  description?: string;
   baseUrl: string;
 };
 
@@ -18,23 +18,19 @@ export const ProductsListPage = ({
   currentPage,
   lastPage,
   products,
-  count,
   title,
+  description,
   baseUrl,
 }: Props) => {
   return (
     <>
       <PageHeader title="Wszystkie produkty" />
       <Container as="section" aria-labelledby="page-title">
-        <header className="flex justify-between items-center pt-8 pb-4">
-          <Heading as="h2" id="page-title">
+        <header className="flex flex-col gap-4 justify-between pt-16 pb-12 max-w-3xl">
+          <Heading as="h2" size="3xl" id="page-title">
             {title}
           </Heading>
-          <p className="text-neutral-500 text-sm">
-            {" "}
-            {products.length} {products.length > 1 ? "ofert" : "oferta"} z{" "}
-            {count}
-          </p>
+          {description && <p>{description}</p>}
         </header>
         {products.length > 0 ? (
           <ProductsList products={products} />

@@ -33,14 +33,11 @@ export default async function Page({ params: { page } }: Props) {
     skip: ((currentPage < 1 ? 1 : currentPage) - 1) * env.PRODUCTS_PER_PAGE,
   });
 
-  console.log(env.PRODUCTS_PER_PAGE);
-
   return (
     <ProductsListPage
       products={products}
       currentPage={currentPage}
       lastPage={Math.ceil(count / env.PRODUCTS_PER_PAGE)}
-      count={count}
       title="Wszystkie produkty"
       baseUrl="/products"
     />

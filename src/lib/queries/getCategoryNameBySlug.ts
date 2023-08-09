@@ -1,3 +1,4 @@
+import { reshapeCategory } from "@/lib/mappers";
 import { GetCategoryNameBySlugDocument } from "@/lib/generated/graphql";
 import { fetcher } from "@/lib/fetcher";
 
@@ -11,5 +12,9 @@ export const getCategoryNameBySlug = async ({ slug }: Args) => {
     variables: { categorySlug: slug },
   });
 
-  return result.category;
+  if (!result.category) {
+    throw new Error(`Category not found: ${slug}`);
+  }
+
+  return reshapeCategory(result.category);
 };
