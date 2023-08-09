@@ -18,6 +18,7 @@ export const reshapeProductWithDetails = (
     }));
 
   return {
+    id: product.id,
     name: product.name,
     slug: product.slug,
     description: {
@@ -53,6 +54,7 @@ export const reshapeProductWithSummary = (
     }))[0];
 
   return {
+    id: product.id,
     name: product.name,
     slug: product.slug,
     price: product.price,

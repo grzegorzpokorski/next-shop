@@ -11,37 +11,34 @@ export type Category = {
   description?: string;
 };
 
-export type ProductWithDetails = {
+type ProductCommonFields = {
+  id: string;
   name: string;
   slug: string;
+  price: number;
+  currency: string;
+  quantityAvailable: number;
+  updatedAt: string;
+  createdAt: string;
+};
+
+export type ProductWithDetails = ProductCommonFields & {
   description: {
     html: string;
   };
   seoTitle: string;
   seoDescription: string;
-  price: number;
-  currency: string;
-  quantityAvailable: number;
   images: Image[];
-  updatedAt: string;
-  createdAt: string;
   category?: {
     name: string;
     slug: string;
   };
 };
 
-export type ProductWithSummary = {
-  name: string;
-  slug: string;
-  price: number;
-  currency: string;
-  quantityAvailable: number;
+export type ProductWithSummary = ProductCommonFields & {
   thumbnail: Image;
   category?: {
     name: string;
     slug: string;
   };
-  updatedAt: string;
-  createdAt: string;
 };
