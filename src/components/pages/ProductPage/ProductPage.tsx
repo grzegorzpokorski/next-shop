@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import { FaPlus } from "react-icons/fa";
 import { ProductsList } from "@/components/blocks/ProductsList/ProductsList";
@@ -6,6 +7,7 @@ import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { Button } from "@/components/ui/Button/Button";
 import { formatPrice } from "@/utils/formatPrice";
+import { badgeVariants } from "@/components/ui/Badge/Badge";
 import type { ProductWithDetails, ProductWithSummary } from "@/lib/types";
 
 type Props = {
@@ -29,6 +31,12 @@ export const ProductPage = async ({ product, relatedProducts }: Props) => {
             />
           </div>
           <div className="flex flex-col items-start justify-center gap-4 w-full md:w-1/2">
+            <Link
+              href={`/category/${product.category?.slug}`}
+              className={badgeVariants({ variant: "category" })}
+            >
+              {product.category?.name}
+            </Link>
             <header className="mb-4">
               <Heading as="h1" size="4xl" id="product-title">
                 {product.name}
