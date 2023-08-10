@@ -19,7 +19,7 @@ export const CategoryBanner = ({
 }: Props) => {
   return (
     <Link href={link} className={twMerge(fullWidth && "lg:col-span-2")}>
-      <div className="bg-black min-h-[280px] lg:min-h-[320px] rounded-md overflow-hidden relative border-2 hover:border-indigo-500 motion-safe:transition-colors group">
+      <div className="bg-black min-h-[280px] lg:min-h-[320px] rounded-lg overflow-hidden relative border-2 hover:border-indigo-500 motion-safe:transition-colors group">
         {thumbnail && (
           <Image
             src={thumbnail.url}
@@ -29,7 +29,7 @@ export const CategoryBanner = ({
             className="absolute h-full w-full object-cover transition ease-in-out duration-300 motion-safe:group-hover:scale-105"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 dark:from-black/80 flex flex-col justify-end p-16 text-white">
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 dark:from-black/80 flex flex-col justify-end p-8 lg:p-16 text-white">
           <Heading as="h3" size="4xl">
             {title}
           </Heading>
