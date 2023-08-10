@@ -1,8 +1,7 @@
-import { FaShoppingCart } from "react-icons/fa";
 import { Container } from "@/components/ui/Container/Container";
 import { HeaderLogo } from "@/components/layout/Header/components/HeaderLogo/HeaderLogo";
 import { HeaderMenu } from "@/components/layout/Header/components/HeaderMenu/HeaderMenu";
-import { Button } from "@/components/ui/Button/Button";
+import { CartLink } from "@/components/layout/Header/components/CartLink/CartLink";
 
 export const Header = () => {
   return (
@@ -14,10 +13,7 @@ export const Header = () => {
           </div>
           <HeaderMenu />
           <div className="order-3 flex flex-row justify-end">
-            <Button variant="outline" size="icon">
-              <FaShoppingCart />
-              <span className="sr-only">open cart</span>
-            </Button>
+            <CartLink />
           </div>
         </div>
       </Container>
