@@ -1,7 +1,6 @@
 import { ProductsList } from "@/components/blocks/ProductsList/ProductsList";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
-import { PageHeader } from "@/components/layout/PageHeader/PageHeader";
 import { Pagination } from "@/components/blocks/Pagination/Pagination";
 import type { ProductWithSummary } from "@/lib/types";
 
@@ -23,15 +22,20 @@ export const ProductsListPage = ({
   baseUrl,
 }: Props) => {
   return (
-    <>
-      <PageHeader title="Wszystkie produkty" />
-      <Container as="section" aria-labelledby="page-title">
-        <header className="flex flex-col gap-4 justify-between pt-16 pb-12 max-w-3xl">
-          <Heading as="h2" size="3xl" id="page-title">
-            {title}
-          </Heading>
-          {description && <p>{description}</p>}
-        </header>
+    <Container as="div">
+      <header
+        className="flex flex-col gap-4 justify-between pt-16 pb-12 max-w-3xl"
+        aria-labelledby="page-title"
+      >
+        <Heading as="h1" size="3xl" id="page-title">
+          {title}
+        </Heading>
+        {description && <p>{description}</p>}
+      </header>
+      <section aria-labelledby="secion-with-products-heading">
+        <Heading as="h2" id="secion-with-products-heading" hidden>
+          Lista produktów
+        </Heading>
         {products.length > 0 ? (
           <ProductsList products={products} />
         ) : (
@@ -45,7 +49,7 @@ export const ProductsListPage = ({
             baseUrl: baseUrl,
           }}
         />
-      </Container>
-    </>
+      </section>
+    </Container>
   );
 };

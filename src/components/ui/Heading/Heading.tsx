@@ -11,6 +11,7 @@ type HeadingProps = {
   variant?: "default";
   size?: "default" | "xl" | "2xl" | "3xl" | "4xl";
   id?: string;
+  hidden?: boolean;
 };
 
 const baseStyles = twMerge("font-bold");
@@ -33,6 +34,7 @@ export const Heading = ({
   variant = "default",
   size,
   id,
+  hidden,
 }: HeadingProps) => {
   return (
     <Tag
@@ -40,6 +42,7 @@ export const Heading = ({
         baseStyles,
         variant && variants[variant],
         size && sizes[size],
+        hidden && "sr-only",
       )}
       id={id}
     >
