@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header/Header";
 import { Footer } from "@/components/layout/Footer/Footer";
 import { Main } from "@/components/layout/Main/Main";
 import { baseUrl } from "@/lib/constants";
+import { SkipLink } from "@/components/blocks/SkipLink/SkipLink";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -50,6 +51,7 @@ export default function RootLayout({
         className={`${poppins.variable} bg-neutral-100 dark:bg-neutral-900`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <SkipLink />
           <Header />
           <Main>{children}</Main>
           <Footer />
