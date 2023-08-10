@@ -29,16 +29,18 @@ export const generateMetadata = async ({
     alternates: {
       canonical: `/category/${categorySlug}`,
     },
-    /*openGraph: {
+    openGraph: {
       images: [
         {
-          url: ``,
+          url: `/api/og?width=1200&height=630&subtitle=${encodeURIComponent(
+            category.name,
+          )}`,
           width: 1200,
           height: 630,
-          alt: "",
+          alt: `Next Shop - ${category.name}`,
         },
       ],
-    },*/
+    },
   };
 };
 

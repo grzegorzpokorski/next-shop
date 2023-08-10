@@ -23,6 +23,18 @@ export function generateMetadata({
     alternates: {
       canonical: `/products/${page}`,
     },
+    openGraph: {
+      images: [
+        {
+          url: `/api/og?width=1200&height=630&subtitle=${encodeURIComponent(
+            "wszystkie produkty",
+          )}`,
+          width: 1200,
+          height: 630,
+          alt: `Next Shop - wszystkie produkty`,
+        },
+      ],
+    },
   };
 }
 
