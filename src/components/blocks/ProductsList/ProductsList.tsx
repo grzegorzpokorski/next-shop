@@ -10,24 +10,28 @@ type ProductsListProps = {
 };
 
 export const ProductsList = ({ products, slider }: ProductsListProps) => {
-  return (
-    <ul
-      className={twMerge(
-        "list-none py-4 gap-3 md:gap-4",
-        slider
-          ? "flex flex-row overflow-x-auto"
-          : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
-      )}
-      role="list"
-    >
-      {products.length > 0 &&
-        products.map((product) => {
-          return (
-            <ProductListItem key={product.name} product={product} slider />
-          );
-        })}
-    </ul>
-  );
+  if (products.length > 0) {
+    return (
+      <ul
+        className={twMerge(
+          "list-none py-4 gap-3 md:gap-4",
+          slider
+            ? "flex flex-row overflow-x-auto"
+            : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
+        )}
+        role="list"
+      >
+        {products.length > 0 &&
+          products.map((product) => {
+            return (
+              <ProductListItem key={product.name} product={product} slider />
+            );
+          })}
+      </ul>
+    );
+  }
+
+  return <p>brak produktów</p>;
 };
 
 type ProductListItemProps = {
@@ -40,7 +44,7 @@ const ProductListItem = ({ product, slider }: ProductListItemProps) => {
     <li
       key={product.name}
       className={twMerge(
-        "aspect-square transition-opacity motion-reduce:transition-none motion-safe:animate-fadeIn w-full",
+        "aspect-square motion-safe:animate-fadeIn w-full",
         slider && "min-w-[280px]",
       )}
     >
@@ -48,7 +52,7 @@ const ProductListItem = ({ product, slider }: ProductListItemProps) => {
         href={`/product/${product.slug}`}
         className="inline-block w-full h-full"
       >
-        <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-indigo-600 dark:hover:border-indigo-500 dark:bg-black relative border-neutral-200 dark:border-neutral-800">
+        <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-indigo-600 dark:hover:border-indigo-500 dark:bg-black relative border-neutral-200 dark:border-neutral-800 motion-safe:transition-colors">
           <Image
             src={product.thumbnail.url}
             width={product.thumbnail.width}

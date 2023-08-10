@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { ProductPage } from "@/components/pages/ProductPage/ProductPage";
+import { ProductPageTemplate } from "@/components/templates/ProductPageTemplate/ProductPageTemplate";
 import { getProductBySlug } from "@/lib/queries/getProductBySlug";
 import { getProductsByCategorySlug } from "@/lib/queries/getProductsByCategorySlug";
 import { shuffleArray } from "@/utils/shuffleArray";
@@ -90,7 +90,7 @@ export default async function Page({ params: { slug } }: Props) {
             __html: JSON.stringify(productJsonLd),
           }}
         />
-        <ProductPage
+        <ProductPageTemplate
           product={product}
           relatedProducts={relatedWithoutCurrent.slice(0, 4)}
         />

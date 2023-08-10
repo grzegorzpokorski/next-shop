@@ -1,8 +1,11 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { ProductsListPage } from "@/components/pages/ProductsListPage/ProductsListPage";
 import { getAllProducts } from "@/lib/queries/getAllProducts";
 import { env } from "@/lib/env.mjs";
+import { ProductsList } from "@/components/blocks/ProductsList/ProductsList";
+import { Container } from "@/components/ui/Container/Container";
+import { Heading } from "@/components/ui/Heading/Heading";
+import { Pagination } from "@/components/blocks/Pagination/Pagination";
 
 type Props = {
   params: {
@@ -34,12 +37,29 @@ export default async function Page({ params: { page } }: Props) {
   });
 
   return (
-    <ProductsListPage
-      products={products}
-      currentPage={currentPage}
-      lastPage={Math.ceil(count / env.PRODUCTS_PER_PAGE)}
-      title="Wszystkie produkty"
-      baseUrl="/products"
-    />
+    <Container as="div">
+      <header
+        className="flex flex-col gap-4 justify-between pt-16 pb-12 max-w-3xl"
+        aria-labelledby="page-title"
+      >
+        <Heading as="h1" size="3xl" id="page-title">
+          Wszytkie produkty
+        </Heading>
+      </header>
+      <section aria-labelledby="heading-of-section-with-products">
+        <Heading as="h2" id="heading-of-section-with-products" hidden>
+          Lista produktów
+        </Heading>
+        <ProductsList products={products} />
+        <Pagination
+          pagination={{
+            currentPage: currentPage,
+            totalPages: Math.ceil(count / env.PRODUCTS_PER_PAGE),
+            searchParams: null,
+            baseUrl: "/products",
+          }}
+        />
+      </section>
+    </Container>
   );
 }

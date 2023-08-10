@@ -15,7 +15,10 @@ type Props = {
   relatedProducts: ProductWithSummary[];
 };
 
-export const ProductPage = async ({ product, relatedProducts }: Props) => {
+export const ProductPageTemplate = async ({
+  product,
+  relatedProducts,
+}: Props) => {
   return (
     <div className="flex flex-col gap-8 py-8">
       <Container as="article" aria-labelledby="product-title">

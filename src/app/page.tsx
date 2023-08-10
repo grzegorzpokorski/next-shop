@@ -1,5 +1,9 @@
-import { HomePage } from "@/components/pages/HomePage/HomePage";
+import { Container } from "@/components/ui/Container/Container";
 
 export default async function Page() {
-  return <HomePage />;
+  return (
+    <Container as="section">
+      <p className="my-4">home - tu będą bannery</p>
+    </Container>
+  );
 }
