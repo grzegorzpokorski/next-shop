@@ -34,12 +34,14 @@ export const ProductPageTemplate = async ({
             />
           </div>
           <div className="flex flex-col items-start justify-center gap-4 w-full md:w-1/2">
-            <Link
-              href={`/category/${product.category?.slug}`}
-              className={badgeVariants({ variant: "category" })}
-            >
-              {product.category?.name}
-            </Link>
+            {product.category && (
+              <Link
+                href={`/category/${product.category?.slug}`}
+                className={badgeVariants({ variant: "category" })}
+              >
+                {product.category?.name}
+              </Link>
+            )}
             <header className="mb-4">
               <Heading as="h1" size="4xl" id="product-title">
                 {product.name}
