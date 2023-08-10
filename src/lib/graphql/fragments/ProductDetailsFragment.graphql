@@ -10,17 +10,8 @@ fragment ProductDetails on Product {
   }
   price
   currency
-  gallery(
-    where: {
-      mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]
-    }
-  ) {
-    id
-    mimeType
-    url(transformation: { document: { output: { format: webp } } })
-    width
-    height
-    fileName
+  gallery {
+    ...ImageDetails
   }
   quantityAvailable
   seoTitle

@@ -9,6 +9,7 @@ export type Category = {
   name: string;
   slug: string;
   description?: string;
+  thumbnail?: Image;
 };
 
 type ProductCommonFields = {

@@ -8,5 +8,6 @@ export const getCategories = async () => {
     variables: {},
   });
 
+  // return result.categories;
   return result.categories.map((category) => reshapeCategory(category));
 };

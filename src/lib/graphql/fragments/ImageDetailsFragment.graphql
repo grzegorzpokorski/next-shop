@@ -1,0 +1,8 @@
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: { document: { output: { format: webp } } })
+  width
+  height
+  fileName
+}

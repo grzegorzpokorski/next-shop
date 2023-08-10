@@ -80,6 +80,7 @@ export type Asset = Node & {
   size?: Maybe<Scalars["Float"]["output"]>;
   /** System stage field */
   stage: Stage;
+  thumbnailCategory: Array<Category>;
   /** The time the document was updated */
   updatedAt: Scalars["DateTime"]["output"];
   /** User that last updated this document */
@@ -158,6 +159,19 @@ export type AssetScheduledInArgs = {
 };
 
 /** Asset system model */
+export type AssetThumbnailCategoryArgs = {
+  after?: InputMaybe<Scalars["String"]["input"]>;
+  before?: InputMaybe<Scalars["String"]["input"]>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  forceParentLocale?: InputMaybe<Scalars["Boolean"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<CategoryOrderByInput>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
+  where?: InputMaybe<CategoryWhereInput>;
+};
+
+/** Asset system model */
 export type AssetUpdatedAtArgs = {
   variation?: SystemDateTimeFieldVariation;
 };
@@ -199,6 +213,7 @@ export type AssetCreateInput = {
   localizations?: InputMaybe<AssetCreateLocalizationsInput>;
   mimeType?: InputMaybe<Scalars["String"]["input"]>;
   size?: InputMaybe<Scalars["Float"]["input"]>;
+  thumbnailCategory?: InputMaybe<CategoryCreateManyInlineInput>;
   updatedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
   width?: InputMaybe<Scalars["Float"]["input"]>;
 };
@@ -321,6 +336,9 @@ export type AssetManyWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  thumbnailCategory_every?: InputMaybe<CategoryWhereInput>;
+  thumbnailCategory_none?: InputMaybe<CategoryWhereInput>;
+  thumbnailCategory_some?: InputMaybe<CategoryWhereInput>;
   updatedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars["DateTime"]["input"]>;
@@ -381,6 +399,7 @@ export type AssetUpdateInput = {
   localizations?: InputMaybe<AssetUpdateLocalizationsInput>;
   mimeType?: InputMaybe<Scalars["String"]["input"]>;
   size?: InputMaybe<Scalars["Float"]["input"]>;
+  thumbnailCategory?: InputMaybe<CategoryUpdateManyInlineInput>;
   width?: InputMaybe<Scalars["Float"]["input"]>;
 };
 
@@ -669,6 +688,9 @@ export type AssetWhereInput = {
   size_not?: InputMaybe<Scalars["Float"]["input"]>;
   /** All values that are not contained in given list. */
   size_not_in?: InputMaybe<Array<InputMaybe<Scalars["Float"]["input"]>>>;
+  thumbnailCategory_every?: InputMaybe<CategoryWhereInput>;
+  thumbnailCategory_none?: InputMaybe<CategoryWhereInput>;
+  thumbnailCategory_some?: InputMaybe<CategoryWhereInput>;
   updatedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars["DateTime"]["input"]>;
@@ -754,6 +776,7 @@ export type Category = Node & {
   slug: Scalars["String"]["output"];
   /** System stage field */
   stage: Stage;
+  thumbnail: Asset;
   /** The time the document was updated */
   updatedAt: Scalars["DateTime"]["output"];
   /** User that last updated this document */
@@ -817,6 +840,11 @@ export type CategoryScheduledInArgs = {
   where?: InputMaybe<ScheduledOperationWhereInput>;
 };
 
+export type CategoryThumbnailArgs = {
+  forceParentLocale?: InputMaybe<Scalars["Boolean"]["input"]>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
 export type CategoryUpdatedAtArgs = {
   variation?: SystemDateTimeFieldVariation;
 };
@@ -852,6 +880,7 @@ export type CategoryCreateInput = {
   name: Scalars["String"]["input"];
   products?: InputMaybe<ProductCreateManyInlineInput>;
   slug: Scalars["String"]["input"];
+  thumbnail: AssetCreateOneInlineInput;
   updatedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
 };
 
@@ -988,6 +1017,7 @@ export type CategoryManyWhereInput = {
   slug_not_starts_with?: InputMaybe<Scalars["String"]["input"]>;
   /** All values starting with the given string. */
   slug_starts_with?: InputMaybe<Scalars["String"]["input"]>;
+  thumbnail?: InputMaybe<AssetWhereInput>;
   updatedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars["DateTime"]["input"]>;
@@ -1034,6 +1064,7 @@ export type CategoryUpdateInput = {
   name?: InputMaybe<Scalars["String"]["input"]>;
   products?: InputMaybe<ProductUpdateManyInlineInput>;
   slug?: InputMaybe<Scalars["String"]["input"]>;
+  thumbnail?: InputMaybe<AssetUpdateOneInlineInput>;
 };
 
 export type CategoryUpdateLocalizationDataInput = {
@@ -1282,6 +1313,7 @@ export type CategoryWhereInput = {
   slug_not_starts_with?: InputMaybe<Scalars["String"]["input"]>;
   /** All values starting with the given string. */
   slug_starts_with?: InputMaybe<Scalars["String"]["input"]>;
+  thumbnail?: InputMaybe<AssetWhereInput>;
   updatedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars["DateTime"]["input"]>;
@@ -4690,6 +4722,23 @@ export type CategoryDetailsFragment = {
   name: string;
   slug: string;
   description?: string | null;
+  thumbnail: {
+    id: string;
+    mimeType?: string | null;
+    url: string;
+    width?: number | null;
+    height?: number | null;
+    fileName: string;
+  };
+};
+
+export type ImageDetailsFragment = {
+  id: string;
+  mimeType?: string | null;
+  url: string;
+  width?: number | null;
+  height?: number | null;
+  fileName: string;
 };
 
 export type ProductDetailsFragment = {
@@ -4709,6 +4758,14 @@ export type ProductDetailsFragment = {
     name: string;
     slug: string;
     description?: string | null;
+    thumbnail: {
+      id: string;
+      mimeType?: string | null;
+      url: string;
+      width?: number | null;
+      height?: number | null;
+      fileName: string;
+    };
   } | null;
   gallery: Array<{
     id: string;
@@ -4742,6 +4799,14 @@ export type ProductSummaryFragment = {
     name: string;
     slug: string;
     description?: string | null;
+    thumbnail: {
+      id: string;
+      mimeType?: string | null;
+      url: string;
+      width?: number | null;
+      height?: number | null;
+      fileName: string;
+    };
   } | null;
 };
 
@@ -4773,6 +4838,14 @@ export type GetAllProductsQuery = {
       name: string;
       slug: string;
       description?: string | null;
+      thumbnail: {
+        id: string;
+        mimeType?: string | null;
+        url: string;
+        width?: number | null;
+        height?: number | null;
+        fileName: string;
+      };
     } | null;
   }>;
   productsConnection: { aggregate: { count: number } };
@@ -4786,6 +4859,14 @@ export type GetCategoriesQuery = {
     name: string;
     slug: string;
     description?: string | null;
+    thumbnail: {
+      id: string;
+      mimeType?: string | null;
+      url: string;
+      width?: number | null;
+      height?: number | null;
+      fileName: string;
+    };
   }>;
 };
 
@@ -4799,6 +4880,14 @@ export type GetCategoryNameBySlugQuery = {
     name: string;
     slug: string;
     description?: string | null;
+    thumbnail: {
+      id: string;
+      mimeType?: string | null;
+      url: string;
+      width?: number | null;
+      height?: number | null;
+      fileName: string;
+    };
   } | null;
 };
 
@@ -4824,6 +4913,14 @@ export type GetProductBySlugQuery = {
       name: string;
       slug: string;
       description?: string | null;
+      thumbnail: {
+        id: string;
+        mimeType?: string | null;
+        url: string;
+        width?: number | null;
+        height?: number | null;
+        fileName: string;
+      };
     } | null;
     gallery: Array<{
       id: string;
@@ -4865,6 +4962,14 @@ export type GetProductsByCategorySlugQuery = {
       name: string;
       slug: string;
       description?: string | null;
+      thumbnail: {
+        id: string;
+        mimeType?: string | null;
+        url: string;
+        width?: number | null;
+        height?: number | null;
+        fileName: string;
+      };
     } | null;
   }>;
   productsConnection: { aggregate: { count: number } };
@@ -4887,6 +4992,19 @@ export class TypedDocumentString<TResult, TVariables>
     return this.value;
   }
 }
+export const ImageDetailsFragmentDoc = new TypedDocumentString(
+  `
+    fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
+}
+    `,
+  { fragmentName: "ImageDetails" },
+) as unknown as TypedDocumentString<ImageDetailsFragment, unknown>;
 export const CategoryDetailsFragmentDoc = new TypedDocumentString(
   `
     fragment CategoryDetails on Category {
@@ -4894,8 +5012,18 @@ export const CategoryDetailsFragmentDoc = new TypedDocumentString(
   name
   slug
   description
+  thumbnail {
+    ...ImageDetails
+  }
 }
-    `,
+    fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
+}`,
   { fragmentName: "CategoryDetails" },
 ) as unknown as TypedDocumentString<CategoryDetailsFragment, unknown>;
 export const ProductDetailsFragmentDoc = new TypedDocumentString(
@@ -4912,15 +5040,8 @@ export const ProductDetailsFragmentDoc = new TypedDocumentString(
   }
   price
   currency
-  gallery(
-    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}
-  ) {
-    id
-    mimeType
-    url(transformation: {document: {output: {format: webp}}})
-    width
-    height
-    fileName
+  gallery {
+    ...ImageDetails
   }
   quantityAvailable
   seoTitle
@@ -4933,6 +5054,17 @@ export const ProductDetailsFragmentDoc = new TypedDocumentString(
   name
   slug
   description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
 }`,
   { fragmentName: "ProductDetails" },
 ) as unknown as TypedDocumentString<ProductDetailsFragment, unknown>;
@@ -4945,12 +5077,7 @@ export const ProductSummaryFragmentDoc = new TypedDocumentString(
   price
   currency
   gallery(first: 1) {
-    id
-    mimeType
-    url(transformation: {document: {output: {format: webp}}})
-    width
-    height
-    fileName
+    ...ImageDetails
   }
   quantityAvailable
   category {
@@ -4964,6 +5091,17 @@ export const ProductSummaryFragmentDoc = new TypedDocumentString(
   name
   slug
   description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
 }`,
   { fragmentName: "ProductSummary" },
 ) as unknown as TypedDocumentString<ProductSummaryFragment, unknown>;
@@ -4983,6 +5121,17 @@ export const GetAllProductsDocument = new TypedDocumentString(`
   name
   slug
   description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
 }
 fragment ProductSummary on Product {
   id
@@ -4991,12 +5140,7 @@ fragment ProductSummary on Product {
   price
   currency
   gallery(first: 1) {
-    id
-    mimeType
-    url(transformation: {document: {output: {format: webp}}})
-    width
-    height
-    fileName
+    ...ImageDetails
   }
   quantityAvailable
   category {
@@ -5019,6 +5163,17 @@ export const GetCategoriesDocument = new TypedDocumentString(`
   name
   slug
   description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
 }`) as unknown as TypedDocumentString<
   GetCategoriesQuery,
   GetCategoriesQueryVariables
@@ -5034,6 +5189,17 @@ export const GetCategoryNameBySlugDocument = new TypedDocumentString(`
   name
   slug
   description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
 }`) as unknown as TypedDocumentString<
   GetCategoryNameBySlugQuery,
   GetCategoryNameBySlugQueryVariables
@@ -5049,6 +5215,17 @@ export const GetProductBySlugDocument = new TypedDocumentString(`
   name
   slug
   description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
 }
 fragment ProductDetails on Product {
   id
@@ -5062,15 +5239,8 @@ fragment ProductDetails on Product {
   }
   price
   currency
-  gallery(
-    where: {mimeType_in: ["image/png", "image/jpeg", "image/avif", "image/webp"]}
-  ) {
-    id
-    mimeType
-    url(transformation: {document: {output: {format: webp}}})
-    width
-    height
-    fileName
+  gallery {
+    ...ImageDetails
   }
   quantityAvailable
   seoTitle
@@ -5102,6 +5272,17 @@ export const GetProductsByCategorySlugDocument = new TypedDocumentString(`
   name
   slug
   description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
 }
 fragment ProductSummary on Product {
   id
@@ -5110,12 +5291,7 @@ fragment ProductSummary on Product {
   price
   currency
   gallery(first: 1) {
-    id
-    mimeType
-    url(transformation: {document: {output: {format: webp}}})
-    width
-    height
-    fileName
+    ...ImageDetails
   }
   quantityAvailable
   category {

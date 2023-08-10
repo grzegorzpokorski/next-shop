@@ -74,10 +74,18 @@ export const reshapeProductWithSummary = (
 
 export const reshapeCategory = (
   category: CategoryDetailsFragment,
-): Category | undefined => {
+): Category => {
   return {
     name: category.name,
     slug: category.slug,
     description: category.description ? category.description : undefined,
+    thumbnail: category.thumbnail.mimeType?.includes("image")
+      ? {
+          url: category.thumbnail.url,
+          alt: `${category.name} - ${category.thumbnail.fileName}`,
+          width: category.thumbnail.width || 0,
+          height: category.thumbnail.height || 0,
+        }
+      : undefined,
   };
 };

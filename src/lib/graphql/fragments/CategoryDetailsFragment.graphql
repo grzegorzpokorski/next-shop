@@ -3,4 +3,7 @@ fragment CategoryDetails on Category {
   name
   slug
   description
+  thumbnail {
+    ...ImageDetails
+  }
 }

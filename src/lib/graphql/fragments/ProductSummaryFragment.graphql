@@ -5,12 +5,7 @@ fragment ProductSummary on Product {
   price
   currency
   gallery(first: 1) {
-    id
-    mimeType
-    url(transformation: { document: { output: { format: webp } } })
-    width
-    height
-    fileName
+    ...ImageDetails
   }
   quantityAvailable
   category {
