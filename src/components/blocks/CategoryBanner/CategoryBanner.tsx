@@ -19,7 +19,7 @@ export const CategoryBanner = ({
 }: Props) => {
   return (
     <Link href={link} className={twMerge(fullWidth && "lg:col-span-2")}>
-      <div className="bg-black min-h-[280px] lg:min-h-[320px] rounded-lg overflow-hidden relative border-2 hover:border-indigo-500 motion-safe:transition-colors group">
+      <div className="bg-black min-h-[280px] lg:min-h-[320px] rounded-lg overflow-hidden relative border hover:border-indigo-500 motion-safe:transition-colors group">
         {thumbnail && (
           <Image
             src={thumbnail.url}
