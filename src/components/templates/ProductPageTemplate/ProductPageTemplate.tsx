@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import { FaPlus } from "react-icons/fa";
@@ -9,6 +8,7 @@ import { Button } from "@/components/ui/Button/Button";
 import { formatPrice } from "@/utils/formatPrice";
 import { badgeVariants } from "@/components/ui/Badge/Badge";
 import type { ProductWithDetails, ProductWithSummary } from "@/lib/types";
+import { Gallery } from "@/components/blocks/Gallery/Gallery";
 
 type Props = {
   product: ProductWithDetails;
@@ -19,19 +19,13 @@ export const ProductPageTemplate = async ({
   product,
   relatedProducts,
 }: Props) => {
+  console.log(product);
   return (
     <div className="flex flex-col gap-8 py-8">
       <Container as="article" aria-labelledby="product-title">
         <div className="flex flex-col md:flex-row gap-8 bg-white dark:bg-black p-8 rounded-md border">
-          <div className="h-full w-full md:w-1/2 overflow-hidden md:sticky md:top-20">
-            <Image
-              src={product.images[0].url}
-              alt={product.images[0].alt}
-              width={product.images[0].width}
-              height={product.images[0].height}
-              className="relative m-auto object-contain"
-              priority
-            />
+          <div className="flex flex-col h-full w-full md:w-1/2 overflow-hidden md:sticky md:top-20">
+            <Gallery images={product.images} />
           </div>
           <div className="flex flex-col items-start justify-center gap-4 w-full md:w-1/2">
             {product.category && (
