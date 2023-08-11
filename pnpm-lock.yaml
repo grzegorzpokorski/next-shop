@@ -47,6 +47,9 @@ dependencies:
   graphql:
     specifier: ^16.7.1
     version: 16.7.1
+  keen-slider:
+    specifier: ^6.8.6
+    version: 6.8.6
   lucide-react:
     specifier: ^0.263.1
     version: 0.263.1(react@18.2.0)
@@ -10042,6 +10045,10 @@ packages:
       object.assign: 4.1.4
       object.values: 1.1.6
     dev: true
+
+  /keen-slider@6.8.6:
+    resolution: {integrity: sha512-dcEQ7GDBpCjUQA8XZeWh3oBBLLmyn8aoeIQFGL/NTVkoEOsmlnXqA4QykUm/SncolAZYGsEk/PfUhLZ7mwMM2w==}
+    dev: false
 
   /kind-of@6.0.3:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
