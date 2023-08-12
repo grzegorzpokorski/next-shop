@@ -5,9 +5,5 @@ type Props = {
 };
 
 export const Main = ({ children }: Props) => {
-  return (
-    <main className="pt-20" id="main">
-      {children}
-    </main>
-  );
+  return <main id="main">{children}</main>;
 };
