@@ -27,8 +27,6 @@ export async function GET(req: NextRequest): Promise<Response | ImageResponse> {
 
     const subtitle = searchParams.get("subtitle");
 
-    console.log(title);
-
     return new ImageResponse(
       (
         <div
@@ -77,7 +75,6 @@ export async function GET(req: NextRequest): Promise<Response | ImageResponse> {
   } catch (e) {
     if (!(e instanceof Error)) throw e;
 
-    console.log(e.message);
     return new Response(`Failed to generate the image`, {
       status: 500,
     });

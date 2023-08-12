@@ -19,7 +19,6 @@ export const ProductPageTemplate = async ({
   product,
   relatedProducts,
 }: Props) => {
-  console.log(product);
   return (
     <div className="flex flex-col gap-8 py-8">
       <Container as="article" aria-labelledby="product-title">
