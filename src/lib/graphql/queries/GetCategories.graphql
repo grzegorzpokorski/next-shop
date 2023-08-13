@@ -1,5 +1,5 @@
 query GetCategories {
-  categories(first: 100) {
+  categories(stage: PUBLISHED, first: 100) {
     ...CategoryDetails
   }
 }

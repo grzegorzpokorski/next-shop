@@ -4813,6 +4813,7 @@ export type ProductSummaryFragment = {
 export type GetAllProductsQueryVariables = Exact<{
   limit: Scalars["Int"]["input"];
   skip: Scalars["Int"]["input"];
+  order?: InputMaybe<ProductOrderByInput>;
 }>;
 
 export type GetAllProductsQuery = {
@@ -4937,6 +4938,7 @@ export type GetProductsByCategorySlugQueryVariables = Exact<{
   categorySlug: Scalars["String"]["input"];
   limit: Scalars["Int"]["input"];
   skip: Scalars["Int"]["input"];
+  order?: InputMaybe<ProductOrderByInput>;
 }>;
 
 export type GetProductsByCategorySlugQuery = {
@@ -5106,8 +5108,8 @@ fragment ImageDetails on Asset {
   { fragmentName: "ProductSummary" },
 ) as unknown as TypedDocumentString<ProductSummaryFragment, unknown>;
 export const GetAllProductsDocument = new TypedDocumentString(`
-    query GetAllProducts($limit: Int!, $skip: Int!) {
-  products(locales: pl, first: $limit, skip: $skip) {
+    query GetAllProducts($limit: Int!, $skip: Int!, $order: ProductOrderByInput = price_DESC) {
+  products(locales: pl, first: $limit, skip: $skip, orderBy: $order) {
     ...ProductSummary
   }
   productsConnection {
@@ -5154,7 +5156,7 @@ fragment ProductSummary on Product {
 >;
 export const GetCategoriesDocument = new TypedDocumentString(`
     query GetCategories {
-  categories(first: 100) {
+  categories(stage: PUBLISHED, first: 100) {
     ...CategoryDetails
   }
 }
@@ -5180,7 +5182,7 @@ fragment ImageDetails on Asset {
 >;
 export const GetCategoryNameBySlugDocument = new TypedDocumentString(`
     query GetCategoryNameBySlug($categorySlug: String!) {
-  category(where: {slug: $categorySlug}) {
+  category(stage: PUBLISHED, where: {slug: $categorySlug}) {
     ...CategoryDetails
   }
 }
@@ -5206,7 +5208,7 @@ fragment ImageDetails on Asset {
 >;
 export const GetProductBySlugDocument = new TypedDocumentString(`
     query GetProductBySlug($slug: String!) {
-  product(where: {slug: $slug}, locales: pl) {
+  product(stage: PUBLISHED, where: {slug: $slug}, locales: pl) {
     ...ProductDetails
   }
 }
@@ -5252,12 +5254,14 @@ fragment ProductDetails on Product {
   GetProductBySlugQueryVariables
 >;
 export const GetProductsByCategorySlugDocument = new TypedDocumentString(`
-    query GetProductsByCategorySlug($categorySlug: String!, $limit: Int!, $skip: Int!) {
+    query GetProductsByCategorySlug($categorySlug: String!, $limit: Int!, $skip: Int!, $order: ProductOrderByInput = price_DESC) {
   products(
+    stage: PUBLISHED
     locales: pl
     where: {category: {Category: {slug: $categorySlug}}}
     first: $limit
     skip: $skip
+    orderBy: $order
   ) {
     ...ProductSummary
   }

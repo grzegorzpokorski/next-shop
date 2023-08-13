@@ -1,5 +1,9 @@
-query GetAllProducts($limit: Int!, $skip: Int!) {
-  products(locales: pl, first: $limit, skip: $skip) {
+query GetAllProducts(
+  $limit: Int!
+  $skip: Int!
+  $order: ProductOrderByInput = price_DESC
+) {
+  products(locales: pl, first: $limit, skip: $skip, orderBy: $order) {
     ...ProductSummary
   }
   productsConnection {

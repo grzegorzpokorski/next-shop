@@ -2,12 +2,15 @@ query GetProductsByCategorySlug(
   $categorySlug: String!
   $limit: Int!
   $skip: Int!
+  $order: ProductOrderByInput = price_DESC
 ) {
   products(
+    stage: PUBLISHED
     locales: pl
     where: { category: { Category: { slug: $categorySlug } } }
     first: $limit
     skip: $skip
+    orderBy: $order
   ) {
     ...ProductSummary
   }

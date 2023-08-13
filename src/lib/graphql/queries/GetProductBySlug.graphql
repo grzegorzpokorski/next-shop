@@ -1,5 +1,5 @@
 query GetProductBySlug($slug: String!) {
-  product(where: { slug: $slug }, locales: pl) {
+  product(stage: PUBLISHED, where: { slug: $slug }, locales: pl) {
     ...ProductDetails
   }
 }

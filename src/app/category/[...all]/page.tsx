@@ -7,11 +7,14 @@ import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { ProductsList } from "@/components/blocks/ProductsList/ProductsList";
 import { Pagination } from "@/components/blocks/Pagination/Pagination";
+import { Filters } from "@/components/blocks/Filters/Filters";
+import { defaultSort, sorting } from "@/lib/constants";
 
 type Props = {
   params: {
     all: string[];
   };
+  searchParams: Record<string, string>;
 };
 
 export const generateMetadata = async ({
@@ -48,15 +51,19 @@ export default async function Page({
   params: {
     all: [categorySlug, page],
   },
+  searchParams,
 }: Props) {
   const currentPage = typeof page === "undefined" ? 1 : parseInt(page);
-
   if (Number.isNaN(currentPage) || currentPage < 1) return notFound();
+
+  const { sortKey } =
+    sorting.find((item) => item.slug === searchParams?.sort) || defaultSort;
 
   const { products, count } = await getProductsByCategorySlug({
     categorySlug,
     limit: env.PRODUCTS_PER_PAGE,
     skip: ((currentPage < 1 ? 1 : currentPage) - 1) * env.PRODUCTS_PER_PAGE,
+    order: sortKey,
   });
   const category = await getCategoryNameBySlug({ slug: categorySlug });
 
@@ -77,12 +84,13 @@ export default async function Page({
         <Heading as="h2" id="heading-of-section-with-products" hidden>
           Lista produktów
         </Heading>
+        <Filters />
         <ProductsList products={products} />
         <Pagination
           pagination={{
             currentPage: currentPage,
             totalPages: Math.ceil(count / env.PRODUCTS_PER_PAGE),
-            searchParams: null,
+            searchParams: new URLSearchParams(searchParams).toString(),
             baseUrl: `/category/${category.name}`,
           }}
         />
