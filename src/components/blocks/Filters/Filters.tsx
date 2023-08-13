@@ -32,7 +32,15 @@ export const Filters = () => {
         <SelectTrigger className="w-full lg:w-72">
           <SelectValue placeholder="Sortowanie" />
         </SelectTrigger>
-        <SelectContent>
+        {/* TODO: remove this hack when this PR (https://github.com/radix-ui/primitives/pull/2085) will be merged or this issue resolved (https://github.com/radix-ui/primitives/issues/1658) */}
+        <SelectContent
+          ref={(ref) => {
+            if (!ref) return;
+            ref.ontouchstart = (e) => {
+              e.preventDefault();
+            };
+          }}
+        >
           {sorting.map((item) => {
             return (
               <SelectItem key={item.slug} value={item.slug}>
