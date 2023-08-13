@@ -11,7 +11,7 @@ export type SortFilterItem = {
 };
 
 export const defaultSort = {
-  title: "Cena: od najtańszego",
+  title: "Cena: od najniższej",
   slug: "price-asc",
   sortKey: ProductOrderByInput.PriceAsc,
 };
@@ -19,17 +19,17 @@ export const defaultSort = {
 export const sorting: SortFilterItem[] = [
   defaultSort,
   {
-    title: "Cena: od najdroższego",
+    title: "Cena: od najwyższej",
     slug: "price-desc",
     sortKey: ProductOrderByInput.PriceDesc,
   },
   {
-    title: "Data dodania: od najstarszego",
+    title: "Data dodania: od najstarszej",
     slug: "latest-desc",
     sortKey: ProductOrderByInput.PublishedAtAsc,
   },
   {
-    title: "Data dodania: od najnowszego",
+    title: "Data dodania: od najnowszej",
     slug: "latest-asc",
     sortKey: ProductOrderByInput.PublishedAtDesc,
   },
