@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import LinkNext from "next/link";
 import { twMerge } from "tailwind-merge";
 
-type LinkVariant = "default" | "logo";
+type LinkVariant = "default" | "logo" | "indigo";
 
 const baseStyles = twMerge("flex flex-row");
 const transitionStyles = "transition-colors motion-reduce:transition-none";
@@ -12,6 +12,11 @@ const linkVariants = {
     "text-neutral-600 hover:text-neutral-800",
     "hover:underline underline-offset-2",
     "dark:text-neutral-100 dark:hover:text-neutral-400",
+  ),
+  indigo: twMerge(
+    "text-indigo-600",
+    "hover:underline underline-offset-2",
+    "dark:text-indigo-400",
   ),
   logo: twMerge(
     "font-bold",

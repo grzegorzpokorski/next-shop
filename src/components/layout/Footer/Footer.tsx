@@ -12,7 +12,7 @@ export const Footer = () => {
           <p className="text-sm flex-1">
             &copy; {new Date().getFullYear()} next-shop. All rights reserved.
             Created by{" "}
-            <Link href="https://github.com/grzegorzpokorski">
+            <Link href="https://github.com/grzegorzpokorski" variant="indigo">
               Grzegorz Pokorski
             </Link>
           </p>

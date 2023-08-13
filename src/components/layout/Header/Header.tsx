@@ -5,7 +5,7 @@ import { CartLink } from "@/components/layout/Header/components/CartLink/CartLin
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 z-50 w-full bg-white dark:bg-neutral-900/90 backdrop-blur-md border-b">
+    <header className="sticky top-0 z-50 w-full bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b">
       <Container as="div">
         <div className="grid grid-cols-3 items-center justify-center h-20">
           <div className="flex mx-auto md:m-0 order-2 md:order-1">
