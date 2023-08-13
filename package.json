@@ -39,7 +39,7 @@
     "graphql": "^16.7.1",
     "keen-slider": "^6.8.6",
     "lucide-react": "^0.263.1",
-    "next": "13.4.12",
+    "next": "13.4.13",
     "next-themes": "^0.2.1",
     "postcss": "8.4.27",
     "react": "18.2.0",
