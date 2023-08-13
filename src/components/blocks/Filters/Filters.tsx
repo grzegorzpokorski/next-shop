@@ -1,7 +1,6 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { defaultSort, sorting } from "@/lib/constants";
+import { useFilters } from "@/components/blocks/Filters/hooks/useFilters";
 import {
   Select,
   SelectContent,
@@ -11,45 +10,35 @@ import {
 } from "@/components/ui/Select/Select";
 
 export const Filters = () => {
-  const pathname = usePathname();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const currentSortSlug = searchParams.get("sort") || defaultSort.slug;
-
-  const appendSelectedSortingMethod = (sortSlug: string) => {
-    const currentSearchParams = new URLSearchParams(searchParams.toString());
-    currentSearchParams.set("sort", sortSlug);
-    const paramsString = currentSearchParams.toString();
-    router.push(`${pathname}?${paramsString}`);
-  };
+  const { changeSortingMethod, currentSortSlug, sortingOptions } = useFilters();
 
   return (
     <div className="flex flex-col lg:flex-row items-center justify-end">
-      <Select
-        value={currentSortSlug}
-        onValueChange={appendSelectedSortingMethod}
-      >
-        <SelectTrigger className="w-full lg:w-72">
-          <SelectValue placeholder="Sortowanie" />
-        </SelectTrigger>
-        {/* TODO: remove this hack when this PR (https://github.com/radix-ui/primitives/pull/2085) will be merged or this issue resolved (https://github.com/radix-ui/primitives/issues/1658) */}
-        <SelectContent
-          ref={(ref) => {
-            if (!ref) return;
-            ref.ontouchstart = (e) => {
-              e.preventDefault();
-            };
-          }}
-        >
-          {sorting.map((item) => {
-            return (
-              <SelectItem key={item.slug} value={item.slug}>
-                {item.title}
-              </SelectItem>
-            );
-          })}
-        </SelectContent>
-      </Select>
+      <label className="w-full lg:w-72">
+        <span className="sr-only">Sorotwanie</span>
+        <Select value={currentSortSlug} onValueChange={changeSortingMethod}>
+          <SelectTrigger>
+            <SelectValue placeholder="Sorotwanie" />
+          </SelectTrigger>
+          {/* TODO: remove this hack when this PR (https://github.com/radix-ui/primitives/pull/2085) will be merged or this issue resolved (https://github.com/radix-ui/primitives/issues/1658) */}
+          <SelectContent
+            ref={(ref) => {
+              if (!ref) return;
+              ref.ontouchstart = (e) => {
+                e.preventDefault();
+              };
+            }}
+          >
+            {sortingOptions.map((option) => {
+              return (
+                <SelectItem key={option.slug} value={option.slug}>
+                  {option.title}
+                </SelectItem>
+              );
+            })}
+          </SelectContent>
+        </Select>
+      </label>
     </div>
   );
 };
