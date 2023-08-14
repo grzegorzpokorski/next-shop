@@ -31,7 +31,7 @@ export const ProductsList = ({ products, slider }: ProductsListProps) => {
     );
   }
 
-  return <p>brak produktów</p>;
+  return null;
 };
 
 type ProductListItemProps = {

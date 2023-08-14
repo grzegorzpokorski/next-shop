@@ -86,17 +86,20 @@ export default async function Page({ params: { page }, searchParams }: Props) {
         <Heading as="h2" id="heading-of-section-with-products" hidden>
           Lista produktów
         </Heading>
-        {count > 1 && <Filters />}
-        <ProductsList products={products} />
         {count > 1 && (
-          <Pagination
-            pagination={{
-              currentPage: currentPage,
-              totalPages: Math.ceil(count / env.PRODUCTS_PER_PAGE),
-              searchParams: new URLSearchParams(searchParams).toString(),
-              baseUrl: "/products",
-            }}
-          />
+          <>
+            <Filters />
+            <ProductsList products={products} />
+
+            <Pagination
+              pagination={{
+                currentPage: currentPage,
+                totalPages: Math.ceil(count / env.PRODUCTS_PER_PAGE),
+                searchParams: new URLSearchParams(searchParams).toString(),
+                baseUrl: "/products",
+              }}
+            />
+          </>
         )}
       </section>
     </Container>
