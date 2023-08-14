@@ -86,7 +86,7 @@ export default async function Page({ params: { page }, searchParams }: Props) {
         <Heading as="h2" id="heading-of-section-with-products" hidden>
           Lista produktów
         </Heading>
-        {count > 1 && (
+        {count > 0 && (
           <>
             <Filters />
             <ProductsList products={products} />
