@@ -18,11 +18,10 @@ export const useSearchForm = () => {
     e.preventDefault();
 
     const input = e.currentTarget.elements.namedItem("q");
-    const search = input instanceof HTMLInputElement ? input.value : "";
     const newParams = new URLSearchParams(searchParams.toString());
 
-    if (search) {
-      newParams.set("q", search);
+    if (input instanceof HTMLInputElement) {
+      newParams.set("q", input.value);
     } else {
       newParams.delete("q");
     }

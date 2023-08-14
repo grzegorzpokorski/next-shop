@@ -34,7 +34,12 @@ export const SearchForm = () => {
             <FaPlus className="rotate-45" />
           </Button>
         )}
-        <Button type="submit" size="icon" variant="search">
+        <Button
+          type="submit"
+          size="icon"
+          variant="search"
+          disabled={searchQuery.length === 0}
+        >
           <span className="sr-only">szukaj</span>
           <FaSearch />
         </Button>
