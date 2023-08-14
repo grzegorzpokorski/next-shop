@@ -1,17 +1,25 @@
+"use client";
+
 import { FaSearch } from "react-icons/fa";
+import { useSearchForm } from "./hooks/useSearchForm";
 import { Button } from "@/components/ui/Button/Button";
 
 export const SearchForm = () => {
+  const { onSubmit, searchQuery, setSearchQuery } = useSearchForm();
+
   return (
-    <form className="w-full md:max-w-[400px] relative flex">
+    <form onSubmit={onSubmit} className="w-full md:max-w-[400px] relative flex">
       <label className="sr-only" htmlFor="search-input">
         Szukaj produktów
       </label>
       <input
+        name="q"
         type="text"
         placeholder="Szukaj produktów..."
         className="h-11 pr-11 w-full rounded-lg border bg-white dark:bg-neutral-800 px-4 py-2 text-sm text-black placeholder:text-neutral-500 dark:border-neutral-800 dark:text-white dark:placeholder:text-neutral-400"
         id="search-input"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
       />
       <div className="absolute right-0">
         <Button type="submit" size="icon" variant="search">

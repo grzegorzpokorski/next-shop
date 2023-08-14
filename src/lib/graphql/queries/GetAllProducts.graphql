@@ -2,6 +2,7 @@ query GetAllProducts(
   $limit: Int!
   $skip: Int!
   $order: ProductOrderByInput = price_DESC
+  $searchQuery: String
 ) {
   products(
     stage: PUBLISHED
@@ -9,10 +10,11 @@ query GetAllProducts(
     first: $limit
     skip: $skip
     orderBy: $order
+    where: { name_contains: $searchQuery }
   ) {
     ...ProductSummary
   }
-  productsConnection(stage: PUBLISHED) {
+  productsConnection(stage: PUBLISHED, where: { name_contains: $searchQuery }) {
     aggregate {
       count
     }

@@ -7,15 +7,22 @@ type Args = {
   limit: number;
   skip: number;
   order?: ProductOrderByInput;
+  searchQuery?: string;
 };
 
-export const getAllProducts = async ({ limit, skip, order }: Args) => {
+export const getAllProducts = async ({
+  limit,
+  skip,
+  order,
+  searchQuery,
+}: Args) => {
   const result = await fetcher({
     query: GetAllProductsDocument,
     variables: {
       limit,
       skip,
       order,
+      searchQuery: searchQuery || "",
     },
   });
 

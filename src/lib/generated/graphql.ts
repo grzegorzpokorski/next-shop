@@ -4814,6 +4814,7 @@ export type GetAllProductsQueryVariables = Exact<{
   limit: Scalars["Int"]["input"];
   skip: Scalars["Int"]["input"];
   order?: InputMaybe<ProductOrderByInput>;
+  searchQuery?: InputMaybe<Scalars["String"]["input"]>;
 }>;
 
 export type GetAllProductsQuery = {
@@ -5108,17 +5109,18 @@ fragment ImageDetails on Asset {
   { fragmentName: "ProductSummary" },
 ) as unknown as TypedDocumentString<ProductSummaryFragment, unknown>;
 export const GetAllProductsDocument = new TypedDocumentString(`
-    query GetAllProducts($limit: Int!, $skip: Int!, $order: ProductOrderByInput = price_DESC) {
+    query GetAllProducts($limit: Int!, $skip: Int!, $order: ProductOrderByInput = price_DESC, $searchQuery: String) {
   products(
     stage: PUBLISHED
     locales: pl
     first: $limit
     skip: $skip
     orderBy: $order
+    where: {name_contains: $searchQuery}
   ) {
     ...ProductSummary
   }
-  productsConnection(stage: PUBLISHED) {
+  productsConnection(stage: PUBLISHED, where: {name_contains: $searchQuery}) {
     aggregate {
       count
     }

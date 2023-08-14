@@ -24,18 +24,5 @@ export const Header = () => {
         </div>
       </Container>
     </header>
-    // <header className="sticky top-0 z-50 w-full bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b">
-    //   <Container as="div">
-    //     <div className="grid grid-cols-3 items-center justify-center h-20">
-    //       <div className="flex mx-auto md:m-0 order-2 md:order-1">
-    //         <HeaderLogo>Next Shop</HeaderLogo>
-    //       </div>
-    //       <HeaderMenu />
-    //       <div className="order-3 flex flex-row justify-end">
-    //         <CartLink />
-    //       </div>
-    //     </div>
-    //   </Container>
-    // </header>
   );
 };
