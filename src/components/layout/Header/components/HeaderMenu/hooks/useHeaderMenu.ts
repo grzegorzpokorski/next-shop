@@ -1,7 +1,11 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useOnKeydown } from "@/hooks/useOnKeydown";
 
 export const useHeaderMenu = () => {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const closeMobileMenu = useCallback(() => {
@@ -28,6 +32,10 @@ export const useHeaderMenu = () => {
       [closeMobileMenu, isMobileMenuOpen],
     ),
   );
+
+  useEffect(() => {
+    closeMobileMenu();
+  }, [closeMobileMenu, pathname, searchParams]);
 
   return useMemo(
     () => ({
