@@ -15,6 +15,7 @@ query GetProductsByCategorySlug(
     ...ProductSummary
   }
   productsConnection(
+    stage: PUBLISHED
     where: { category: { Category: { slug: $categorySlug } } }
   ) {
     aggregate {

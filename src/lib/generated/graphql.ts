@@ -5109,10 +5109,16 @@ fragment ImageDetails on Asset {
 ) as unknown as TypedDocumentString<ProductSummaryFragment, unknown>;
 export const GetAllProductsDocument = new TypedDocumentString(`
     query GetAllProducts($limit: Int!, $skip: Int!, $order: ProductOrderByInput = price_DESC) {
-  products(locales: pl, first: $limit, skip: $skip, orderBy: $order) {
+  products(
+    stage: PUBLISHED
+    locales: pl
+    first: $limit
+    skip: $skip
+    orderBy: $order
+  ) {
     ...ProductSummary
   }
-  productsConnection {
+  productsConnection(stage: PUBLISHED) {
     aggregate {
       count
     }
@@ -5265,7 +5271,10 @@ export const GetProductsByCategorySlugDocument = new TypedDocumentString(`
   ) {
     ...ProductSummary
   }
-  productsConnection(where: {category: {Category: {slug: $categorySlug}}}) {
+  productsConnection(
+    stage: PUBLISHED
+    where: {category: {Category: {slug: $categorySlug}}}
+  ) {
     aggregate {
       count
     }

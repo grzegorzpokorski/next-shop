@@ -3,10 +3,16 @@ query GetAllProducts(
   $skip: Int!
   $order: ProductOrderByInput = price_DESC
 ) {
-  products(locales: pl, first: $limit, skip: $skip, orderBy: $order) {
+  products(
+    stage: PUBLISHED
+    locales: pl
+    first: $limit
+    skip: $skip
+    orderBy: $order
+  ) {
     ...ProductSummary
   }
-  productsConnection {
+  productsConnection(stage: PUBLISHED) {
     aggregate {
       count
     }
