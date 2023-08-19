@@ -59,7 +59,6 @@ const ProductListItem = ({ product, slider }: ProductListItemProps) => {
             height={product.thumbnail.height}
             alt={product.thumbnail.alt}
             className="relative h-full w-full object-contain transition motion-reduce:transition-none duration-300 ease-in-out motion-safe:hover:scale-105"
-            unoptimized
           />
           <div className="absolute bottom-0 left-0 right-0 flex w-full px-4 pb-4">
             <div className="flex w-full gap-4 items-center rounded border bg-white/70 p-1 font-medium text-black backdrop-blur-md text-xs dark:border-neutral-800 dark:bg-black/70 dark:text-white">

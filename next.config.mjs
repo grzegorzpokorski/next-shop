@@ -4,6 +4,7 @@ import "./src/lib/env.mjs";
 const nextConfig = {
   images: {
     remotePatterns: [{ hostname: "media.graphassets.com", protocol: "https" }],
+    unoptimized: true,
   },
 };
 
