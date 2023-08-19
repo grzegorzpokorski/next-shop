@@ -12,9 +12,5 @@ export const getProductBySlug = async ({ slug }: Args) => {
     variables: { slug },
   });
 
-  if (!result.product) {
-    throw new Error(`Product not found: ${slug}`);
-  }
-
-  return reshapeProductWithDetails(result.product);
+  return result.product ? reshapeProductWithDetails(result.product) : null;
 };

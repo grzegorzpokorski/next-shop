@@ -12,9 +12,5 @@ export const getCategoryNameBySlug = async ({ slug }: Args) => {
     variables: { categorySlug: slug },
   });
 
-  if (!result.category) {
-    throw new Error(`Category not found: ${slug}`);
-  }
-
-  return reshapeCategory(result.category);
+  return result.category ? reshapeCategory(result.category) : null;
 };
