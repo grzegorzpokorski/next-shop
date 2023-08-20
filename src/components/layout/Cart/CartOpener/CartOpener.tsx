@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FaShoppingCart } from "react-icons/fa";
 import { Button } from "@/components/ui/Button/Button";
 
-export const CartLink = () => {
+export const CartOpener = () => {
   return (
     <Button variant="outline" size="icon" asChild className="relative">
       <Link href="/cart">

@@ -2,7 +2,7 @@ import { SearchForm } from "@/components/layout/Header/components/SearchForm/Sea
 import { Container } from "@/components/ui/Container/Container";
 import { HeaderLogo } from "@/components/layout/Header/components/HeaderLogo/HeaderLogo";
 import { HeaderMenu } from "@/components/layout/Header/components/HeaderMenu/HeaderMenu";
-import { CartLink } from "@/components/layout/Header/components/CartLink/CartLink";
+import { CartOpener } from "@/components/layout/Cart/CartOpener/CartOpener";
 
 export const Header = () => {
   return (
@@ -19,7 +19,7 @@ export const Header = () => {
             <div className="hidden md:flex w-full justify-end">
               <SearchForm />
             </div>
-            <CartLink />
+            <CartOpener />
           </div>
         </div>
       </Container>
