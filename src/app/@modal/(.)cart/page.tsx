@@ -10,14 +10,14 @@ export default async function Page() {
   return (
     <CartModal>
       <div className="w-full max-w-screen-sm fixed top-0 right-0 bottom-0 bg-white dark:bg-neutral-900 overflow-y-auto">
-        <div className="sticky top-0 flex p-4 md:px-8 items-center justify-between border-b bg-white/60 dark:bg-neutral-900/60 backdrop-blur-lg">
+        <div className="sticky top-0 flex p-4 md:px-8 items-center justify-between border-b bg-white/60 dark:bg-neutral-900/60 backdrop-blur-lg z-50">
           <Heading as="h2" size="2xl">
             Twój koszyk
           </Heading>
           <CloseCartButton />
         </div>
         <CartItemsList products={products} />
-        <CartSummary total={{ amount: 998, currency: "PLN" }} />
+        <CartSummary total={{ amount: 998, currency: "PLN" }} sticky />
       </div>
     </CartModal>
   );

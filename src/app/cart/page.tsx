@@ -17,14 +17,17 @@ export default async function Page() {
           Twój koszyk
         </Heading>
       </header>
-      <section aria-labelledby="heading-of-section-with-products">
+      <section
+        aria-labelledby="heading-of-section-with-products"
+        className="mb-16"
+      >
         <Heading as="h2" id="heading-of-section-with-products" hidden>
           Lista produktów w koszyku
         </Heading>
-        <div className="bg-black rounded mb-16">
+        <div className="bg-black rounded-t">
           <CartItemsList products={products} />
+          <CartSummary total={{ amount: 998, currency: "PLN" }} />
         </div>
-        <CartSummary total={{ amount: 998, currency: "PLN" }} />
       </section>
     </Container>
   );
