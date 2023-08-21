@@ -1,5 +1,6 @@
 import { CartItemsList } from "@/components/layout/Cart/CartItemsList/CartItemsList";
 import { CartModal } from "@/components/layout/Cart/CartModal/CartModal";
+import { CartSummary } from "@/components/layout/Cart/CartSummary/CartSummary";
 import { CloseCartButton } from "@/components/layout/Cart/CloseCartButton/CloseCartButton";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { getAllProducts } from "@/lib/queries/getAllProducts";
@@ -16,6 +17,7 @@ export default async function Page() {
           <CloseCartButton />
         </div>
         <CartItemsList products={products} />
+        <CartSummary total={{ amount: 998, currency: "PLN" }} />
       </div>
     </CartModal>
   );

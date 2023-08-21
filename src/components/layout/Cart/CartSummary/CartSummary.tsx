@@ -1,0 +1,39 @@
+import Link from "next/link";
+import { Button } from "@/components/ui/Button/Button";
+import { formatPrice } from "@/utils/formatPrice";
+
+type Props = {
+  total: {
+    amount: number;
+    currency: string;
+  };
+};
+
+export const CartSummary = ({ total }: Props) => {
+  return (
+    <div className="sticky bottom-0 left-0 right-0 p-4 lg:p-8 landscape:p-n8 flex flex-col justify-end bg-white/50 dark:bg-black/50 border-t backdrop-blur-lg">
+      <div className="flex justify-between text-base font-medium">
+        <p>Razem do zapłaty:</p>
+        <p>
+          {formatPrice({
+            currency: total.currency,
+            price: total.amount,
+          })}
+        </p>
+      </div>
+      <p className="text-primary/80 text-xs mt-1">
+        Koszty dostawy zostaną obliczone w kolejnym kroku.
+      </p>
+      <div className="mt-6 grid grid-cols-1 gap-2 text-center">
+        <Button variant="indigo" className="lg:order-2">
+          Złóż zamówienie
+        </Button>
+        <Button asChild variant="outline" className="lg:order-1">
+          <Link href="/products">
+            Kontynuuj zakupy<span aria-hidden="true"> →</span>
+          </Link>
+        </Button>
+      </div>
+    </div>
+  );
+};

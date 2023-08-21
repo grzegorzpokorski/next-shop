@@ -1,10 +1,14 @@
 "use client";
 
-import type { MouseEventHandler, ReactNode } from "react";
-import { useCallback, useRef } from "react";
-// import * as Portal from "@radix-ui/react-portal";
+import {
+  useRef,
+  useCallback,
+  type MouseEventHandler,
+  type ReactNode,
+  useEffect,
+} from "react";
+import * as Portal from "@radix-ui/react-portal";
 import { useRouter } from "next/navigation";
-import * as Dialog from "@radix-ui/react-dialog";
 
 type Props = {
   children: ReactNode;
@@ -14,27 +18,29 @@ export const CartModal = ({ children }: Props) => {
   const router = useRouter();
   const overlayRef = useRef(null);
 
-  const onDismiss = useCallback(() => {
-    router.back();
-  }, [router]);
-
   const handleClickOnOverlay: MouseEventHandler = useCallback(
     (e) => {
-      if (e.target === overlayRef.current) onDismiss();
+      if (e.target === overlayRef.current) {
+        router.back();
+      }
     },
-    [onDismiss],
+    [router],
   );
 
+  useEffect(() => {
+    document.querySelector("body")?.classList.add("overflow-hidden");
+    console.log("huj");
+  }, []);
+
   return (
-    <Dialog.Root defaultOpen={true}>
-      <Dialog.Portal>
-        <Dialog.Overlay
-          className="fixed inset-0 bg-white/50 dark:bg-black/50 z-50"
-          ref={overlayRef}
-          onClick={handleClickOnOverlay}
-        />
-        <Dialog.Content className="z-50">{children}</Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
+    <Portal.Root>
+      <div
+        className="fixed inset-0 bg-white/50 dark:bg-black/50 z-50"
+        ref={overlayRef}
+        onClick={handleClickOnOverlay}
+      >
+        {children}
+      </div>
+    </Portal.Root>
   );
 };
