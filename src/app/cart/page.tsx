@@ -1,8 +1,28 @@
+import type { Metadata } from "next/types";
 import { CartItemsList } from "@/components/layout/Cart/CartItemsList/CartItemsList";
 import { CartSummary } from "@/components/layout/Cart/CartSummary/CartSummary";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { getAllProducts } from "@/lib/queries/getAllProducts";
+
+export const metadata: Metadata = {
+  title: `Koszyk`,
+  alternates: {
+    canonical: `/cart`,
+  },
+  openGraph: {
+    images: [
+      {
+        url: `/api/og?width=1200&height=630&subtitle=${encodeURIComponent(
+          "koszyk zakupowy",
+        )}`,
+        width: 1200,
+        height: 630,
+        alt: `Next Shop - koszyk zakupowy`,
+      },
+    ],
+  },
+};
 
 export default async function Page() {
   const { products } = await getAllProducts({ limit: 5, skip: 0 });
