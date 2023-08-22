@@ -1,4 +1,4 @@
-import Link from "next/link";
+// import Link from "next/link";
 import Image from "next/image";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import type { ProductWithSummary } from "@/lib/types";
@@ -19,7 +19,7 @@ export const CartItemsList = ({ products }: Props) => {
           className="border-b last:border-0 p-4 lg:p-8 flex flex-col gap-4"
         >
           <div className="flex gap-4 items-center">
-            <Link
+            <a
               href={`/product/${product.slug}`}
               className="h-20 w-20 flex-shrink-0 overflow-hidden rounded border bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-900/50 dark:hover:bg-neutral-900/40 motion-safe:transition-colors"
             >
@@ -30,13 +30,13 @@ export const CartItemsList = ({ products }: Props) => {
                 alt={product.thumbnail.alt}
                 className="h-full w-full object-cover object-center"
               />
-            </Link>
+            </a>
             <div className="flex flex-col items-start mr-auto gap-1">
-              <Link href={`/product/${product.slug}`}>
+              <a href={`/product/${product.slug}`}>
                 <Heading as="h2" size="default">
                   {product.name}
                 </Heading>
-              </Link>
+              </a>
               <p className="text-primary/80 text-sm">
                 {product.category?.name}
               </p>
