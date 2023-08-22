@@ -15,8 +15,9 @@ export const CartSummary = ({ total, sticky }: Props) => {
   return (
     <div
       className={twMerge(
-        sticky && "md:sticky",
-        "bottom-0 left-0 right-0 p-4 lg:p-8 landscape:p-n8 flex flex-col justify-end bg-white/50 dark:bg-black/50 border-t backdrop-blur-lg",
+        sticky && "sticky",
+        "bottom-0 left-0 right-0 p-4 lg:p-8 landscape:p-n8 flex flex-col justify-end bg-white/50 dark:bg-black/70 border-t backdrop-blur-lg",
+        "@container",
       )}
     >
       <div className="flex justify-between text-base font-medium">
@@ -31,7 +32,7 @@ export const CartSummary = ({ total, sticky }: Props) => {
       <p className="text-primary/80 text-xs mt-1">
         Koszty dostawy zostaną obliczone w kolejnym kroku.
       </p>
-      <div className="mt-6 grid grid-cols-1 gap-2 text-center">
+      <div className="mt-6 grid @sm:grid-cols-1 @md:grid-cols-2 gap-2 text-center">
         <Button variant="indigo" className="lg:order-2">
           Złóż zamówienie
         </Button>

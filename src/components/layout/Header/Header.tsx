@@ -6,7 +6,7 @@ import { CartOpener } from "@/components/layout/Cart/CartOpener/CartOpener";
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b">
+    <header className="sticky top-0 z-40 w-full bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b">
       <Container as="div">
         <div className="flex flex-row items-center justify-between md:gap-4 h-20">
           <div className="flex flex-row-reverse md:flex-row md:gap-8 items-center w-full">
