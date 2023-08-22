@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import { Button } from "@/components/ui/Button/Button";
 import { formatPrice } from "@/utils/formatPrice";
@@ -37,9 +36,9 @@ export const CartSummary = ({ total, sticky }: Props) => {
           Złóż zamówienie
         </Button>
         <Button asChild variant="outline" className="lg:order-1">
-          <Link href="/products">
+          <a href="/products">
             Kontynuuj zakupy<span aria-hidden="true"> →</span>
-          </Link>
+          </a>
         </Button>
       </div>
     </div>
