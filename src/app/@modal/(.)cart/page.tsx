@@ -2,7 +2,6 @@ import { CartItemsList } from "@/components/layout/Cart/CartItemsList/CartItemsL
 import { CartModal } from "@/components/layout/Cart/CartModal/CartModal";
 import { CartSummary } from "@/components/layout/Cart/CartSummary/CartSummary";
 import { CloseCartButton } from "@/components/layout/Cart/CloseCartButton/CloseCartButton";
-import { ViewFullCartButton } from "@/components/layout/Cart/ViewFullCartButton/ViewFullCartButton";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { getAllProducts } from "@/lib/queries/getAllProducts";
 
