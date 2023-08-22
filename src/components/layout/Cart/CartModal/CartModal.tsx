@@ -14,7 +14,7 @@ export const CartModal = ({ children }: Props) => {
   return (
     <Dialog.Root defaultOpen={true} onOpenChange={() => router.back()}>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-white/50 dark:bg-black/50 z-50" />
+        <Dialog.Overlay className="fixed inset-0 bg-white/50 dark:bg-black/50 z-50 backdrop-blur-lg" />
         <Dialog.Content>{children}</Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
