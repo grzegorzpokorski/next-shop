@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button/Button";
 import { formatPrice } from "@/utils/formatPrice";
 
@@ -12,6 +15,7 @@ type Props = {
 };
 
 export const CartSummary = ({ total, sticky }: Props) => {
+  const router = useRouter();
   return (
     <div
       className={twMerge(
@@ -36,10 +40,12 @@ export const CartSummary = ({ total, sticky }: Props) => {
         <Button variant="indigo" className="lg:order-2">
           Złóż zamówienie
         </Button>
-        <Button asChild variant="outline" className="lg:order-1">
-          <Link href="/products">
-            Kontynuuj zakupy<span aria-hidden="true"> →</span>
-          </Link>
+        <Button
+          variant="outline"
+          className="lg:order-1"
+          onClick={() => router.back()}
+        >
+          Kontynuuj zakupy<span aria-hidden="true"> →</span>
         </Button>
       </div>
     </div>
