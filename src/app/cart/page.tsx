@@ -24,7 +24,7 @@ export default async function Page() {
         <Heading as="h2" id="heading-of-section-with-products" hidden>
           Lista produktów w koszyku
         </Heading>
-        <div className="bg-black rounded-t">
+        <div className="bg-white dark:bg-black rounded-t">
           <CartItemsList products={products} />
           <CartSummary total={{ amount: 998, currency: "PLN" }} />
         </div>
