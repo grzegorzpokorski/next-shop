@@ -761,7 +761,7 @@ export type Cart = Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars["ID"]["output"];
-  items: Array<CartItem>;
+  items: Array<CartitemsUnion>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars["DateTime"]["output"]>;
   /** User that last published this document */
@@ -799,9 +799,7 @@ export type CartItemsArgs = {
   forceParentLocale?: InputMaybe<Scalars["Boolean"]["input"]>;
   last?: InputMaybe<Scalars["Int"]["input"]>;
   locales?: InputMaybe<Array<Locale>>;
-  orderBy?: InputMaybe<CartItemOrderByInput>;
   skip?: InputMaybe<Scalars["Int"]["input"]>;
-  where?: InputMaybe<CartItemWhereInput>;
 };
 
 export type CartPublishedByArgs = {
@@ -843,7 +841,7 @@ export type CartConnection = {
 
 export type CartCreateInput = {
   createdAt?: InputMaybe<Scalars["DateTime"]["input"]>;
-  items?: InputMaybe<CartItemCreateManyInlineInput>;
+  items?: InputMaybe<CartitemsUnionCreateManyInlineInput>;
   updatedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
 };
 
@@ -872,10 +870,15 @@ export type CartEdge = {
 export type CartItem = {
   /** The unique identifier */
   id: Scalars["ID"]["output"];
-  itemId: Scalars["String"]["output"];
+  product?: Maybe<Product>;
   quantity: Scalars["Int"]["output"];
   /** System stage field */
   stage: Stage;
+};
+
+export type CartItemProductArgs = {
+  forceParentLocale?: InputMaybe<Scalars["Boolean"]["input"]>;
+  locales?: InputMaybe<Array<Locale>>;
 };
 
 export type CartItemConnectInput = {
@@ -895,7 +898,7 @@ export type CartItemConnection = {
 };
 
 export type CartItemCreateInput = {
-  itemId: Scalars["String"]["input"];
+  product?: InputMaybe<ProductCreateOneInlineInput>;
   quantity: Scalars["Int"]["input"];
 };
 
@@ -953,25 +956,7 @@ export type CartItemManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars["ID"]["input"]>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars["ID"]["input"]>;
-  itemId?: InputMaybe<Scalars["String"]["input"]>;
-  /** All values containing the given string. */
-  itemId_contains?: InputMaybe<Scalars["String"]["input"]>;
-  /** All values ending with the given string. */
-  itemId_ends_with?: InputMaybe<Scalars["String"]["input"]>;
-  /** All values that are contained in given list. */
-  itemId_in?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  itemId_not?: InputMaybe<Scalars["String"]["input"]>;
-  /** All values not containing the given string. */
-  itemId_not_contains?: InputMaybe<Scalars["String"]["input"]>;
-  /** All values not ending with the given string */
-  itemId_not_ends_with?: InputMaybe<Scalars["String"]["input"]>;
-  /** All values that are not contained in given list. */
-  itemId_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
-  /** All values not starting with the given string. */
-  itemId_not_starts_with?: InputMaybe<Scalars["String"]["input"]>;
-  /** All values starting with the given string. */
-  itemId_starts_with?: InputMaybe<Scalars["String"]["input"]>;
+  product?: InputMaybe<ProductWhereInput>;
   quantity?: InputMaybe<Scalars["Int"]["input"]>;
   /** All values greater than the given value. */
   quantity_gt?: InputMaybe<Scalars["Int"]["input"]>;
@@ -992,8 +977,6 @@ export type CartItemManyWhereInput = {
 export enum CartItemOrderByInput {
   IdAsc = "id_ASC",
   IdDesc = "id_DESC",
-  ItemIdAsc = "itemId_ASC",
-  ItemIdDesc = "itemId_DESC",
   QuantityAsc = "quantity_ASC",
   QuantityDesc = "quantity_DESC",
 }
@@ -1079,7 +1062,7 @@ export type CartItemParentWhereUniqueInput = {
 };
 
 export type CartItemUpdateInput = {
-  itemId?: InputMaybe<Scalars["String"]["input"]>;
+  product?: InputMaybe<ProductUpdateOneInlineInput>;
   quantity?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
@@ -1188,25 +1171,7 @@ export type CartItemWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars["ID"]["input"]>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars["ID"]["input"]>;
-  itemId?: InputMaybe<Scalars["String"]["input"]>;
-  /** All values containing the given string. */
-  itemId_contains?: InputMaybe<Scalars["String"]["input"]>;
-  /** All values ending with the given string. */
-  itemId_ends_with?: InputMaybe<Scalars["String"]["input"]>;
-  /** All values that are contained in given list. */
-  itemId_in?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  itemId_not?: InputMaybe<Scalars["String"]["input"]>;
-  /** All values not containing the given string. */
-  itemId_not_contains?: InputMaybe<Scalars["String"]["input"]>;
-  /** All values not ending with the given string */
-  itemId_not_ends_with?: InputMaybe<Scalars["String"]["input"]>;
-  /** All values that are not contained in given list. */
-  itemId_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
-  /** All values not starting with the given string. */
-  itemId_not_starts_with?: InputMaybe<Scalars["String"]["input"]>;
-  /** All values starting with the given string. */
-  itemId_starts_with?: InputMaybe<Scalars["String"]["input"]>;
+  product?: InputMaybe<ProductWhereInput>;
   quantity?: InputMaybe<Scalars["Int"]["input"]>;
   /** All values greater than the given value. */
   quantity_gt?: InputMaybe<Scalars["Int"]["input"]>;
@@ -1227,7 +1192,6 @@ export type CartItemWhereInput = {
 /** References CartItem record uniquely */
 export type CartItemWhereUniqueInput = {
   id?: InputMaybe<Scalars["ID"]["input"]>;
-  itemId?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 /** Identifies documents */
@@ -1280,9 +1244,10 @@ export type CartManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars["ID"]["input"]>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars["ID"]["input"]>;
-  items_every?: InputMaybe<CartItemWhereInput>;
-  items_none?: InputMaybe<CartItemWhereInput>;
-  items_some?: InputMaybe<CartItemWhereInput>;
+  /** All values in which the union is empty. */
+  items_empty?: InputMaybe<Scalars["Boolean"]["input"]>;
+  /** Matches if the modular component contains at least one connection to the item provided to the filter */
+  items_some?: InputMaybe<CartitemsUnionWhereInput>;
   publishedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars["DateTime"]["input"]>;
@@ -1336,7 +1301,7 @@ export enum CartOrderByInput {
 }
 
 export type CartUpdateInput = {
-  items?: InputMaybe<CartItemUpdateManyInlineInput>;
+  items?: InputMaybe<CartitemsUnionUpdateManyInlineInput>;
 };
 
 export type CartUpdateManyInlineInput = {
@@ -1460,9 +1425,10 @@ export type CartWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars["ID"]["input"]>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars["ID"]["input"]>;
-  items_every?: InputMaybe<CartItemWhereInput>;
-  items_none?: InputMaybe<CartItemWhereInput>;
-  items_some?: InputMaybe<CartItemWhereInput>;
+  /** All values in which the union is empty. */
+  items_empty?: InputMaybe<Scalars["Boolean"]["input"]>;
+  /** Matches if the modular component contains at least one connection to the item provided to the filter */
+  items_some?: InputMaybe<CartitemsUnionWhereInput>;
   publishedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars["DateTime"]["input"]>;
@@ -1521,6 +1487,88 @@ export type CartWhereStageInput = {
 /** References Cart record uniquely */
 export type CartWhereUniqueInput = {
   id?: InputMaybe<Scalars["ID"]["input"]>;
+};
+
+export type CartitemsUnion = CartItem;
+
+export type CartitemsUnionConnectInput = {
+  CartItem?: InputMaybe<CartItemConnectInput>;
+};
+
+export type CartitemsUnionCreateInput = {
+  CartItem?: InputMaybe<CartItemCreateInput>;
+};
+
+export type CartitemsUnionCreateManyInlineInput = {
+  /** Create and connect multiple existing CartitemsUnion documents */
+  create?: InputMaybe<Array<CartitemsUnionCreateInput>>;
+};
+
+export type CartitemsUnionCreateOneInlineInput = {
+  /** Create and connect one CartitemsUnion document */
+  create?: InputMaybe<CartitemsUnionCreateInput>;
+};
+
+export type CartitemsUnionCreateWithPositionInput = {
+  CartItem?: InputMaybe<CartItemCreateWithPositionInput>;
+};
+
+export type CartitemsUnionUpdateInput = {
+  CartItem?: InputMaybe<CartItemUpdateInput>;
+};
+
+export type CartitemsUnionUpdateManyInlineInput = {
+  /** Create and connect multiple CartitemsUnion component instances */
+  create?: InputMaybe<Array<CartitemsUnionCreateWithPositionInput>>;
+  /** Delete multiple CartitemsUnion documents */
+  delete?: InputMaybe<Array<CartitemsUnionWhereUniqueInput>>;
+  /** Update multiple CartitemsUnion component instances */
+  update?: InputMaybe<
+    Array<CartitemsUnionUpdateWithNestedWhereUniqueAndPositionInput>
+  >;
+  /** Upsert multiple CartitemsUnion component instances */
+  upsert?: InputMaybe<
+    Array<CartitemsUnionUpsertWithNestedWhereUniqueAndPositionInput>
+  >;
+};
+
+export type CartitemsUnionUpdateManyWithNestedWhereInput = {
+  CartItem?: InputMaybe<CartItemUpdateManyWithNestedWhereInput>;
+};
+
+export type CartitemsUnionUpdateOneInlineInput = {
+  /** Create and connect one CartitemsUnion document */
+  create?: InputMaybe<CartitemsUnionCreateInput>;
+  /** Delete currently connected CartitemsUnion document */
+  delete?: InputMaybe<Scalars["Boolean"]["input"]>;
+  /** Update single CartitemsUnion document */
+  update?: InputMaybe<CartitemsUnionUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single CartitemsUnion document */
+  upsert?: InputMaybe<CartitemsUnionUpsertWithNestedWhereUniqueInput>;
+};
+
+export type CartitemsUnionUpdateWithNestedWhereUniqueAndPositionInput = {
+  CartItem?: InputMaybe<CartItemUpdateWithNestedWhereUniqueAndPositionInput>;
+};
+
+export type CartitemsUnionUpdateWithNestedWhereUniqueInput = {
+  CartItem?: InputMaybe<CartItemUpdateWithNestedWhereUniqueInput>;
+};
+
+export type CartitemsUnionUpsertWithNestedWhereUniqueAndPositionInput = {
+  CartItem?: InputMaybe<CartItemUpsertWithNestedWhereUniqueAndPositionInput>;
+};
+
+export type CartitemsUnionUpsertWithNestedWhereUniqueInput = {
+  CartItem?: InputMaybe<CartItemUpsertWithNestedWhereUniqueInput>;
+};
+
+export type CartitemsUnionWhereInput = {
+  CartItem?: InputMaybe<CartItemWhereInput>;
+};
+
+export type CartitemsUnionWhereUniqueInput = {
+  CartItem?: InputMaybe<CartItemWhereUniqueInput>;
 };
 
 export type Category = Node & {
@@ -3174,6 +3222,7 @@ export type ProductConnection = {
 
 export type ProductCreateInput = {
   category?: InputMaybe<ProductCategoryCreateOneInlineInput>;
+  cllmthjzj1wmr01t77f7a3xf6?: InputMaybe<CartItemCreateManyInlineInput>;
   createdAt?: InputMaybe<Scalars["DateTime"]["input"]>;
   currency: Currency;
   /** description input for default locale (pl) */
@@ -3418,6 +3467,7 @@ export enum ProductOrderByInput {
 
 export type ProductUpdateInput = {
   category?: InputMaybe<ProductCategoryUpdateOneInlineInput>;
+  cllmthjzj1wmr01t77f7a3xf6?: InputMaybe<CartItemUpdateManyInlineInput>;
   currency?: InputMaybe<Currency>;
   /** description input for default locale (pl) */
   description?: InputMaybe<Scalars["RichTextAST"]["input"]>;
@@ -5682,6 +5732,46 @@ export enum _SystemDateTimeFieldVariation {
   Localization = "localization",
 }
 
+export type CartFragment = {
+  id: string;
+  items: Array<{
+    id: string;
+    quantity: number;
+    product?: {
+      id: string;
+      name: string;
+      slug: string;
+      price: number;
+      currency: Currency;
+      quantityAvailable: number;
+      updatedAt: string;
+      createdAt: string;
+      gallery: Array<{
+        id: string;
+        mimeType?: string | null;
+        url: string;
+        width?: number | null;
+        height?: number | null;
+        fileName: string;
+      }>;
+      category?: {
+        id: string;
+        name: string;
+        slug: string;
+        description?: string | null;
+        thumbnail: {
+          id: string;
+          mimeType?: string | null;
+          url: string;
+          width?: number | null;
+          height?: number | null;
+          fileName: string;
+        };
+      } | null;
+    } | null;
+  }>;
+};
+
 export type CategoryDetailsFragment = {
   id: string;
   name: string;
@@ -5775,6 +5865,193 @@ export type ProductSummaryFragment = {
   } | null;
 };
 
+export type AddItemToCartMutationVariables = Exact<{
+  cartId: Scalars["ID"]["input"];
+  productQty: Scalars["Int"]["input"];
+  productId: Scalars["ID"]["input"];
+}>;
+
+export type AddItemToCartMutation = {
+  updateCart?: {
+    id: string;
+    items: Array<{
+      id: string;
+      quantity: number;
+      product?: {
+        id: string;
+        name: string;
+        slug: string;
+        price: number;
+        currency: Currency;
+        quantityAvailable: number;
+        updatedAt: string;
+        createdAt: string;
+        gallery: Array<{
+          id: string;
+          mimeType?: string | null;
+          url: string;
+          width?: number | null;
+          height?: number | null;
+          fileName: string;
+        }>;
+        category?: {
+          id: string;
+          name: string;
+          slug: string;
+          description?: string | null;
+          thumbnail: {
+            id: string;
+            mimeType?: string | null;
+            url: string;
+            width?: number | null;
+            height?: number | null;
+            fileName: string;
+          };
+        } | null;
+      } | null;
+    }>;
+  } | null;
+};
+
+export type CreateEmptyCartMutationVariables = Exact<{ [key: string]: never }>;
+
+export type CreateEmptyCartMutation = {
+  createCart?: {
+    id: string;
+    items: Array<{
+      id: string;
+      quantity: number;
+      product?: {
+        id: string;
+        name: string;
+        slug: string;
+        price: number;
+        currency: Currency;
+        quantityAvailable: number;
+        updatedAt: string;
+        createdAt: string;
+        gallery: Array<{
+          id: string;
+          mimeType?: string | null;
+          url: string;
+          width?: number | null;
+          height?: number | null;
+          fileName: string;
+        }>;
+        category?: {
+          id: string;
+          name: string;
+          slug: string;
+          description?: string | null;
+          thumbnail: {
+            id: string;
+            mimeType?: string | null;
+            url: string;
+            width?: number | null;
+            height?: number | null;
+            fileName: string;
+          };
+        } | null;
+      } | null;
+    }>;
+  } | null;
+};
+
+export type DeteteCartItemMutationVariables = Exact<{
+  cartId: Scalars["ID"]["input"];
+  itemId: Scalars["ID"]["input"];
+}>;
+
+export type DeteteCartItemMutation = {
+  updateCart?: {
+    id: string;
+    items: Array<{
+      id: string;
+      quantity: number;
+      product?: {
+        id: string;
+        name: string;
+        slug: string;
+        price: number;
+        currency: Currency;
+        quantityAvailable: number;
+        updatedAt: string;
+        createdAt: string;
+        gallery: Array<{
+          id: string;
+          mimeType?: string | null;
+          url: string;
+          width?: number | null;
+          height?: number | null;
+          fileName: string;
+        }>;
+        category?: {
+          id: string;
+          name: string;
+          slug: string;
+          description?: string | null;
+          thumbnail: {
+            id: string;
+            mimeType?: string | null;
+            url: string;
+            width?: number | null;
+            height?: number | null;
+            fileName: string;
+          };
+        } | null;
+      } | null;
+    }>;
+  } | null;
+};
+
+export type UpdateCartItemQuantityMutationVariables = Exact<{
+  cartId: Scalars["ID"]["input"];
+  itemId: Scalars["ID"]["input"];
+  qty: Scalars["Int"]["input"];
+}>;
+
+export type UpdateCartItemQuantityMutation = {
+  update?: {
+    id: string;
+    items: Array<{
+      id: string;
+      quantity: number;
+      product?: {
+        id: string;
+        name: string;
+        slug: string;
+        price: number;
+        currency: Currency;
+        quantityAvailable: number;
+        updatedAt: string;
+        createdAt: string;
+        gallery: Array<{
+          id: string;
+          mimeType?: string | null;
+          url: string;
+          width?: number | null;
+          height?: number | null;
+          fileName: string;
+        }>;
+        category?: {
+          id: string;
+          name: string;
+          slug: string;
+          description?: string | null;
+          thumbnail: {
+            id: string;
+            mimeType?: string | null;
+            url: string;
+            width?: number | null;
+            height?: number | null;
+            fileName: string;
+          };
+        } | null;
+      } | null;
+    }>;
+  } | null;
+};
+
 export type GetAllProductsQueryVariables = Exact<{
   limit: Scalars["Int"]["input"];
   skip: Scalars["Int"]["input"];
@@ -5816,6 +6093,52 @@ export type GetAllProductsQuery = {
     } | null;
   }>;
   productsConnection: { aggregate: { count: number } };
+};
+
+export type GetCartByIdQueryVariables = Exact<{
+  cartId: Scalars["ID"]["input"];
+}>;
+
+export type GetCartByIdQuery = {
+  cart?: {
+    id: string;
+    items: Array<{
+      id: string;
+      quantity: number;
+      product?: {
+        id: string;
+        name: string;
+        slug: string;
+        price: number;
+        currency: Currency;
+        quantityAvailable: number;
+        updatedAt: string;
+        createdAt: string;
+        gallery: Array<{
+          id: string;
+          mimeType?: string | null;
+          url: string;
+          width?: number | null;
+          height?: number | null;
+          fileName: string;
+        }>;
+        category?: {
+          id: string;
+          name: string;
+          slug: string;
+          description?: string | null;
+          thumbnail: {
+            id: string;
+            mimeType?: string | null;
+            url: string;
+            width?: number | null;
+            height?: number | null;
+            fileName: string;
+          };
+        } | null;
+      } | null;
+    }>;
+  } | null;
 };
 
 export type GetCategoriesQueryVariables = Exact<{ [key: string]: never }>;
@@ -6035,6 +6358,92 @@ export const CategoryDetailsFragmentDoc = new TypedDocumentString(
 }`,
   { fragmentName: "CategoryDetails" },
 ) as unknown as TypedDocumentString<CategoryDetailsFragment, unknown>;
+export const ProductSummaryFragmentDoc = new TypedDocumentString(
+  `
+    fragment ProductSummary on Product {
+  id
+  name
+  slug
+  price
+  currency
+  gallery(first: 1) {
+    ...ImageDetails
+  }
+  quantityAvailable
+  category {
+    ...CategoryDetails
+  }
+  updatedAt
+  createdAt
+}
+    fragment CategoryDetails on Category {
+  id
+  name
+  slug
+  description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
+}`,
+  { fragmentName: "ProductSummary" },
+) as unknown as TypedDocumentString<ProductSummaryFragment, unknown>;
+export const CartFragmentDoc = new TypedDocumentString(
+  `
+    fragment Cart on Cart {
+  id
+  items(first: 100) {
+    ... on CartItem {
+      id
+      quantity
+      product {
+        ...ProductSummary
+      }
+    }
+  }
+}
+    fragment CategoryDetails on Category {
+  id
+  name
+  slug
+  description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
+}
+fragment ProductSummary on Product {
+  id
+  name
+  slug
+  price
+  currency
+  gallery(first: 1) {
+    ...ImageDetails
+  }
+  quantityAvailable
+  category {
+    ...CategoryDetails
+  }
+  updatedAt
+  createdAt
+}`,
+  { fragmentName: "Cart" },
+) as unknown as TypedDocumentString<CartFragment, unknown>;
 export const ProductDetailsFragmentDoc = new TypedDocumentString(
   `
     fragment ProductDetails on Product {
@@ -6077,25 +6486,28 @@ fragment ImageDetails on Asset {
 }`,
   { fragmentName: "ProductDetails" },
 ) as unknown as TypedDocumentString<ProductDetailsFragment, unknown>;
-export const ProductSummaryFragmentDoc = new TypedDocumentString(
-  `
-    fragment ProductSummary on Product {
-  id
-  name
-  slug
-  price
-  currency
-  gallery(first: 1) {
-    ...ImageDetails
+export const AddItemToCartDocument = new TypedDocumentString(`
+    mutation AddItemToCart($cartId: ID!, $productQty: Int!, $productId: ID!) {
+  updateCart(
+    where: {id: $cartId}
+    data: {items: {create: {CartItem: {data: {quantity: $productQty, product: {connect: {id: $productId}}}}}}}
+  ) {
+    ...Cart
   }
-  quantityAvailable
-  category {
-    ...CategoryDetails
-  }
-  updatedAt
-  createdAt
 }
-    fragment CategoryDetails on Category {
+    fragment Cart on Cart {
+  id
+  items(first: 100) {
+    ... on CartItem {
+      id
+      quantity
+      product {
+        ...ProductSummary
+      }
+    }
+  }
+}
+fragment CategoryDetails on Category {
   id
   name
   slug
@@ -6111,9 +6523,194 @@ fragment ImageDetails on Asset {
   width
   height
   fileName
-}`,
-  { fragmentName: "ProductSummary" },
-) as unknown as TypedDocumentString<ProductSummaryFragment, unknown>;
+}
+fragment ProductSummary on Product {
+  id
+  name
+  slug
+  price
+  currency
+  gallery(first: 1) {
+    ...ImageDetails
+  }
+  quantityAvailable
+  category {
+    ...CategoryDetails
+  }
+  updatedAt
+  createdAt
+}`) as unknown as TypedDocumentString<
+  AddItemToCartMutation,
+  AddItemToCartMutationVariables
+>;
+export const CreateEmptyCartDocument = new TypedDocumentString(`
+    mutation CreateEmptyCart {
+  createCart(data: {items: {}}) {
+    ...Cart
+  }
+}
+    fragment Cart on Cart {
+  id
+  items(first: 100) {
+    ... on CartItem {
+      id
+      quantity
+      product {
+        ...ProductSummary
+      }
+    }
+  }
+}
+fragment CategoryDetails on Category {
+  id
+  name
+  slug
+  description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
+}
+fragment ProductSummary on Product {
+  id
+  name
+  slug
+  price
+  currency
+  gallery(first: 1) {
+    ...ImageDetails
+  }
+  quantityAvailable
+  category {
+    ...CategoryDetails
+  }
+  updatedAt
+  createdAt
+}`) as unknown as TypedDocumentString<
+  CreateEmptyCartMutation,
+  CreateEmptyCartMutationVariables
+>;
+export const DeteteCartItemDocument = new TypedDocumentString(`
+    mutation DeteteCartItem($cartId: ID!, $itemId: ID!) {
+  updateCart(
+    where: {id: $cartId}
+    data: {items: {delete: {CartItem: {id: $itemId}}}}
+  ) {
+    ...Cart
+  }
+}
+    fragment Cart on Cart {
+  id
+  items(first: 100) {
+    ... on CartItem {
+      id
+      quantity
+      product {
+        ...ProductSummary
+      }
+    }
+  }
+}
+fragment CategoryDetails on Category {
+  id
+  name
+  slug
+  description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
+}
+fragment ProductSummary on Product {
+  id
+  name
+  slug
+  price
+  currency
+  gallery(first: 1) {
+    ...ImageDetails
+  }
+  quantityAvailable
+  category {
+    ...CategoryDetails
+  }
+  updatedAt
+  createdAt
+}`) as unknown as TypedDocumentString<
+  DeteteCartItemMutation,
+  DeteteCartItemMutationVariables
+>;
+export const UpdateCartItemQuantityDocument = new TypedDocumentString(`
+    mutation UpdateCartItemQuantity($cartId: ID!, $itemId: ID!, $qty: Int!) {
+  update: updateCart(
+    where: {id: $cartId}
+    data: {items: {update: [{CartItem: {where: {id: $itemId}, data: {quantity: $qty}}}]}}
+  ) {
+    ...Cart
+  }
+}
+    fragment Cart on Cart {
+  id
+  items(first: 100) {
+    ... on CartItem {
+      id
+      quantity
+      product {
+        ...ProductSummary
+      }
+    }
+  }
+}
+fragment CategoryDetails on Category {
+  id
+  name
+  slug
+  description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
+}
+fragment ProductSummary on Product {
+  id
+  name
+  slug
+  price
+  currency
+  gallery(first: 1) {
+    ...ImageDetails
+  }
+  quantityAvailable
+  category {
+    ...CategoryDetails
+  }
+  updatedAt
+  createdAt
+}`) as unknown as TypedDocumentString<
+  UpdateCartItemQuantityMutation,
+  UpdateCartItemQuantityMutationVariables
+>;
 export const GetAllProductsDocument = new TypedDocumentString(`
     query GetAllProducts($limit: Int!, $skip: Int!, $order: ProductOrderByInput = price_DESC, $searchQuery: String) {
   products(
@@ -6167,6 +6764,60 @@ fragment ProductSummary on Product {
 }`) as unknown as TypedDocumentString<
   GetAllProductsQuery,
   GetAllProductsQueryVariables
+>;
+export const GetCartByIdDocument = new TypedDocumentString(`
+    query GetCartById($cartId: ID!) {
+  cart(where: {id: $cartId}) {
+    ...Cart
+  }
+}
+    fragment Cart on Cart {
+  id
+  items(first: 100) {
+    ... on CartItem {
+      id
+      quantity
+      product {
+        ...ProductSummary
+      }
+    }
+  }
+}
+fragment CategoryDetails on Category {
+  id
+  name
+  slug
+  description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
+}
+fragment ProductSummary on Product {
+  id
+  name
+  slug
+  price
+  currency
+  gallery(first: 1) {
+    ...ImageDetails
+  }
+  quantityAvailable
+  category {
+    ...CategoryDetails
+  }
+  updatedAt
+  createdAt
+}`) as unknown as TypedDocumentString<
+  GetCartByIdQuery,
+  GetCartByIdQueryVariables
 >;
 export const GetCategoriesDocument = new TypedDocumentString(`
     query GetCategories {

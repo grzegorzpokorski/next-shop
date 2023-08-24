@@ -12,6 +12,8 @@ import * as types from "./graphql";
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+  "fragment Cart on Cart {\n  id\n  items(first: 100) {\n    ... on CartItem {\n      id\n      quantity\n      product {\n        ...ProductSummary\n      }\n    }\n  }\n}":
+    types.CartFragmentDoc,
   "fragment CategoryDetails on Category {\n  id\n  name\n  slug\n  description\n  thumbnail {\n    ...ImageDetails\n  }\n}":
     types.CategoryDetailsFragmentDoc,
   "fragment ImageDetails on Asset {\n  id\n  mimeType\n  url(transformation: {document: {output: {format: webp}}})\n  width\n  height\n  fileName\n}":
@@ -20,8 +22,18 @@ const documents = {
     types.ProductDetailsFragmentDoc,
   "fragment ProductSummary on Product {\n  id\n  name\n  slug\n  price\n  currency\n  gallery(first: 1) {\n    ...ImageDetails\n  }\n  quantityAvailable\n  category {\n    ...CategoryDetails\n  }\n  updatedAt\n  createdAt\n}":
     types.ProductSummaryFragmentDoc,
+  "mutation AddItemToCart($cartId: ID!, $productQty: Int!, $productId: ID!) {\n  updateCart(\n    where: {id: $cartId}\n    data: {items: {create: {CartItem: {data: {quantity: $productQty, product: {connect: {id: $productId}}}}}}}\n  ) {\n    ...Cart\n  }\n}":
+    types.AddItemToCartDocument,
+  "mutation CreateEmptyCart {\n  createCart(data: {items: {}}) {\n    ...Cart\n  }\n}":
+    types.CreateEmptyCartDocument,
+  "mutation DeteteCartItem($cartId: ID!, $itemId: ID!) {\n  updateCart(\n    where: {id: $cartId}\n    data: {items: {delete: {CartItem: {id: $itemId}}}}\n  ) {\n    ...Cart\n  }\n}":
+    types.DeteteCartItemDocument,
+  "mutation UpdateCartItemQuantity($cartId: ID!, $itemId: ID!, $qty: Int!) {\n  update: updateCart(\n    where: {id: $cartId}\n    data: {items: {update: [{CartItem: {where: {id: $itemId}, data: {quantity: $qty}}}]}}\n  ) {\n    ...Cart\n  }\n}":
+    types.UpdateCartItemQuantityDocument,
   "query GetAllProducts($limit: Int!, $skip: Int!, $order: ProductOrderByInput = price_DESC, $searchQuery: String) {\n  products(\n    stage: PUBLISHED\n    locales: pl\n    first: $limit\n    skip: $skip\n    orderBy: $order\n    where: {name_contains: $searchQuery}\n  ) {\n    ...ProductSummary\n  }\n  productsConnection(stage: PUBLISHED, where: {name_contains: $searchQuery}) {\n    aggregate {\n      count\n    }\n  }\n}":
     types.GetAllProductsDocument,
+  "query GetCartById($cartId: ID!) {\n  cart(where: {id: $cartId}) {\n    ...Cart\n  }\n}":
+    types.GetCartByIdDocument,
   "query GetCategories {\n  categories(stage: PUBLISHED, first: 100) {\n    ...CategoryDetails\n  }\n}":
     types.GetCategoriesDocument,
   "query GetCategoryNameBySlug($categorySlug: String!) {\n  category(stage: PUBLISHED, where: {slug: $categorySlug}) {\n    ...CategoryDetails\n  }\n}":
@@ -34,6 +46,12 @@ const documents = {
     types.GetProductsByIdsDocument,
 };
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "fragment Cart on Cart {\n  id\n  items(first: 100) {\n    ... on CartItem {\n      id\n      quantity\n      product {\n        ...ProductSummary\n      }\n    }\n  }\n}",
+): typeof import("./graphql").CartFragmentDoc;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -62,8 +80,38 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
+  source: "mutation AddItemToCart($cartId: ID!, $productQty: Int!, $productId: ID!) {\n  updateCart(\n    where: {id: $cartId}\n    data: {items: {create: {CartItem: {data: {quantity: $productQty, product: {connect: {id: $productId}}}}}}}\n  ) {\n    ...Cart\n  }\n}",
+): typeof import("./graphql").AddItemToCartDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "mutation CreateEmptyCart {\n  createCart(data: {items: {}}) {\n    ...Cart\n  }\n}",
+): typeof import("./graphql").CreateEmptyCartDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "mutation DeteteCartItem($cartId: ID!, $itemId: ID!) {\n  updateCart(\n    where: {id: $cartId}\n    data: {items: {delete: {CartItem: {id: $itemId}}}}\n  ) {\n    ...Cart\n  }\n}",
+): typeof import("./graphql").DeteteCartItemDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "mutation UpdateCartItemQuantity($cartId: ID!, $itemId: ID!, $qty: Int!) {\n  update: updateCart(\n    where: {id: $cartId}\n    data: {items: {update: [{CartItem: {where: {id: $itemId}, data: {quantity: $qty}}}]}}\n  ) {\n    ...Cart\n  }\n}",
+): typeof import("./graphql").UpdateCartItemQuantityDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
   source: "query GetAllProducts($limit: Int!, $skip: Int!, $order: ProductOrderByInput = price_DESC, $searchQuery: String) {\n  products(\n    stage: PUBLISHED\n    locales: pl\n    first: $limit\n    skip: $skip\n    orderBy: $order\n    where: {name_contains: $searchQuery}\n  ) {\n    ...ProductSummary\n  }\n  productsConnection(stage: PUBLISHED, where: {name_contains: $searchQuery}) {\n    aggregate {\n      count\n    }\n  }\n}",
 ): typeof import("./graphql").GetAllProductsDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "query GetCartById($cartId: ID!) {\n  cart(where: {id: $cartId}) {\n    ...Cart\n  }\n}",
+): typeof import("./graphql").GetCartByIdDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
