@@ -90,7 +90,6 @@ export default async function Page({ params: { page }, searchParams }: Props) {
           <>
             <Filters />
             <ProductsList products={products} />
-
             <Pagination
               pagination={{
                 currentPage: currentPage,
