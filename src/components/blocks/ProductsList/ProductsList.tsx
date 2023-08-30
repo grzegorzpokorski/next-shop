@@ -24,7 +24,11 @@ export const ProductsList = ({ products, slider }: ProductsListProps) => {
         {products.length > 0 &&
           products.map((product) => {
             return (
-              <ProductListItem key={product.name} product={product} slider />
+              <ProductListItem
+                key={product.name}
+                product={product}
+                slider={slider}
+              />
             );
           })}
       </ul>
@@ -45,7 +49,7 @@ const ProductListItem = ({ product, slider }: ProductListItemProps) => {
       key={product.name}
       className={twMerge(
         "aspect-square motion-safe:animate-fadeIn w-full",
-        slider && "min-w-[280px]",
+        slider && "min-w-[280px] md:max-w-[50%] lg:max-w-[33%] xl:max-w-[25%]",
       )}
     >
       <Link
