@@ -1,10 +1,9 @@
 import { Container } from "@/components/ui/Container/Container";
 import { Skeleton } from "@/components/ui/Skeleton/Skeleton";
-import { env } from "@/lib/env.mjs";
 
 export default function Page() {
   return (
-    <div className="flex flex-col gap-8 py-8">
+    <div className="flex flex-col gap-8 py-8" role="status">
       <Container as="article" aria-labelledby="product-title">
         <div className="flex flex-col md:flex-row gap-8 bg-white dark:bg-black p-8 rounded-md border">
           <div className="flex flex-col h-full w-full md:w-1/2 overflow-hidden md:sticky md:top-20">
@@ -23,16 +22,14 @@ export default function Page() {
           </div>
         </div>
         <div className="mt-8">
-          <div className="flex flex-col gap-2">
-            <Skeleton className="w-80 h-8" />
-          </div>
+          <Skeleton className="w-80 h-8" />
           <div className="list-none py-4 gap-3 md:gap-4 flex flex-row overflow-x-auto">
-            {Array(env.PRODUCTS_PER_PAGE)
+            {Array(4)
               .fill(0)
               .map((_, idx) => (
                 <Skeleton
                   key={idx}
-                  className="aspect-square h-full min-w-[280px]"
+                  className="aspect-square h-full min-w-[280px] w-full"
                 />
               ))}
           </div>

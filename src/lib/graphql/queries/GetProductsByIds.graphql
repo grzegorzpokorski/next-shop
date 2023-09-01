@@ -1,0 +1,5 @@
+query GetProductsByIds($ids: [ID]!) {
+  products(where: { id_in: $ids }, first: 4, skip: 0) {
+    ...ProductSummary
+  }
+}
