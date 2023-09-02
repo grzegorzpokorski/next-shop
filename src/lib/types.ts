@@ -43,3 +43,16 @@ export type ProductWithSummary = ProductCommonFields & {
     slug: string;
   };
 };
+
+export type CartItem = {
+  id: string;
+  quantity: number;
+  product: ProductWithSummary | null;
+};
+
+export type Cart = {
+  id: string;
+  totalValue: number;
+  totalQty: number;
+  items: CartItem[];
+};

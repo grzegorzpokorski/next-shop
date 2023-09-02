@@ -1,0 +1,14 @@
+mutation UpdateCartItemQuantity($cartId: ID!, $itemId: ID!, $qty: Int!) {
+  update: updateCart(
+    where: { id: $cartId }
+    data: {
+      items: {
+        update: [
+          { CartItem: { where: { id: $itemId }, data: { quantity: $qty } } }
+        ]
+      }
+    }
+  ) {
+    ...Cart
+  }
+}

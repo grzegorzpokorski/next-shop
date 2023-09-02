@@ -1,5 +1,11 @@
-import type { Category, ProductWithDetails, ProductWithSummary } from "./types";
 import type {
+  Cart,
+  Category,
+  ProductWithDetails,
+  ProductWithSummary,
+} from "@/lib/types";
+import type {
+  CartFragment,
   CategoryDetailsFragment,
   ProductDetailsFragment,
   ProductSummaryFragment,
@@ -87,5 +93,23 @@ export const reshapeCategory = (
           height: category.thumbnail.height || 0,
         }
       : undefined,
+  };
+};
+
+export const reshapeCart = (cart: CartFragment): Cart => {
+  return {
+    id: cart.id,
+    items: cart.items.map((item) => ({
+      ...item,
+      product: item.product ? reshapeProductWithSummary(item.product) : null,
+    })),
+    totalQty: cart.items.reduce((sum, curr) => {
+      return curr.quantity + sum;
+    }, 0),
+    totalValue: cart.items.reduce((value, curr) => {
+      if (curr.product?.price)
+        return value + curr.product.price * curr.quantity;
+      return value;
+    }, 0),
   };
 };
