@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { ProductPageTemplate } from "@/components/templates/ProductPageTemplate/ProductPageTemplate";
 import { getProductBySlug } from "@/lib/queries/getProductBySlug";
 import { getProductsByCategorySlug } from "@/lib/queries/getProductsByCategorySlug";
 import { shuffleArray } from "@/utils/shuffleArray";
 import { getAllProducts } from "@/lib/queries/getAllProducts";
+import { RecentlyViewedCookieSetter } from "@/components/sections/RecentlyViewed/RecentlyViewedCookieSetter";
 
 type Props = {
   params: {
@@ -81,22 +83,25 @@ export default async function Page({ params: { slug } }: Props) {
     },
   };
 
-  if (product) {
-    return (
-      <>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(productJsonLd),
-          }}
-        />
-        <ProductPageTemplate
-          product={product}
-          relatedProducts={relatedWithoutCurrent.slice(0, 4)}
-        />
-      </>
-    );
-  }
+  const cookieStore = cookies();
+  const cookieWithRecentlyViewed = cookieStore.get("recentlyViewed");
 
-  return notFound();
+  return (
+    <>
+      <RecentlyViewedCookieSetter
+        productId={product.id}
+        cookie={cookieWithRecentlyViewed}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productJsonLd),
+        }}
+      />
+      <ProductPageTemplate
+        product={product}
+        relatedProducts={relatedWithoutCurrent.slice(0, 4)}
+      />
+    </>
+  );
 }

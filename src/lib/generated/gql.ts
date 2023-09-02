@@ -30,6 +30,8 @@ const documents = {
     types.GetProductBySlugDocument,
   "query GetProductsByCategorySlug($categorySlug: String!, $limit: Int!, $skip: Int!, $order: ProductOrderByInput = price_DESC) {\n  products(\n    stage: PUBLISHED\n    locales: pl\n    where: {category: {Category: {slug: $categorySlug}}}\n    first: $limit\n    skip: $skip\n    orderBy: $order\n  ) {\n    ...ProductSummary\n  }\n  productsConnection(\n    stage: PUBLISHED\n    where: {category: {Category: {slug: $categorySlug}}}\n  ) {\n    aggregate {\n      count\n    }\n  }\n}":
     types.GetProductsByCategorySlugDocument,
+  "query GetProductsByIds($ids: [ID]!) {\n  products(where: {id_in: $ids}, first: 4, skip: 0) {\n    ...ProductSummary\n  }\n}":
+    types.GetProductsByIdsDocument,
 };
 
 /**
@@ -86,6 +88,12 @@ export function graphql(
 export function graphql(
   source: "query GetProductsByCategorySlug($categorySlug: String!, $limit: Int!, $skip: Int!, $order: ProductOrderByInput = price_DESC) {\n  products(\n    stage: PUBLISHED\n    locales: pl\n    where: {category: {Category: {slug: $categorySlug}}}\n    first: $limit\n    skip: $skip\n    orderBy: $order\n  ) {\n    ...ProductSummary\n  }\n  productsConnection(\n    stage: PUBLISHED\n    where: {category: {Category: {slug: $categorySlug}}}\n  ) {\n    aggregate {\n      count\n    }\n  }\n}",
 ): typeof import("./graphql").GetProductsByCategorySlugDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "query GetProductsByIds($ids: [ID]!) {\n  products(where: {id_in: $ids}, first: 4, skip: 0) {\n    ...ProductSummary\n  }\n}",
+): typeof import("./graphql").GetProductsByIdsDocument;
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

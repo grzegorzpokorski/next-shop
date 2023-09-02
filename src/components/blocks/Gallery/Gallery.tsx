@@ -61,6 +61,27 @@ export const Gallery = ({ images }: Props) => {
     [ThumbnailPlugin(instanceRef)],
   );
 
+  if (images.length === 1) {
+    return (
+      <div ref={sliderRef} className="keen-slider rounded-md">
+        {images.length > 0 &&
+          images.map((image, idx) => {
+            return (
+              <Image
+                key={image.url}
+                src={image.url}
+                alt={image.alt}
+                width={image.width}
+                height={image.height}
+                className={`relative m-auto object-contain keen-slider__slide slide-${idx}`}
+                priority={idx === 0}
+              />
+            );
+          })}
+      </div>
+    );
+  }
+
   return (
     <>
       <div ref={sliderRef} className="keen-slider rounded-md">
