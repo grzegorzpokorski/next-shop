@@ -1,8 +1,10 @@
+import { Suspense } from "react";
 import { SearchForm } from "@/components/layout/Header/components/SearchForm/SearchForm";
 import { Container } from "@/components/ui/Container/Container";
 import { HeaderLogo } from "@/components/layout/Header/components/HeaderLogo/HeaderLogo";
 import { HeaderMenu } from "@/components/layout/Header/components/HeaderMenu/HeaderMenu";
 import { CartOpener } from "@/components/layout/Cart/CartOpener/CartOpener";
+import { Skeleton } from "@/components/ui/Skeleton/Skeleton";
 
 export const Header = () => {
   return (
@@ -19,7 +21,11 @@ export const Header = () => {
             <div className="hidden md:flex w-full justify-end">
               <SearchForm />
             </div>
-            <CartOpener />
+            <Suspense
+              fallback={<Skeleton className="aspect-square h-11 w-11" />}
+            >
+              <CartOpener />
+            </Suspense>
           </div>
         </div>
       </Container>

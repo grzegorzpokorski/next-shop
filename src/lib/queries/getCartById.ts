@@ -12,6 +12,7 @@ export const getCartById = async ({ id }: Args) => {
     variables: {
       cartId: id,
     },
+    cache: "no-store",
   });
 
   return result.cart ? reshapeCart(result.cart) : null;
