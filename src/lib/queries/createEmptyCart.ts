@@ -5,6 +5,7 @@ export const createEmptyCart = async () => {
   const result = await fetcher({
     query: CreateEmptyCartDocument,
     variables: {},
+    cache: "no-store",
   });
 
   return result.createCart;

@@ -13,6 +13,7 @@ export const deleteCartItem = async ({ cartId, itemId }: Args) => {
       cartId,
       itemId,
     },
+    cache: "no-store",
   });
 
   return result.updateCart;

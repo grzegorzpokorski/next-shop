@@ -19,6 +19,7 @@ export const addItemToCart = async ({
       productId,
       productQty,
     },
+    cache: "no-store",
   });
 
   return result.updateCart;

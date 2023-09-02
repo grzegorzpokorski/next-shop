@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { DeleteItemFromCart } from "../DeteteItemFromCart/DeleteItemFromCart";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { Button } from "@/components/ui/Button/Button";
 import { formatPrice } from "@/utils/formatPrice";
@@ -50,10 +51,7 @@ const Item = ({ item }: { item: CartItem }) => {
           </a>
           <p className="text-primary/80 text-sm">{product.category?.name}</p>
         </div>
-        <Button size="icon-sm" variant="ghost">
-          <span className="sr-only">usuń z koszyka</span>
-          <FaPlus aria-hidden className="rotate-45" />
-        </Button>
+        <DeleteItemFromCart itemId={id} />
       </div>
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-1">
