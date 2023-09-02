@@ -4,6 +4,7 @@ import { CartSummary } from "@/components/layout/Cart/CartSummary/CartSummary";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { getAllProducts } from "@/lib/queries/getAllProducts";
+import { EmptyCartInfo } from "@/components/layout/Cart/EmptyCartInfo/EmptyCartInfo";
 
 export const metadata: Metadata = {
   title: `Koszyk`,
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const { products } = await getAllProducts({ limit: 5, skip: 0 });
+  const { products } = await getAllProducts({ limit: 0, skip: 0 });
 
   return (
     <Container as="div">
@@ -45,8 +46,14 @@ export default async function Page() {
           Lista produktów w koszyku
         </Heading>
         <div className="bg-white dark:bg-black rounded-t">
-          <CartItemsList products={products} />
-          <CartSummary total={{ amount: 998, currency: "PLN" }} />
+          {products.length > 0 ? (
+            <>
+              <CartItemsList products={products} />
+              <CartSummary total={{ amount: 998, currency: "PLN" }} />
+            </>
+          ) : (
+            <EmptyCartInfo />
+          )}
         </div>
       </section>
     </Container>

@@ -1,4 +1,3 @@
-// import Link from "next/link";
 import Image from "next/image";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import type { ProductWithSummary } from "@/lib/types";
