@@ -49,7 +49,10 @@ export const ProductPageTemplate = async ({
               className="prose prose-neutral dark:prose-invert max-w-none"
               dangerouslySetInnerHTML={{ __html: product.description.html }}
             />
-            <AddToCart productId={product.id} />
+            <AddToCart
+              productId={product.id}
+              available={Boolean(product.quantityAvailable)}
+            />
           </div>
         </div>
       </Container>
