@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { DecreaseItemQty } from "@/components/layout/Cart/DecreaseItemQty/DecreaseItemQty";
-import { IncreaseItemQty } from "@/components/layout/Cart/IncreaseItemQty/IncreaseItemQty";
+// import { DecreaseItemQty } from "@/components/layout/Cart/DecreaseItemQty/DecreaseItemQty";
+// import { IncreaseItemQty } from "@/components/layout/Cart/IncreaseItemQty/IncreaseItemQty";
+import { QuantityChangerForm } from "@/components/layout/Cart/QuantityChangerForm/QuantityChangerForm";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { DeleteItemFromCart } from "@/components/layout/Cart/DeteteItemFromCart/DeleteItemFromCart";
 import { formatPrice } from "@/utils/formatPrice";
@@ -54,7 +55,12 @@ const Item = ({ item }: { item: CartItem }) => {
         <DeleteItemFromCart itemId={id} />
       </div>
       <div className="flex justify-between items-center">
-        <div className="flex items-center gap-1">
+        <QuantityChangerForm
+          itemId={id}
+          quantity={quantity}
+          maxQuantity={product.quantityAvailable}
+        />
+        {/* <div className="flex items-center gap-1">
           <DecreaseItemQty itemId={id} quantity={quantity} />
           <span className="px-2 text-sm">
             {quantity} z {product.quantityAvailable}{" "}
@@ -65,7 +71,7 @@ const Item = ({ item }: { item: CartItem }) => {
             quantity={quantity}
             quantityAvailable={product.quantityAvailable}
           />
-        </div>
+        </div> */}
         <p className="text-sm">
           <span className="font-medium block">
             {formatPrice({

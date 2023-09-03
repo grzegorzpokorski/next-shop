@@ -2,6 +2,7 @@
 
 import { useTransition } from "react";
 import { FaPlus } from "react-icons/fa";
+import { twMerge } from "tailwind-merge";
 import { Button } from "@/components/ui/Button/Button";
 import { removeItemFromCart } from "@/lib/actions";
 
@@ -19,11 +20,18 @@ export const DeleteItemFromCart = ({ itemId }: Props) => {
       onClick={() => {
         startTransition(() => removeItemFromCart(itemId));
       }}
+      aria-disabled={isPending}
     >
       <span className="sr-only">
         {isPending ? "usuwanie" : "usuń"} z koszyka
       </span>
-      <FaPlus aria-hidden className="rotate-45" />
+      <FaPlus
+        aria-hidden
+        className={twMerge(
+          !isPending && "rotate-45",
+          isPending && "motion-safe:animate-spin",
+        )}
+      />
     </Button>
   );
 };
