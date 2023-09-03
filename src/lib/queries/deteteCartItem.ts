@@ -1,5 +1,6 @@
 import { DeteteCartItemDocument } from "@/lib/generated/graphql";
 import { fetcher } from "@/lib/fetcher";
+import { reshapeCart } from "@/lib/mappers";
 
 type Args = {
   cartId: string;
@@ -16,5 +17,5 @@ export const deleteCartItem = async ({ cartId, itemId }: Args) => {
     cache: "no-store",
   });
 
-  return result.updateCart;
+  return result.updateCart ? reshapeCart(result.updateCart) : null;
 };

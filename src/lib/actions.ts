@@ -9,7 +9,7 @@ import { createEmptyCart } from "@/lib/queries/createEmptyCart";
 import { getCartById } from "@/lib/queries/getCartById";
 import { addItemToCart } from "@/lib/queries/addItemToCart";
 
-export const getCart = async () => {
+const getCart = async () => {
   const cookieStore = cookies();
   const cookieWithCartId = cookieStore.get("cartId");
   const cartId = cookieWithCartId?.value;
@@ -31,6 +31,17 @@ export const getCart = async () => {
   }
 
   return await setNewCart();
+};
+
+const refreshCookie = () => {
+  const cookieStore = cookies();
+  const cookieWithCartId = cookieStore.get("cartId");
+  const cartId = cookieWithCartId?.value;
+  const weekInSeconds = 60 * 60 * 24 * 7;
+
+  if (cartId) {
+    cookieStore.set("cartId", cartId, { maxAge: weekInSeconds });
+  }
 };
 
 export const addNewItemToCart = async (productId: string) => {
@@ -56,7 +67,10 @@ export const addNewItemToCart = async (productId: string) => {
       itemId,
       qty: quantity + 1,
     });
-    if (updatedCart) revalidateTag(TAGS.cart);
+    if (updatedCart) {
+      revalidateTag(TAGS.cart);
+      refreshCookie();
+    }
     return;
   }
 
@@ -65,7 +79,10 @@ export const addNewItemToCart = async (productId: string) => {
     productId: productId,
     productQty: 1,
   });
-  if (updatedCart) revalidateTag(TAGS.cart);
+  if (updatedCart) {
+    revalidateTag(TAGS.cart);
+    refreshCookie();
+  }
 };
 
 export const removeItemFromCart = async (itemId: string) => {
@@ -73,7 +90,10 @@ export const removeItemFromCart = async (itemId: string) => {
   if (!cart) throw new Error(`Cannot remove item from cart.`);
 
   const updatedCart = await deleteCartItem({ cartId: cart.id, itemId });
-  if (updatedCart) revalidateTag(TAGS.cart);
+  if (updatedCart) {
+    revalidateTag(TAGS.cart);
+    refreshCookie();
+  }
 };
 
 export const updateItemQuantity = async ({
@@ -91,5 +111,8 @@ export const updateItemQuantity = async ({
     itemId,
     qty: quantity,
   });
-  if (updatedCart) revalidateTag(TAGS.cart);
+  if (updatedCart) {
+    revalidateTag(TAGS.cart);
+    refreshCookie();
+  }
 };

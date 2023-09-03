@@ -1,5 +1,6 @@
 import { UpdateCartItemQuantityDocument } from "@/lib/generated/graphql";
 import { fetcher } from "@/lib/fetcher";
+import { reshapeCart } from "@/lib/mappers";
 
 type Args = {
   cartId: string;
@@ -18,5 +19,5 @@ export const updateCartItemQuantity = async ({ cartId, itemId, qty }: Args) => {
     cache: "no-store",
   });
 
-  return result.update;
+  return result.update ? reshapeCart(result.update) : null;
 };

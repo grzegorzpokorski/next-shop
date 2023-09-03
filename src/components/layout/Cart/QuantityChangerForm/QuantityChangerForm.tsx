@@ -26,15 +26,10 @@ export const QuantityChangerForm = ({
         formAction={async () => {
           if (optimisticQuantity > 1) {
             setOptimisticQuantity(optimisticQuantity - 1);
-            // delay execution becouse of hygraph rate limits
-            setTimeout(
-              async () =>
-                await updateItemQuantity({
-                  itemId,
-                  quantity: optimisticQuantity - 1,
-                }),
-              1000,
-            );
+            await updateItemQuantity({
+              itemId,
+              quantity: optimisticQuantity - 1,
+            });
           }
         }}
         aria-disabled={optimisticQuantity === 1}
@@ -52,15 +47,10 @@ export const QuantityChangerForm = ({
         formAction={async () => {
           if (optimisticQuantity < maxQuantity) {
             setOptimisticQuantity(optimisticQuantity + 1);
-            // delay execution becouse of hygraph rate limits
-            setTimeout(
-              async () =>
-                await updateItemQuantity({
-                  itemId,
-                  quantity: optimisticQuantity + 1,
-                }),
-              1000,
-            );
+            await updateItemQuantity({
+              itemId,
+              quantity: optimisticQuantity + 1,
+            });
           }
         }}
         aria-disabled={optimisticQuantity === maxQuantity}
