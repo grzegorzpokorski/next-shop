@@ -6,10 +6,9 @@ import { Heading } from "@/components/ui/Heading/Heading";
 import { getCategories } from "@/lib/queries/getCategories";
 import { RecentlyViewedSkeleton } from "@/components/sections/RecentlyViewed/RecentlyViewedSkeleton";
 
-export const revalidate = 0;
-
 export default async function Page() {
   const categories = await getCategories();
+
   return (
     <>
       <Container as="section">

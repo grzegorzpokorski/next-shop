@@ -7,20 +7,37 @@ type GraphQlError = {
   message: string;
 };
 type GraphQlErrorRespone<T> = { data: T } | { errors: readonly GraphQlError[] };
+type HTTPRequestMethods =
+  | "GET"
+  | "POST"
+  | "HEAD"
+  | "PUT"
+  | "DELETE"
+  | "CONNECT"
+  | "OPTIONS"
+  | "TRACE"
+  | "PATCH";
 
 export async function fetcher<Result, Variables>({
   query,
   variables,
   headers,
   cache = "force-cache",
+  method = "POST",
+  tags,
 }: {
+  method?: HTTPRequestMethods;
   query: TypedDocumentString<Result, Variables>;
   variables: Variables;
   headers?: HeadersInit;
   cache?: RequestCache;
+  tags?: NextFetchRequestConfig["tags"];
 }): Promise<Result> {
+  const options = cache
+    ? { cache, next: { tags } }
+    : { next: { revalidate: 900, tags } };
   const result = await fetch(endpoint, {
-    method: "POST",
+    method,
     headers: {
       "Content-Type": "application/json",
       ...headers,
@@ -29,7 +46,7 @@ export async function fetcher<Result, Variables>({
       query: query.toString(),
       ...(variables && { variables }),
     }),
-    cache,
+    ...options,
   });
 
   const body = (await result.json()) as GraphQlErrorRespone<Result>;

@@ -31,6 +31,12 @@
     "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/require-await": "off",
     "@next/next/no-html-link-for-pages": "off",
-    "import/order": "error"
+    "import/order": "error",
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": false
+      }
+    ]
   }
 }

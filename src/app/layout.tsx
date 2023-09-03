@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import { Poppins } from "next/font/google";
+import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Header } from "@/components/layout/Header/Header";
@@ -42,8 +43,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
+  modal: ReactNode;
 }) {
   return (
     <html lang="pl" suppressHydrationWarning>
@@ -55,6 +58,7 @@ export default function RootLayout({
           <Header />
           <Main>{children}</Main>
           <Footer />
+          {modal}
         </ThemeProvider>
       </body>
     </html>

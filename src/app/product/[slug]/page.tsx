@@ -4,8 +4,9 @@ import { cookies } from "next/headers";
 import { ProductPageTemplate } from "@/components/templates/ProductPageTemplate/ProductPageTemplate";
 import { getProductBySlug } from "@/lib/queries/getProductBySlug";
 import { getProductsByCategorySlug } from "@/lib/queries/getProductsByCategorySlug";
-import { shuffleArray } from "@/utils/shuffleArray";
-import { getAllProducts } from "@/lib/queries/getAllProducts";
+// @TODO restore after resolve this issue: https://github.com/vercel/next.js/issues/49408
+// import { shuffleArray } from "@/utils/shuffleArray";
+// import { getAllProducts } from "@/lib/queries/getAllProducts";
 import { RecentlyViewedCookieSetter } from "@/components/sections/RecentlyViewed/RecentlyViewedCookieSetter";
 
 type Props = {
@@ -14,13 +15,14 @@ type Props = {
   };
 };
 
-export async function generateStaticParams() {
-  const { products } = await getAllProducts({ limit: 100, skip: 0 });
+// @TODO restore after resolve this issue: https://github.com/vercel/next.js/issues/49408
+// export async function generateStaticParams() {
+//   const { products } = await getAllProducts({ limit: 100, skip: 0 });
 
-  return products.map((product) => ({
-    slug: product.slug,
-  }));
-}
+//   return products.map((product) => ({
+//     slug: product.slug,
+//   }));
+// }
 
 export const generateMetadata = async ({
   params: { slug },
@@ -62,9 +64,13 @@ export default async function Page({ params: { slug } }: Props) {
     skip: 0,
   });
 
-  const relatedWithoutCurrent = shuffleArray({
-    unshuffled: relatedProducts.products.filter((item) => item.slug !== slug),
-  });
+  // @TODO remplace after resolve this issue: https://github.com/vercel/next.js/issues/49408
+  const relatedWithoutCurrent = relatedProducts.products.filter(
+    (item) => item.slug !== slug,
+  );
+  // const relatedWithoutCurrent = shuffleArray({
+  //   unshuffled: relatedProducts.products.filter((item) => item.slug !== slug),
+  // });
 
   const productJsonLd = {
     "@context": "https://schema.org",

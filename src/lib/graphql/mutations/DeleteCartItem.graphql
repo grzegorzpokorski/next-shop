@@ -1,0 +1,8 @@
+mutation DeteteCartItem($cartId: ID!, $itemId: ID!) {
+  updateCart(
+    where: { id: $cartId }
+    data: { items: { delete: { CartItem: { id: $itemId } } } }
+  ) {
+    ...Cart
+  }
+}

@@ -34,3 +34,9 @@ export const sorting: SortFilterItem[] = [
     sortKey: ProductOrderByInput.PublishedAtDesc,
   },
 ];
+
+export const TAGS = {
+  products: "products",
+  categories: "categories",
+  cart: "cart",
+};

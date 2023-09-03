@@ -5732,6 +5732,46 @@ export enum _SystemDateTimeFieldVariation {
   Localization = "localization",
 }
 
+export type CartFragment = {
+  id: string;
+  items: Array<{
+    id: string;
+    quantity: number;
+    product?: {
+      id: string;
+      name: string;
+      slug: string;
+      price: number;
+      currency: Currency;
+      quantityAvailable: number;
+      updatedAt: string;
+      createdAt: string;
+      gallery: Array<{
+        id: string;
+        mimeType?: string | null;
+        url: string;
+        width?: number | null;
+        height?: number | null;
+        fileName: string;
+      }>;
+      category?: {
+        id: string;
+        name: string;
+        slug: string;
+        description?: string | null;
+        thumbnail: {
+          id: string;
+          mimeType?: string | null;
+          url: string;
+          width?: number | null;
+          height?: number | null;
+          fileName: string;
+        };
+      } | null;
+    } | null;
+  }>;
+};
+
 export type CategoryDetailsFragment = {
   id: string;
   name: string;
@@ -5825,6 +5865,193 @@ export type ProductSummaryFragment = {
   } | null;
 };
 
+export type AddItemToCartMutationVariables = Exact<{
+  cartId: Scalars["ID"]["input"];
+  productQty: Scalars["Int"]["input"];
+  productId: Scalars["ID"]["input"];
+}>;
+
+export type AddItemToCartMutation = {
+  updateCart?: {
+    id: string;
+    items: Array<{
+      id: string;
+      quantity: number;
+      product?: {
+        id: string;
+        name: string;
+        slug: string;
+        price: number;
+        currency: Currency;
+        quantityAvailable: number;
+        updatedAt: string;
+        createdAt: string;
+        gallery: Array<{
+          id: string;
+          mimeType?: string | null;
+          url: string;
+          width?: number | null;
+          height?: number | null;
+          fileName: string;
+        }>;
+        category?: {
+          id: string;
+          name: string;
+          slug: string;
+          description?: string | null;
+          thumbnail: {
+            id: string;
+            mimeType?: string | null;
+            url: string;
+            width?: number | null;
+            height?: number | null;
+            fileName: string;
+          };
+        } | null;
+      } | null;
+    }>;
+  } | null;
+};
+
+export type CreateEmptyCartMutationVariables = Exact<{ [key: string]: never }>;
+
+export type CreateEmptyCartMutation = {
+  createCart?: {
+    id: string;
+    items: Array<{
+      id: string;
+      quantity: number;
+      product?: {
+        id: string;
+        name: string;
+        slug: string;
+        price: number;
+        currency: Currency;
+        quantityAvailable: number;
+        updatedAt: string;
+        createdAt: string;
+        gallery: Array<{
+          id: string;
+          mimeType?: string | null;
+          url: string;
+          width?: number | null;
+          height?: number | null;
+          fileName: string;
+        }>;
+        category?: {
+          id: string;
+          name: string;
+          slug: string;
+          description?: string | null;
+          thumbnail: {
+            id: string;
+            mimeType?: string | null;
+            url: string;
+            width?: number | null;
+            height?: number | null;
+            fileName: string;
+          };
+        } | null;
+      } | null;
+    }>;
+  } | null;
+};
+
+export type DeteteCartItemMutationVariables = Exact<{
+  cartId: Scalars["ID"]["input"];
+  itemId: Scalars["ID"]["input"];
+}>;
+
+export type DeteteCartItemMutation = {
+  updateCart?: {
+    id: string;
+    items: Array<{
+      id: string;
+      quantity: number;
+      product?: {
+        id: string;
+        name: string;
+        slug: string;
+        price: number;
+        currency: Currency;
+        quantityAvailable: number;
+        updatedAt: string;
+        createdAt: string;
+        gallery: Array<{
+          id: string;
+          mimeType?: string | null;
+          url: string;
+          width?: number | null;
+          height?: number | null;
+          fileName: string;
+        }>;
+        category?: {
+          id: string;
+          name: string;
+          slug: string;
+          description?: string | null;
+          thumbnail: {
+            id: string;
+            mimeType?: string | null;
+            url: string;
+            width?: number | null;
+            height?: number | null;
+            fileName: string;
+          };
+        } | null;
+      } | null;
+    }>;
+  } | null;
+};
+
+export type UpdateCartItemQuantityMutationVariables = Exact<{
+  cartId: Scalars["ID"]["input"];
+  itemId: Scalars["ID"]["input"];
+  qty: Scalars["Int"]["input"];
+}>;
+
+export type UpdateCartItemQuantityMutation = {
+  update?: {
+    id: string;
+    items: Array<{
+      id: string;
+      quantity: number;
+      product?: {
+        id: string;
+        name: string;
+        slug: string;
+        price: number;
+        currency: Currency;
+        quantityAvailable: number;
+        updatedAt: string;
+        createdAt: string;
+        gallery: Array<{
+          id: string;
+          mimeType?: string | null;
+          url: string;
+          width?: number | null;
+          height?: number | null;
+          fileName: string;
+        }>;
+        category?: {
+          id: string;
+          name: string;
+          slug: string;
+          description?: string | null;
+          thumbnail: {
+            id: string;
+            mimeType?: string | null;
+            url: string;
+            width?: number | null;
+            height?: number | null;
+            fileName: string;
+          };
+        } | null;
+      } | null;
+    }>;
+  } | null;
+};
+
 export type GetAllProductsQueryVariables = Exact<{
   limit: Scalars["Int"]["input"];
   skip: Scalars["Int"]["input"];
@@ -5866,6 +6093,52 @@ export type GetAllProductsQuery = {
     } | null;
   }>;
   productsConnection: { aggregate: { count: number } };
+};
+
+export type GetCartByIdQueryVariables = Exact<{
+  cartId: Scalars["ID"]["input"];
+}>;
+
+export type GetCartByIdQuery = {
+  cart?: {
+    id: string;
+    items: Array<{
+      id: string;
+      quantity: number;
+      product?: {
+        id: string;
+        name: string;
+        slug: string;
+        price: number;
+        currency: Currency;
+        quantityAvailable: number;
+        updatedAt: string;
+        createdAt: string;
+        gallery: Array<{
+          id: string;
+          mimeType?: string | null;
+          url: string;
+          width?: number | null;
+          height?: number | null;
+          fileName: string;
+        }>;
+        category?: {
+          id: string;
+          name: string;
+          slug: string;
+          description?: string | null;
+          thumbnail: {
+            id: string;
+            mimeType?: string | null;
+            url: string;
+            width?: number | null;
+            height?: number | null;
+            fileName: string;
+          };
+        } | null;
+      } | null;
+    }>;
+  } | null;
 };
 
 export type GetCategoriesQueryVariables = Exact<{ [key: string]: never }>;
@@ -6085,6 +6358,92 @@ export const CategoryDetailsFragmentDoc = new TypedDocumentString(
 }`,
   { fragmentName: "CategoryDetails" },
 ) as unknown as TypedDocumentString<CategoryDetailsFragment, unknown>;
+export const ProductSummaryFragmentDoc = new TypedDocumentString(
+  `
+    fragment ProductSummary on Product {
+  id
+  name
+  slug
+  price
+  currency
+  gallery(first: 1) {
+    ...ImageDetails
+  }
+  quantityAvailable
+  category {
+    ...CategoryDetails
+  }
+  updatedAt
+  createdAt
+}
+    fragment CategoryDetails on Category {
+  id
+  name
+  slug
+  description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
+}`,
+  { fragmentName: "ProductSummary" },
+) as unknown as TypedDocumentString<ProductSummaryFragment, unknown>;
+export const CartFragmentDoc = new TypedDocumentString(
+  `
+    fragment Cart on Cart {
+  id
+  items(first: 100) {
+    ... on CartItem {
+      id
+      quantity
+      product {
+        ...ProductSummary
+      }
+    }
+  }
+}
+    fragment CategoryDetails on Category {
+  id
+  name
+  slug
+  description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
+}
+fragment ProductSummary on Product {
+  id
+  name
+  slug
+  price
+  currency
+  gallery(first: 1) {
+    ...ImageDetails
+  }
+  quantityAvailable
+  category {
+    ...CategoryDetails
+  }
+  updatedAt
+  createdAt
+}`,
+  { fragmentName: "Cart" },
+) as unknown as TypedDocumentString<CartFragment, unknown>;
 export const ProductDetailsFragmentDoc = new TypedDocumentString(
   `
     fragment ProductDetails on Product {
@@ -6127,25 +6486,28 @@ fragment ImageDetails on Asset {
 }`,
   { fragmentName: "ProductDetails" },
 ) as unknown as TypedDocumentString<ProductDetailsFragment, unknown>;
-export const ProductSummaryFragmentDoc = new TypedDocumentString(
-  `
-    fragment ProductSummary on Product {
-  id
-  name
-  slug
-  price
-  currency
-  gallery(first: 1) {
-    ...ImageDetails
+export const AddItemToCartDocument = new TypedDocumentString(`
+    mutation AddItemToCart($cartId: ID!, $productQty: Int!, $productId: ID!) {
+  updateCart(
+    where: {id: $cartId}
+    data: {items: {create: {CartItem: {data: {quantity: $productQty, product: {connect: {id: $productId}}}}}}}
+  ) {
+    ...Cart
   }
-  quantityAvailable
-  category {
-    ...CategoryDetails
-  }
-  updatedAt
-  createdAt
 }
-    fragment CategoryDetails on Category {
+    fragment Cart on Cart {
+  id
+  items(first: 100) {
+    ... on CartItem {
+      id
+      quantity
+      product {
+        ...ProductSummary
+      }
+    }
+  }
+}
+fragment CategoryDetails on Category {
   id
   name
   slug
@@ -6161,9 +6523,194 @@ fragment ImageDetails on Asset {
   width
   height
   fileName
-}`,
-  { fragmentName: "ProductSummary" },
-) as unknown as TypedDocumentString<ProductSummaryFragment, unknown>;
+}
+fragment ProductSummary on Product {
+  id
+  name
+  slug
+  price
+  currency
+  gallery(first: 1) {
+    ...ImageDetails
+  }
+  quantityAvailable
+  category {
+    ...CategoryDetails
+  }
+  updatedAt
+  createdAt
+}`) as unknown as TypedDocumentString<
+  AddItemToCartMutation,
+  AddItemToCartMutationVariables
+>;
+export const CreateEmptyCartDocument = new TypedDocumentString(`
+    mutation CreateEmptyCart {
+  createCart(data: {items: {}}) {
+    ...Cart
+  }
+}
+    fragment Cart on Cart {
+  id
+  items(first: 100) {
+    ... on CartItem {
+      id
+      quantity
+      product {
+        ...ProductSummary
+      }
+    }
+  }
+}
+fragment CategoryDetails on Category {
+  id
+  name
+  slug
+  description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
+}
+fragment ProductSummary on Product {
+  id
+  name
+  slug
+  price
+  currency
+  gallery(first: 1) {
+    ...ImageDetails
+  }
+  quantityAvailable
+  category {
+    ...CategoryDetails
+  }
+  updatedAt
+  createdAt
+}`) as unknown as TypedDocumentString<
+  CreateEmptyCartMutation,
+  CreateEmptyCartMutationVariables
+>;
+export const DeteteCartItemDocument = new TypedDocumentString(`
+    mutation DeteteCartItem($cartId: ID!, $itemId: ID!) {
+  updateCart(
+    where: {id: $cartId}
+    data: {items: {delete: {CartItem: {id: $itemId}}}}
+  ) {
+    ...Cart
+  }
+}
+    fragment Cart on Cart {
+  id
+  items(first: 100) {
+    ... on CartItem {
+      id
+      quantity
+      product {
+        ...ProductSummary
+      }
+    }
+  }
+}
+fragment CategoryDetails on Category {
+  id
+  name
+  slug
+  description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
+}
+fragment ProductSummary on Product {
+  id
+  name
+  slug
+  price
+  currency
+  gallery(first: 1) {
+    ...ImageDetails
+  }
+  quantityAvailable
+  category {
+    ...CategoryDetails
+  }
+  updatedAt
+  createdAt
+}`) as unknown as TypedDocumentString<
+  DeteteCartItemMutation,
+  DeteteCartItemMutationVariables
+>;
+export const UpdateCartItemQuantityDocument = new TypedDocumentString(`
+    mutation UpdateCartItemQuantity($cartId: ID!, $itemId: ID!, $qty: Int!) {
+  update: updateCart(
+    where: {id: $cartId}
+    data: {items: {update: [{CartItem: {where: {id: $itemId}, data: {quantity: $qty}}}]}}
+  ) {
+    ...Cart
+  }
+}
+    fragment Cart on Cart {
+  id
+  items(first: 100) {
+    ... on CartItem {
+      id
+      quantity
+      product {
+        ...ProductSummary
+      }
+    }
+  }
+}
+fragment CategoryDetails on Category {
+  id
+  name
+  slug
+  description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
+}
+fragment ProductSummary on Product {
+  id
+  name
+  slug
+  price
+  currency
+  gallery(first: 1) {
+    ...ImageDetails
+  }
+  quantityAvailable
+  category {
+    ...CategoryDetails
+  }
+  updatedAt
+  createdAt
+}`) as unknown as TypedDocumentString<
+  UpdateCartItemQuantityMutation,
+  UpdateCartItemQuantityMutationVariables
+>;
 export const GetAllProductsDocument = new TypedDocumentString(`
     query GetAllProducts($limit: Int!, $skip: Int!, $order: ProductOrderByInput = price_DESC, $searchQuery: String) {
   products(
@@ -6217,6 +6764,60 @@ fragment ProductSummary on Product {
 }`) as unknown as TypedDocumentString<
   GetAllProductsQuery,
   GetAllProductsQueryVariables
+>;
+export const GetCartByIdDocument = new TypedDocumentString(`
+    query GetCartById($cartId: ID!) {
+  cart(where: {id: $cartId}) {
+    ...Cart
+  }
+}
+    fragment Cart on Cart {
+  id
+  items(first: 100) {
+    ... on CartItem {
+      id
+      quantity
+      product {
+        ...ProductSummary
+      }
+    }
+  }
+}
+fragment CategoryDetails on Category {
+  id
+  name
+  slug
+  description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
+}
+fragment ProductSummary on Product {
+  id
+  name
+  slug
+  price
+  currency
+  gallery(first: 1) {
+    ...ImageDetails
+  }
+  quantityAvailable
+  category {
+    ...CategoryDetails
+  }
+  updatedAt
+  createdAt
+}`) as unknown as TypedDocumentString<
+  GetCartByIdQuery,
+  GetCartByIdQueryVariables
 >;
 export const GetCategoriesDocument = new TypedDocumentString(`
     query GetCategories {
@@ -6376,7 +6977,7 @@ fragment ProductSummary on Product {
 >;
 export const GetProductsByIdsDocument = new TypedDocumentString(`
     query GetProductsByIds($ids: [ID]!) {
-  products(where: {id_in: $ids}, first: 4, skip: 0) {
+  products(where: {id_in: $ids}, first: 100, skip: 0) {
     ...ProductSummary
   }
 }

@@ -22,8 +22,10 @@
     "codegen:watch": "gql-gen -w -r dotenv/config --config codegen.yml"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.0.4",
     "@radix-ui/react-dropdown-menu": "^2.0.5",
     "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-portal": "^1.0.3",
     "@radix-ui/react-select": "^1.2.2",
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",

@@ -21,6 +21,7 @@ export const SearchForm = () => {
         className="h-11 pr-24 w-full rounded-lg border bg-white dark:bg-neutral-800 px-4 py-2 text-sm text-black placeholder:text-neutral-500 dark:border-neutral-800 dark:text-white dark:placeholder:text-neutral-400"
         id={inputId}
         value={searchQuery}
+        autoComplete="off"
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       <div className="absolute right-0">

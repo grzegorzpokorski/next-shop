@@ -1,0 +1,19 @@
+mutation AddItemToCart($cartId: ID!, $productQty: Int!, $productId: ID!) {
+  updateCart(
+    where: { id: $cartId }
+    data: {
+      items: {
+        create: {
+          CartItem: {
+            data: {
+              quantity: $productQty
+              product: { connect: { id: $productId } }
+            }
+          }
+        }
+      }
+    }
+  ) {
+    ...Cart
+  }
+}

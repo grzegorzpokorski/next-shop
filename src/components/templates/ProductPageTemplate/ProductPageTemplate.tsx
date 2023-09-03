@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
-import { FaPlus } from "react-icons/fa";
+import { AddToCart } from "@/components/templates/ProductPageTemplate/AddToCart";
 import { ProductsList } from "@/components/blocks/ProductsList/ProductsList";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
-import { Button } from "@/components/ui/Button/Button";
 import { formatPrice } from "@/utils/formatPrice";
 import { badgeVariants } from "@/components/ui/Badge/Badge";
 import type { ProductWithDetails, ProductWithSummary } from "@/lib/types";
@@ -50,10 +49,10 @@ export const ProductPageTemplate = async ({
               className="prose prose-neutral dark:prose-invert max-w-none"
               dangerouslySetInnerHTML={{ __html: product.description.html }}
             />
-            <Button variant="indigo" size="lg">
-              <FaPlus className="mr-2" aria-hidden />
-              Dodaj do koszyka
-            </Button>
+            <AddToCart
+              productId={product.id}
+              available={Boolean(product.quantityAvailable)}
+            />
           </div>
         </div>
       </Container>

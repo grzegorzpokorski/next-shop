@@ -1,0 +1,12 @@
+fragment Cart on Cart {
+  id
+  items(first: 100) {
+    ... on CartItem {
+      id
+      quantity
+      product {
+        ...ProductSummary
+      }
+    }
+  }
+}
