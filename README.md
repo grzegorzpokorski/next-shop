@@ -20,5 +20,5 @@ Currently working on shopping cart functionality.
 
 ## To do:
 
-- Shopping cart functionality (storing cart itmes in db, mutations, queries, increase / decrease / remove item from cart, etc).
-- List of recent viewed products in purpose to increase conversion (storing products in local Storage / Cookie and fetch them from cms in places like home page or single product page).
+- Restore intercepted & parallel cart when Next.js fix bugs related to that kind of routes and server actions, etc.
+- Remove expired / abandoned cards from Graphcms (treated as database for carts).
