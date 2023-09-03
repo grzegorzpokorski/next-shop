@@ -16,6 +16,8 @@ This repository contains the source code of a website showcasing a simple e-comm
 
 ![](/screenshots/product.png?raw=true)
 
+![](/screenshots/cart.png?raw=true)
+
 ## To do:
 
 - Restore intercepted & parallel cart when Next.js team fix bugs related to that kind of routes and server actions, etc. OR: Rebuild cart in intercepted & parallel route to only display content of the cart and omit management functionality.
