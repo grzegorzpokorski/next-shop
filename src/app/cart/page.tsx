@@ -57,7 +57,7 @@ export default async function Page() {
         </Heading>
         <div className="bg-white dark:bg-black rounded-t">
           <CartItemsList items={cart.items} />
-          <CartSummary total={{ amount: 998, currency: "PLN" }} />
+          <CartSummary total={{ amount: cart.totalValue, currency: "PLN" }} />
         </div>
       </section>
     </Container>

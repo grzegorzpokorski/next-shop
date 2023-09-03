@@ -7,7 +7,7 @@ type Args = {
   qty: number;
 };
 
-export const addItemToCart = async ({ cartId, itemId, qty }: Args) => {
+export const updateCartItemQuantity = async ({ cartId, itemId, qty }: Args) => {
   const result = await fetcher({
     query: UpdateCartItemQuantityDocument,
     variables: {

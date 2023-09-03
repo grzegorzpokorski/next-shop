@@ -13,23 +13,22 @@ type Props = {
 
 export const AddToCart = ({ available, productId }: Props) => {
   const [isPending, startTransition] = useTransition();
+  const disabled = !available || isPending;
 
   return (
     <Button
       variant="indigo"
       size="lg"
       onClick={() => {
-        if (available) {
-          startTransition(() => addNewItemToCart(productId));
-        }
+        if (disabled) return;
+        startTransition(() => addNewItemToCart(productId));
       }}
-      aria-disabled={!available}
+      aria-disabled={disabled}
     >
       <FaPlus
-        className={twMerge("mr-2", isPending && "motion-safe:animate-spin")}
+        className={twMerge("mr-2", disabled && "motion-safe:animate-spin")}
         aria-hidden
       />
-
       {isPending ? "Dodawanie do koszyka" : "Dodaj do koszyka"}
     </Button>
   );

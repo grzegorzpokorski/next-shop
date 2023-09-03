@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { FaMinus, FaPlus } from "react-icons/fa";
-import { DeleteItemFromCart } from "../DeteteItemFromCart/DeleteItemFromCart";
+import { DecreaseItemQty } from "@/components/layout/Cart/DecreaseItemQty/DecreaseItemQty";
+import { IncreaseItemQty } from "@/components/layout/Cart/IncreaseItemQty/IncreaseItemQty";
 import { Heading } from "@/components/ui/Heading/Heading";
-import { Button } from "@/components/ui/Button/Button";
+import { DeleteItemFromCart } from "@/components/layout/Cart/DeteteItemFromCart/DeleteItemFromCart";
 import { formatPrice } from "@/utils/formatPrice";
 import type { CartItem } from "@/lib/types";
 
@@ -55,18 +55,16 @@ const Item = ({ item }: { item: CartItem }) => {
       </div>
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-1">
-          <Button size="icon-sm" variant="outline">
-            <span className="sr-only">zmniejsz ilość</span>
-            <FaMinus aria-hidden />
-          </Button>
+          <DecreaseItemQty itemId={id} quantity={quantity} />
           <span className="px-2 text-sm">
             {quantity} z {product.quantityAvailable}{" "}
             <span className="hidden md:inline">dostępnych</span>
           </span>
-          <Button size="icon-sm" variant="outline">
-            <span className="sr-only">zwiększ ilość</span>
-            <FaPlus aria-hidden />
-          </Button>
+          <IncreaseItemQty
+            itemId={id}
+            quantity={quantity}
+            quantityAvailable={product.quantityAvailable}
+          />
         </div>
         <p className="text-sm">
           <span className="font-medium block">
