@@ -60,11 +60,11 @@ const Item = ({ item }: { item: CartItem }) => {
           quantity={quantity}
           maxQuantity={product.quantityAvailable}
         />
-        <p className="text-sm">
-          <span className="font-medium block">
+        <p className="text-sm flex flex-col items-end">
+          <span className="font-medium">
             {formatPrice({
               currency: product.currency,
-              price: product.price,
+              price: product.price * quantity,
             })}
           </span>{" "}
           {quantity > 1 && (
@@ -72,7 +72,7 @@ const Item = ({ item }: { item: CartItem }) => {
               za sztukę{" "}
               {formatPrice({
                 currency: product.currency,
-                price: product.price * quantity,
+                price: product.price,
               })}
             </>
           )}
