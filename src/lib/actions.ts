@@ -37,12 +37,34 @@ export const addNewItemToCart = async (productId: string) => {
   const cart = await getCart();
   if (!cart) throw new Error(`Cannot add product to cart.`);
 
+  const currentlyExistedCartItemWithGivenProduct = cart.items.filter(
+    (item) => item.product && item.product.id === productId,
+  );
+
+  if (currentlyExistedCartItemWithGivenProduct.length > 0) {
+    if (
+      currentlyExistedCartItemWithGivenProduct[0].quantity ===
+      currentlyExistedCartItemWithGivenProduct[0].product?.quantityAvailable
+    ) {
+      return;
+    }
+
+    const { id: itemId, quantity } =
+      currentlyExistedCartItemWithGivenProduct[0];
+    const updatedCart = await updateCartItemQuantity({
+      cartId: cart.id,
+      itemId,
+      qty: quantity + 1,
+    });
+    if (updatedCart) revalidateTag(TAGS.cart);
+    return;
+  }
+
   const updatedCart = await addItemToCart({
     cartId: cart.id,
     productId: productId,
     productQty: 1,
   });
-
   if (updatedCart) revalidateTag(TAGS.cart);
 };
 

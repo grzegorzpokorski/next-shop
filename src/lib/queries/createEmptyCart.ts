@@ -1,5 +1,6 @@
 import { fetcher } from "../fetcher";
 import { CreateEmptyCartDocument } from "../generated/graphql";
+import { reshapeCart } from "../mappers";
 
 export const createEmptyCart = async () => {
   const result = await fetcher({
@@ -8,5 +9,5 @@ export const createEmptyCart = async () => {
     cache: "no-store",
   });
 
-  return result.createCart;
+  return result.createCart ? reshapeCart(result.createCart) : null;
 };
