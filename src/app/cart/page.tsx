@@ -1,11 +1,11 @@
 import type { Metadata } from "next/types";
 import { cookies } from "next/headers";
-import { CartItemsList } from "@/components/layout/Cart/CartItemsList/CartItemsList";
-import { CartSummary } from "@/components/layout/Cart/CartSummary/CartSummary";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
-import { EmptyCartInfo } from "@/components/layout/Cart/EmptyCartInfo/EmptyCartInfo";
 import { getCartById } from "@/lib/queries/getCartById";
+import { CartSummary } from "@/components/layout/Cart/CartSummary/CartSummary";
+import { EmptyCartInfo } from "@/components/layout/Cart/EmptyCartInfo/EmptyCartInfo";
+import { CartItemsTemplate } from "@/components/templates/CartItemsTemplate/CartItemsTemplate";
 
 export const metadata: Metadata = {
   title: `Koszyk`,
@@ -56,7 +56,7 @@ export default async function Page() {
           Lista produktów w koszyku
         </Heading>
         <div className="bg-white dark:bg-black rounded-t">
-          <CartItemsList items={cart.items} />
+          <CartItemsTemplate items={cart.items} />
           <CartSummary total={{ amount: cart.totalValue, currency: "PLN" }} />
         </div>
       </section>

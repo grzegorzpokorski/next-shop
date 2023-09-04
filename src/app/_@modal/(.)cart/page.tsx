@@ -1,11 +1,11 @@
 import { cookies } from "next/headers";
-import { CartItemsList } from "@/components/layout/Cart/CartItemsList/CartItemsList";
 import { CartModal } from "@/components/layout/Cart/CartModal/CartModal";
 import { CartSummary } from "@/components/layout/Cart/CartSummary/CartSummary";
-import { CloseCartButton } from "@/components/layout/Cart/CloseCartButton/CloseCartButton";
+import { CloseButton } from "@/components/layout/Cart/CloseButton/CloseButton";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { EmptyCartInfo } from "@/components/layout/Cart/EmptyCartInfo/EmptyCartInfo";
 import { getCartById } from "@/lib/queries/getCartById";
+import { CartItemsTemplate } from "@/components/templates/CartItemsTemplate/CartItemsTemplate";
 
 export default async function Page() {
   const cookieStore = cookies();
@@ -27,10 +27,10 @@ export default async function Page() {
             <Heading as="h2" size="2xl">
               Twój koszyk
             </Heading>
-            <CloseCartButton />
+            <CloseButton />
           </div>
           {cart.items && cart.items.length > 0 ? (
-            <CartItemsList items={cart.items} />
+            <CartItemsTemplate items={cart.items} modal />
           ) : (
             <EmptyCartInfo />
           )}
@@ -39,6 +39,7 @@ export default async function Page() {
           <CartSummary
             total={{ amount: cart.totalValue, currency: "PLN" }}
             stickToTheBottom
+            modal
           />
         )}
       </div>
@@ -54,7 +55,7 @@ const EmptyCart = () => (
           <Heading as="h2" size="2xl">
             Twój koszyk
           </Heading>
-          <CloseCartButton />
+          <CloseButton />
         </div>
         <EmptyCartInfo />
       </div>

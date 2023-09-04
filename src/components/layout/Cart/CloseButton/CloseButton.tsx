@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { FaPlus } from "react-icons/fa";
 import { Button } from "@/components/ui/Button/Button";
 
-export const CloseCartButton = () => {
+export const CloseButton = () => {
   const router = useRouter();
   const handleClick = useCallback(() => {
     router.back();

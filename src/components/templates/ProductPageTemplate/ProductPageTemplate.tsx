@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
-import { AddToCart } from "@/components/templates/ProductPageTemplate/AddToCart";
 import { ProductsList } from "@/components/blocks/ProductsList/ProductsList";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { formatPrice } from "@/utils/formatPrice";
 import { badgeVariants } from "@/components/ui/Badge/Badge";
-import type { ProductWithDetails, ProductWithSummary } from "@/lib/types";
 import { Gallery } from "@/components/blocks/Gallery/Gallery";
+import { AddToCart } from "@/components/layout/Cart/AddToCart/AddToCart";
+import type { ProductWithDetails, ProductWithSummary } from "@/lib/types";
 
 type Props = {
   product: ProductWithDetails;

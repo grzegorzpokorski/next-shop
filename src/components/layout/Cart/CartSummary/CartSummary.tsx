@@ -8,9 +8,10 @@ type Props = {
     currency: string;
   };
   stickToTheBottom?: boolean;
+  modal?: boolean;
 };
 
-export const CartSummary = ({ total, stickToTheBottom }: Props) => {
+export const CartSummary = ({ total, stickToTheBottom, modal }: Props) => {
   return (
     <div
       className={twMerge(
@@ -36,9 +37,11 @@ export const CartSummary = ({ total, stickToTheBottom }: Props) => {
           Złóż zamówienie
         </Button>
         <Button asChild variant="outline" className="lg:order-1">
-          <a href="/products">
-            Kontynuuj zakupy<span aria-hidden="true"> →</span>
-          </a>
+          {modal ? (
+            <a href="/cart">Edytuj koszyk</a>
+          ) : (
+            <a href="/products">Kontynuuj zakupy</a>
+          )}
         </Button>
       </div>
     </div>
