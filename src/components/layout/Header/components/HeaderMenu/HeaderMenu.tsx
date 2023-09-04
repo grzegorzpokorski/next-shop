@@ -27,24 +27,24 @@ export const HeaderMenu = () => {
       />
       <div
         className={twMerge(
-          "fixed md:relative z-30 md:auto",
-          "inset-0 h-[100dvh] md:h-auto py-16 md:py-0",
-          "md:bg-transparent",
-          "flex flex-col items-center justify-between md:flex-row gap-4",
+          "fixed lg:relative z-30 lg:auto",
+          "inset-0 h-[100dvh] lg:h-auto py-16 lg:py-0",
+          "lg:bg-transparent",
+          "flex flex-col items-center justify-between lg:flex-row gap-4",
           "overflow-y-auto",
           "transition-all",
           isMobileMenuOpen
-            ? "translate-x-0 md:translate-x-0 bg-white dark:bg-neutral-900"
-            : "-translate-x-full md:translate-x-0",
+            ? "translate-x-0 lg:translate-x-0 bg-white dark:bg-neutral-900"
+            : "-translate-x-full lg:translate-x-0",
           "list-none gap-6 overflow-y-auto w-full lg:w-auto text-center",
           "px-3",
         )}
       >
-        <div className="md:hidden w-full mt-3">
+        <div className="lg:hidden w-full mt-3">
           <SearchForm />
         </div>
         <ul
-          className="list-none flex flex-col items-center justify-center md:flex-row gap-6 my-auto md:my-0"
+          className="list-none flex flex-col items-center justify-center lg:flex-row gap-6 my-auto lg:my-0"
           role="list"
           id="menu"
         >

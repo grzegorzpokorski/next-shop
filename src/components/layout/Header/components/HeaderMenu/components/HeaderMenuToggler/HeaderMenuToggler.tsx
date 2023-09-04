@@ -1,4 +1,3 @@
-import { twMerge } from "tailwind-merge";
 import { FaBars, FaPlus } from "react-icons/fa";
 import { Button } from "@/components/ui/Button/Button";
 
@@ -13,7 +12,7 @@ export const HeaderMenuToggler = ({ onClick, isOpen, menuId }: Props) => {
     <Button
       variant="outline"
       size="icon"
-      className={twMerge("relative z-50 md:hidden")}
+      className="relative z-50 lg:hidden"
       onClick={onClick}
       aria-expanded={isOpen}
       aria-controls={menuId}
