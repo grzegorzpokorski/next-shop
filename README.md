@@ -1,6 +1,6 @@
 # Next-Shop
 
-This repository contains the source code of a website showcasing a simple e-commerce platform. The project utilizes the latest features of the Next.js framework, including the app router, intercepting and parallel routes, as well as server components. Data is fetched from the Hygraph CMS using GraphQL, with a focus on maximizing the advantages provided by server components.
+This repository contains the source code of the website showcasing a simple e-commerce platform. The project utilizes the latest features of the Next.js framework, including the app router, intercepting and parallel routes, as well as server components. Data is fetched from the Hygraph CMS using GraphQL, with a focus on maximizing the advantages provided by server components.
 
 ## Live 🌐
 
