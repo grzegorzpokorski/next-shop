@@ -6,6 +6,17 @@ This repository contains the source code of the website showcasing a simple e-co
 
 [https://next-shop-gp.vercel.app/](https://next-shop-gp.vercel.app/)
 
+## Features
+
+- Shopping cart stored in a database - this enhances the conversion rate and enables the shop owner to analyze users' shopping choices, especially in situations when they abandon their carts.
+- Optimistic updates of cart item quantity enhance the user experience even further, making it feel more natural. Users don't have to wait for changes to be saved on the server to proceed with their actions.
+- Automatically generated OG images for each product using API route from Next.js for better SEO.
+- Search form which allows to quickly find an interesting product.
+- A fully responsive and mobile-first layout with themes tailored to user preferences, including colors, animations.
+- The use of HTTP streaming (Suspense) that enables users to interact with the page while other parts of the web page are being downloaded from the server in the background.
+- To execute mutations on database used server actions which simplify whole process and does not require special endpoints to operate.
+- Fully type-safe queries thanks to [GraphQL Code Generator](https://the-guild.dev/graphql/codegen).
+
 ## Some screenshots:
 
 ![](/screenshots/home.png?raw=true)
@@ -22,7 +33,6 @@ This repository contains the source code of the website showcasing a simple e-co
 
 - Restore intercepted & parallel cart when Next.js team fix [bugs](https://github.com/vercel/next.js/issues/52591) related to that kind of routes and server actions, etc. OR: Rebuild cart in intercepted & parallel route to only display content of the cart and omit management functionality.
 - Integrate with Stripe payment provider.
-- Remove expired / abandoned carts from Hygraph CMS (treated as database for carts).
 - Refactor project architecture.
 - Add units tests.
 - Add stories to Storybook.
