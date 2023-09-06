@@ -8,17 +8,19 @@ import { TAGS } from "@/lib/constants";
 import { createEmptyCart } from "@/lib/queries/createEmptyCart";
 import { getCartById } from "@/lib/queries/getCartById";
 import { addItemToCart } from "@/lib/queries/addItemToCart";
+import { env } from "@/lib/env.mjs";
+
+const expirationTimeInSeconds = 60 * 60 * 24 * env.COOKIE_MAX_AGE_IN_DAYS;
 
 const getCart = async () => {
   const cookieStore = cookies();
   const cookieWithCartId = cookieStore.get("cartId");
   const cartId = cookieWithCartId?.value;
-  const weekInSeconds = 60 * 60 * 24 * 7;
 
   const setNewCart = async () => {
     const cart = await createEmptyCart();
     if (cart) {
-      cookieStore.set("cartId", cart.id, { maxAge: weekInSeconds });
+      cookieStore.set("cartId", cart.id, { maxAge: expirationTimeInSeconds });
       return cart;
     }
     throw new Error("Cannot set new cart.");
@@ -37,10 +39,9 @@ const refreshCookie = () => {
   const cookieStore = cookies();
   const cookieWithCartId = cookieStore.get("cartId");
   const cartId = cookieWithCartId?.value;
-  const weekInSeconds = 60 * 60 * 24 * 7;
 
   if (cartId) {
-    cookieStore.set("cartId", cartId, { maxAge: weekInSeconds });
+    cookieStore.set("cartId", cartId, { maxAge: expirationTimeInSeconds });
   }
 };
 
