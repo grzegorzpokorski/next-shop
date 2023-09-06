@@ -17,6 +17,12 @@ This repository contains the source code of the website showcasing a simple e-co
 - To execute mutations on database used server actions which simplify whole process and does not require special endpoints to operate.
 - Fully type-safe queries thanks to [GraphQL Code Generator](https://the-guild.dev/graphql/codegen).
 
+## Performance results 📈
+
+![](/screenshots/lighthouse-mobile.png?raw=true "lighthouse mobile")
+
+![](/screenshots/lighthouse-desktop.png?raw=true "lighthouse desktop")
+
 ## Some screenshots:
 
 ![](/screenshots/home.png?raw=true)
