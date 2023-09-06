@@ -1,5 +1,5 @@
-import { fetcher } from "../fetcher";
-import { CreateEmptyCartDocument } from "../generated/graphql";
+import { fetcher } from "@/lib/fetcher";
+import { CreateEmptyCartDocument } from "@/lib/generated/graphql";
 import { reshapeCart } from "@/lib/mappers";
 
 export const createEmptyCart = async () => {
