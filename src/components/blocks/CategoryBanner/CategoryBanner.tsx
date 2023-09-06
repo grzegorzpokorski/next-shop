@@ -28,6 +28,7 @@ export const CategoryBanner = ({
             height={thumbnail.height}
             sizes={fullWidth ? `100vw` : `(max-width: 1024px) 100vw, 50vw`}
             className="absolute h-full w-full object-cover transition ease-in-out duration-300 motion-safe:group-hover:scale-105"
+            priority
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 dark:from-black/80 flex flex-col justify-end p-8 lg:p-16 text-white">
