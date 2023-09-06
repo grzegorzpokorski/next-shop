@@ -2,10 +2,9 @@ import { env } from "@/lib/env.mjs";
 import { deleteCartsByDateTime } from "@/lib/queries/deleteCartsByDateTime";
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const sharedKey = searchParams.get("key");
+  const cronSecret = request.headers.get("Authorization")?.split(" ")[1];
 
-  if (!sharedKey || sharedKey !== env.CRON_KEY) {
+  if (cronSecret !== env.CRON_SECRET) {
     return new Response("Forbidden", { status: 403 });
   }
 
