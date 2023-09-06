@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/remove-expired-carts",
+      "schedule": "0 1 * * *"
+    }
+  ]
+}
