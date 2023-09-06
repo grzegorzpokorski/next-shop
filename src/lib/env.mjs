@@ -5,6 +5,8 @@ export const env = createEnv({
   server: {
     HYGRAPH_URL: z.string().url(),
     PRODUCTS_PER_PAGE: z.coerce.number().int().min(1).optional().default(8),
+    CRON_KEY: z.string(),
+    COOKIE_MAX_AGE_IN_DAYS: z.coerce.number().int().min(1),
   },
   client: {
     NODE_ENV: z.enum(["development", "test", "production"]),
@@ -13,5 +15,7 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     HYGRAPH_URL: process.env.HYGRAPH_URL,
     PRODUCTS_PER_PAGE: process.env.PRODUCTS_PER_PAGE,
+    CRON_KEY: process.env.CRON_KEY,
+    COOKIE_MAX_AGE_IN_DAYS: process.env.COOKIE_MAX_AGE_IN_DAYS,
   },
 });

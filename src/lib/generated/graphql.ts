@@ -6004,6 +6004,14 @@ export type DeteteCartItemMutation = {
   } | null;
 };
 
+export type DeleteCartsByDateTimeMutationVariables = Exact<{
+  boundaryDate: Scalars["DateTime"]["input"];
+}>;
+
+export type DeleteCartsByDateTimeMutation = {
+  deleteManyCarts: { count: unknown };
+};
+
 export type UpdateCartItemQuantityMutationVariables = Exact<{
   cartId: Scalars["ID"]["input"];
   itemId: Scalars["ID"]["input"];
@@ -6653,6 +6661,16 @@ fragment ProductSummary on Product {
 }`) as unknown as TypedDocumentString<
   DeteteCartItemMutation,
   DeteteCartItemMutationVariables
+>;
+export const DeleteCartsByDateTimeDocument = new TypedDocumentString(`
+    mutation DeleteCartsByDateTime($boundaryDate: DateTime!) {
+  deleteManyCarts(where: {updatedAt_lt: $boundaryDate}) {
+    count
+  }
+}
+    `) as unknown as TypedDocumentString<
+  DeleteCartsByDateTimeMutation,
+  DeleteCartsByDateTimeMutationVariables
 >;
 export const UpdateCartItemQuantityDocument = new TypedDocumentString(`
     mutation UpdateCartItemQuantity($cartId: ID!, $itemId: ID!, $qty: Int!) {

@@ -28,6 +28,8 @@ const documents = {
     types.CreateEmptyCartDocument,
   "mutation DeteteCartItem($cartId: ID!, $itemId: ID!) {\n  updateCart(\n    where: {id: $cartId}\n    data: {items: {delete: {CartItem: {id: $itemId}}}}\n  ) {\n    ...Cart\n  }\n}":
     types.DeteteCartItemDocument,
+  "mutation DeleteCartsByDateTime($boundaryDate: DateTime!) {\n  deleteManyCarts(where: {updatedAt_lt: $boundaryDate}) {\n    count\n  }\n}":
+    types.DeleteCartsByDateTimeDocument,
   "mutation UpdateCartItemQuantity($cartId: ID!, $itemId: ID!, $qty: Int!) {\n  update: updateCart(\n    where: {id: $cartId}\n    data: {items: {update: [{CartItem: {where: {id: $itemId}, data: {quantity: $qty}}}]}}\n  ) {\n    ...Cart\n  }\n}":
     types.UpdateCartItemQuantityDocument,
   "query GetAllProducts($limit: Int!, $skip: Int!, $order: ProductOrderByInput = price_DESC, $searchQuery: String) {\n  products(\n    stage: PUBLISHED\n    locales: pl\n    first: $limit\n    skip: $skip\n    orderBy: $order\n    where: {name_contains: $searchQuery}\n  ) {\n    ...ProductSummary\n  }\n  productsConnection(stage: PUBLISHED, where: {name_contains: $searchQuery}) {\n    aggregate {\n      count\n    }\n  }\n}":
@@ -94,6 +96,12 @@ export function graphql(
 export function graphql(
   source: "mutation DeteteCartItem($cartId: ID!, $itemId: ID!) {\n  updateCart(\n    where: {id: $cartId}\n    data: {items: {delete: {CartItem: {id: $itemId}}}}\n  ) {\n    ...Cart\n  }\n}",
 ): typeof import("./graphql").DeteteCartItemDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "mutation DeleteCartsByDateTime($boundaryDate: DateTime!) {\n  deleteManyCarts(where: {updatedAt_lt: $boundaryDate}) {\n    count\n  }\n}",
+): typeof import("./graphql").DeleteCartsByDateTimeDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

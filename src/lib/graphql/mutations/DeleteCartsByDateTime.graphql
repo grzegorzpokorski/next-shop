@@ -1,0 +1,5 @@
+mutation DeleteCartsByDateTime($boundaryDate: DateTime!) {
+  deleteManyCarts(where: { updatedAt_lt: $boundaryDate }) {
+    count
+  }
+}
