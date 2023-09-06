@@ -7,6 +7,7 @@ export const env = createEnv({
     PRODUCTS_PER_PAGE: z.coerce.number().int().min(1).optional().default(8),
     CRON_SECRET: z.string(),
     COOKIE_MAX_AGE_IN_DAYS: z.coerce.number().int().min(1),
+    VERCEL_ENV: z.string().optional(),
   },
   client: {
     NODE_ENV: z.enum(["development", "test", "production"]),
@@ -17,5 +18,6 @@ export const env = createEnv({
     PRODUCTS_PER_PAGE: process.env.PRODUCTS_PER_PAGE,
     CRON_SECRET: process.env.CRON_SECRET,
     COOKIE_MAX_AGE_IN_DAYS: process.env.COOKIE_MAX_AGE_IN_DAYS,
+    VERCEL_ENV: process.env.VERCEL_ENV,
   },
 });
