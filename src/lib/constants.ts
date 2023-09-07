@@ -40,3 +40,10 @@ export const TAGS = {
   categories: "categories",
   cart: "cart",
 };
+
+const productionHost = "next-shop-gp.vercel.app";
+const devHost = "localhost:3000";
+const host = process.env.NODE_ENV === "production" ? productionHost : devHost;
+const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
+
+export const siteUrl = `${protocol}://${host}`;
