@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
@@ -9,8 +9,8 @@ import { Main } from "@/components/layout/Main/Main";
 import { baseUrl } from "@/lib/constants";
 import { SkipLink } from "@/components/blocks/SkipLink/SkipLink";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "700"],
 });
@@ -49,10 +49,8 @@ export default function RootLayout({
   modal: ReactNode;
 }) {
   return (
-    <html lang="pl" suppressHydrationWarning>
-      <body
-        className={`${poppins.variable} bg-neutral-100 dark:bg-neutral-900`}
-      >
+    <html lang="pl" suppressHydrationWarning className={`${inter.variable}`}>
+      <body className="bg-neutral-100 dark:bg-neutral-900">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <SkipLink />
           <Header />
