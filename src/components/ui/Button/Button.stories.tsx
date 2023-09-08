@@ -96,7 +96,12 @@ export const SizeIcon: Story = {
   args: {
     variant: "indigo",
     size: "icon",
-    children: <FaHome />,
+    children: (
+      <>
+        <FaHome />
+        <span className="sr-only">home</span>
+      </>
+    ),
   },
 };
 
@@ -105,6 +110,11 @@ export const SizeIconSm: Story = {
   args: {
     variant: "indigo",
     size: "icon-sm",
-    children: <FaHome />,
+    children: (
+      <>
+        <FaHome />
+        <span className="sr-only">home</span>
+      </>
+    ),
   },
 };
