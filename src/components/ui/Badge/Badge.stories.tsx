@@ -44,3 +44,10 @@ export const Secondary: Story = {
     variant: "secondary",
   },
 };
+
+export const Category: Story = {
+  name: "category",
+  args: {
+    variant: "category",
+  },
+};
