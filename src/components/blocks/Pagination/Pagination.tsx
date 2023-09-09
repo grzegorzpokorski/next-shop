@@ -87,27 +87,6 @@ export const Pagination = ({ pagination }: Props) => {
                 >
                   {page}
                 </Link>
-                {/* <PaginationLink
-                  page={page}
-                  currentPage={pagination.currentPage}
-                  searchParams={searchParams}
-                /> */}
-                {/* <Link
-                  href={
-                    pagination.searchParams
-                      ? `${pagination.baseUrl}/${page}?${pagination.searchParams}`
-                      : `${pagination.baseUrl}/${page}`
-                  }
-                  aria-label={`Strona ${page}${
-                    pagination.currentPage - 1 === page
-                      ? ", poprzednia"
-                      : pagination.currentPage + 1 === page
-                      ? ", kolejna"
-                      : ""
-                  }`}
-                >
-                  {page}
-                </Link> */}
               </Button>
             </li>
           ),
