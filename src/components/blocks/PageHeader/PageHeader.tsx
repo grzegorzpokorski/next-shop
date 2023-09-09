@@ -32,6 +32,8 @@ export const PageHeaderTitle = ({
   );
 };
 
-export const PageHeaderDescription = ({ children }: Props) => {
+export const PageHeaderDescription = ({
+  children,
+}: Pick<Props, "children">) => {
   return <p>{children}</p>;
 };
