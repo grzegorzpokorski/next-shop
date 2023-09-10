@@ -19,7 +19,9 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "codegen": "gql-gen -r dotenv/config --config codegen.yml",
-    "codegen:watch": "gql-gen -w -r dotenv/config --config codegen.yml"
+    "codegen:watch": "gql-gen -w -r dotenv/config --config codegen.yml",
+    "e2e": "pnpm exec playwright test",
+    "e2e:ui": "pnpm exec playwright test --ui"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.4",
@@ -57,6 +59,7 @@
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/client-preset": "^4.1.0",
     "@graphql-typed-document-node/core": "^3.2.0",
+    "@playwright/test": "^1.37.1",
     "@storybook/addon-a11y": "^7.4.0",
     "@storybook/addon-essentials": "^7.4.0",
     "@storybook/addon-interactions": "^7.4.0",

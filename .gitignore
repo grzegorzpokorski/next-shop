@@ -35,4 +35,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/src/stories/
+/test-results/
+/tests-examples/
+/playwright-report/
+/playwright/.cache/
