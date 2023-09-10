@@ -57,6 +57,15 @@ export const HeaderMenu = () => {
           <HeaderMenuItem href="/category/myszki" onClick={closeMobileMenu}>
             Myszki
           </HeaderMenuItem>
+          <HeaderMenuItem
+            href="/polityka-prywatnosci"
+            onClick={closeMobileMenu}
+          >
+            Polityka prywatności
+          </HeaderMenuItem>
+          <HeaderMenuItem href="/o-nas" onClick={closeMobileMenu}>
+            O nas
+          </HeaderMenuItem>
         </ul>
       </div>
     </ReactFocusLock>
