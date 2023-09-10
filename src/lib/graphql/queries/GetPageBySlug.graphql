@@ -1,0 +1,5 @@
+query GetPageBySlug($slug: String!) {
+  page(where: { slug: $slug }) {
+    ...Page
+  }
+}

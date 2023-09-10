@@ -7,6 +7,7 @@ import type {
 import type {
   CartFragment,
   CategoryDetailsFragment,
+  PageFragment,
   ProductDetailsFragment,
   ProductSummaryFragment,
 } from "@/lib/generated/graphql";
@@ -111,5 +112,14 @@ export const reshapeCart = (cart: CartFragment): Cart => {
         return value + curr.product.price * curr.quantity;
       return value;
     }, 0),
+  };
+};
+
+export const reshapePage = (page: PageFragment) => {
+  return {
+    id: page.id,
+    slug: page.slug,
+    title: page.title,
+    content: page.content,
   };
 };

@@ -18,6 +18,8 @@ const documents = {
     types.CategoryDetailsFragmentDoc,
   "fragment ImageDetails on Asset {\n  id\n  mimeType\n  url(transformation: {document: {output: {format: webp}}})\n  width\n  height\n  fileName\n}":
     types.ImageDetailsFragmentDoc,
+  "fragment Page on Page {\n  id\n  slug\n  title\n  content\n  createdAt\n  updatedAt\n}":
+    types.PageFragmentDoc,
   "fragment ProductDetails on Product {\n  id\n  name\n  slug\n  description {\n    html\n  }\n  category {\n    ...CategoryDetails\n  }\n  price\n  currency\n  gallery {\n    ...ImageDetails\n  }\n  quantityAvailable\n  seoTitle\n  seoDescription\n  updatedAt\n  createdAt\n}":
     types.ProductDetailsFragmentDoc,
   "fragment ProductSummary on Product {\n  id\n  name\n  slug\n  price\n  currency\n  gallery(first: 1) {\n    ...ImageDetails\n  }\n  quantityAvailable\n  category {\n    ...CategoryDetails\n  }\n  updatedAt\n  createdAt\n}":
@@ -40,6 +42,8 @@ const documents = {
     types.GetCategoriesDocument,
   "query GetCategoryNameBySlug($categorySlug: String!) {\n  category(stage: PUBLISHED, where: {slug: $categorySlug}) {\n    ...CategoryDetails\n  }\n}":
     types.GetCategoryNameBySlugDocument,
+  "query GetPageBySlug($slug: String!) {\n  page(where: {slug: $slug}) {\n    ...Page\n  }\n}":
+    types.GetPageBySlugDocument,
   "query GetProductBySlug($slug: String!) {\n  product(stage: PUBLISHED, where: {slug: $slug}, locales: pl) {\n    ...ProductDetails\n  }\n}":
     types.GetProductBySlugDocument,
   "query GetProductsByCategorySlug($categorySlug: String!, $limit: Int!, $skip: Int!, $order: ProductOrderByInput = price_DESC) {\n  products(\n    stage: PUBLISHED\n    locales: pl\n    where: {category: {Category: {slug: $categorySlug}}}\n    first: $limit\n    skip: $skip\n    orderBy: $order\n  ) {\n    ...ProductSummary\n  }\n  productsConnection(\n    stage: PUBLISHED\n    where: {category: {Category: {slug: $categorySlug}}}\n  ) {\n    aggregate {\n      count\n    }\n  }\n}":
@@ -66,6 +70,12 @@ export function graphql(
 export function graphql(
   source: "fragment ImageDetails on Asset {\n  id\n  mimeType\n  url(transformation: {document: {output: {format: webp}}})\n  width\n  height\n  fileName\n}",
 ): typeof import("./graphql").ImageDetailsFragmentDoc;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "fragment Page on Page {\n  id\n  slug\n  title\n  content\n  createdAt\n  updatedAt\n}",
+): typeof import("./graphql").PageFragmentDoc;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -132,6 +142,12 @@ export function graphql(
 export function graphql(
   source: "query GetCategoryNameBySlug($categorySlug: String!) {\n  category(stage: PUBLISHED, where: {slug: $categorySlug}) {\n    ...CategoryDetails\n  }\n}",
 ): typeof import("./graphql").GetCategoryNameBySlugDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "query GetPageBySlug($slug: String!) {\n  page(where: {slug: $slug}) {\n    ...Page\n  }\n}",
+): typeof import("./graphql").GetPageBySlugDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
