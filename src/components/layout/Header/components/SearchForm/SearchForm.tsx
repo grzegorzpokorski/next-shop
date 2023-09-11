@@ -10,7 +10,10 @@ export const SearchForm = () => {
   const inputId = useId();
 
   return (
-    <form onSubmit={onSubmit} className="w-full lg:max-w-[400px] relative flex">
+    <form
+      onSubmit={onSubmit}
+      className="w-full lg:min-w-[200px] lg:max-w-[400px] relative flex"
+    >
       <label className="sr-only" htmlFor={inputId}>
         Szukaj produktów
       </label>

@@ -22,6 +22,7 @@ const linkVariants = {
     "font-bold",
     "text-neutral-600 hover:text-neutral-800",
     "dark:text-neutral-100 dark:hover:text-neutral-400",
+    "whitespace-nowrap",
   ),
 } as const;
 

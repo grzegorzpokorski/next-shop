@@ -44,7 +44,7 @@ export const HeaderMenu = () => {
           <SearchForm />
         </div>
         <ul
-          className="list-none flex flex-col items-center justify-center lg:flex-row gap-6 my-auto lg:my-0"
+          className="list-none flex flex-col items-center justify-center lg:flex-row gap-6 my-auto lg:my-0 whitespace-nowrap"
           role="list"
           id="menu"
         >
@@ -57,14 +57,11 @@ export const HeaderMenu = () => {
           <HeaderMenuItem href="/category/myszki" onClick={closeMobileMenu}>
             Myszki
           </HeaderMenuItem>
-          <HeaderMenuItem
-            href="/polityka-prywatnosci"
-            onClick={closeMobileMenu}
-          >
-            Polityka prywatności
-          </HeaderMenuItem>
           <HeaderMenuItem href="/o-nas" onClick={closeMobileMenu}>
             O nas
+          </HeaderMenuItem>
+          <HeaderMenuItem href="/kontakt" onClick={closeMobileMenu}>
+            Kontakt
           </HeaderMenuItem>
         </ul>
       </div>
