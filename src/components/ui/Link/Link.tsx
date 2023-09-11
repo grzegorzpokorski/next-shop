@@ -1,39 +1,46 @@
 import type { ReactNode } from "react";
 import LinkNext from "next/link";
 import { twMerge } from "tailwind-merge";
+import type { VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
+import { cn } from "@/utils/cn";
 
-type LinkVariant = "default" | "logo" | "indigo";
+const linkVariants = cva(
+  "flex flex-row transition-colors motion-reduce:transition-none",
+  {
+    variants: {
+      variant: {
+        default: twMerge(
+          "text-neutral-600 hover:text-neutral-800",
+          "hover:underline underline-offset-2",
+          "dark:text-neutral-100 dark:hover:text-neutral-400",
+        ),
+        indigo: twMerge(
+          "text-indigo-600",
+          "hover:underline underline-offset-2",
+          "dark:text-indigo-400",
+        ),
+        logo: twMerge(
+          "font-bold",
+          "text-neutral-600 hover:text-neutral-800",
+          "dark:text-neutral-100 dark:hover:text-neutral-400",
+          "whitespace-nowrap",
+        ),
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  },
+);
 
-const baseStyles = twMerge("flex flex-row");
-const transitionStyles = "transition-colors motion-reduce:transition-none";
-
-const linkVariants = {
-  default: twMerge(
-    "text-neutral-600 hover:text-neutral-800",
-    "hover:underline underline-offset-2",
-    "dark:text-neutral-100 dark:hover:text-neutral-400",
-  ),
-  indigo: twMerge(
-    "text-indigo-600",
-    "hover:underline underline-offset-2",
-    "dark:text-indigo-400",
-  ),
-  logo: twMerge(
-    "font-bold",
-    "text-neutral-600 hover:text-neutral-800",
-    "dark:text-neutral-100 dark:hover:text-neutral-400",
-    "whitespace-nowrap",
-  ),
-} as const;
-
-export type LinkProps = {
+type Props = {
   href: string;
   children: ReactNode;
   onClick?: () => void;
-  variant?: LinkVariant;
-};
+} & VariantProps<typeof linkVariants>;
 
-export const Link = ({ variant = "default", ...props }: LinkProps) => {
+export const Link = (props: Props) => {
   const isInternal = ["#", "/"].some((item) => props.href.startsWith(item))
     ? true
     : false;
@@ -43,11 +50,7 @@ export const Link = ({ variant = "default", ...props }: LinkProps) => {
       <LinkNext
         href={props.href}
         onClick={props.onClick}
-        className={twMerge(
-          transitionStyles,
-          baseStyles,
-          variant && linkVariants[variant],
-        )}
+        className={cn(linkVariants({ variant: props.variant }))}
       >
         {props.children}
       </LinkNext>
@@ -60,7 +63,7 @@ export const Link = ({ variant = "default", ...props }: LinkProps) => {
       rel="noopener noreferrer"
       href={props.href}
       onClick={props.onClick}
-      className={twMerge(variant && linkVariants[variant])}
+      className={cn(linkVariants({ variant: props.variant }))}
     >
       {props.children}
     </a>
