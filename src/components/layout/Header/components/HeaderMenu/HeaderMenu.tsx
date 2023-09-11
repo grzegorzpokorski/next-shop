@@ -44,7 +44,7 @@ export const HeaderMenu = () => {
           <SearchForm />
         </div>
         <ul
-          className="list-none flex flex-col items-center justify-center lg:flex-row gap-6 my-auto lg:my-0 whitespace-nowrap"
+          className="list-none flex flex-col items-center justify-center lg:flex-row gap-6 my-auto lg:my-0 whitespace-nowrap lg:text-sm"
           role="list"
           id="menu"
         >
