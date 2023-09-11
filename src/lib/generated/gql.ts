@@ -18,7 +18,7 @@ const documents = {
     types.CategoryDetailsFragmentDoc,
   "fragment ImageDetails on Asset {\n  id\n  mimeType\n  url(transformation: {document: {output: {format: webp}}})\n  width\n  height\n  fileName\n}":
     types.ImageDetailsFragmentDoc,
-  "fragment Page on Page {\n  id\n  slug\n  title\n  content\n  createdAt\n  updatedAt\n}":
+  "fragment Page on Page {\n  id\n  slug\n  title\n  content\n  seoTitle\n  seoDescription\n  createdAt\n  updatedAt\n}":
     types.PageFragmentDoc,
   "fragment ProductDetails on Product {\n  id\n  name\n  slug\n  description {\n    html\n  }\n  category {\n    ...CategoryDetails\n  }\n  price\n  currency\n  gallery {\n    ...ImageDetails\n  }\n  quantityAvailable\n  seoTitle\n  seoDescription\n  updatedAt\n  createdAt\n}":
     types.ProductDetailsFragmentDoc,
@@ -74,7 +74,7 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "fragment Page on Page {\n  id\n  slug\n  title\n  content\n  createdAt\n  updatedAt\n}",
+  source: "fragment Page on Page {\n  id\n  slug\n  title\n  content\n  seoTitle\n  seoDescription\n  createdAt\n  updatedAt\n}",
 ): typeof import("./graphql").PageFragmentDoc;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.

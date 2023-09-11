@@ -3187,6 +3187,8 @@ export type Page = Node & {
   /** User that last published this document */
   publishedBy?: Maybe<User>;
   scheduledIn: Array<ScheduledOperation>;
+  seoDescription?: Maybe<Scalars["String"]["output"]>;
+  seoTitle?: Maybe<Scalars["String"]["output"]>;
   slug: Scalars["String"]["output"];
   /** System stage field */
   stage: Stage;
@@ -3274,6 +3276,10 @@ export type PageCreateInput = {
   createdAt?: InputMaybe<Scalars["DateTime"]["input"]>;
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: InputMaybe<PageCreateLocalizationsInput>;
+  /** seoDescription input for default locale (pl) */
+  seoDescription?: InputMaybe<Scalars["String"]["input"]>;
+  /** seoTitle input for default locale (pl) */
+  seoTitle?: InputMaybe<Scalars["String"]["input"]>;
   slug: Scalars["String"]["input"];
   /** title input for default locale (pl) */
   title: Scalars["String"]["input"];
@@ -3283,6 +3289,8 @@ export type PageCreateInput = {
 export type PageCreateLocalizationDataInput = {
   content?: InputMaybe<Scalars["String"]["input"]>;
   createdAt?: InputMaybe<Scalars["DateTime"]["input"]>;
+  seoDescription?: InputMaybe<Scalars["String"]["input"]>;
+  seoTitle?: InputMaybe<Scalars["String"]["input"]>;
   title: Scalars["String"]["input"];
   updatedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
 };
@@ -3453,6 +3461,10 @@ export enum PageOrderByInput {
   IdDesc = "id_DESC",
   PublishedAtAsc = "publishedAt_ASC",
   PublishedAtDesc = "publishedAt_DESC",
+  SeoDescriptionAsc = "seoDescription_ASC",
+  SeoDescriptionDesc = "seoDescription_DESC",
+  SeoTitleAsc = "seoTitle_ASC",
+  SeoTitleDesc = "seoTitle_DESC",
   SlugAsc = "slug_ASC",
   SlugDesc = "slug_DESC",
   TitleAsc = "title_ASC",
@@ -3466,6 +3478,10 @@ export type PageUpdateInput = {
   content?: InputMaybe<Scalars["String"]["input"]>;
   /** Manage document localizations */
   localizations?: InputMaybe<PageUpdateLocalizationsInput>;
+  /** seoDescription input for default locale (pl) */
+  seoDescription?: InputMaybe<Scalars["String"]["input"]>;
+  /** seoTitle input for default locale (pl) */
+  seoTitle?: InputMaybe<Scalars["String"]["input"]>;
   slug?: InputMaybe<Scalars["String"]["input"]>;
   /** title input for default locale (pl) */
   title?: InputMaybe<Scalars["String"]["input"]>;
@@ -3473,6 +3489,8 @@ export type PageUpdateInput = {
 
 export type PageUpdateLocalizationDataInput = {
   content?: InputMaybe<Scalars["String"]["input"]>;
+  seoDescription?: InputMaybe<Scalars["String"]["input"]>;
+  seoTitle?: InputMaybe<Scalars["String"]["input"]>;
   title?: InputMaybe<Scalars["String"]["input"]>;
 };
 
@@ -3513,10 +3531,16 @@ export type PageUpdateManyInput = {
   content?: InputMaybe<Scalars["String"]["input"]>;
   /** Optional updates to localizations */
   localizations?: InputMaybe<PageUpdateManyLocalizationsInput>;
+  /** seoDescription input for default locale (pl) */
+  seoDescription?: InputMaybe<Scalars["String"]["input"]>;
+  /** seoTitle input for default locale (pl) */
+  seoTitle?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type PageUpdateManyLocalizationDataInput = {
   content?: InputMaybe<Scalars["String"]["input"]>;
+  seoDescription?: InputMaybe<Scalars["String"]["input"]>;
+  seoTitle?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type PageUpdateManyLocalizationInput = {
@@ -3674,6 +3698,46 @@ export type PageWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  seoDescription?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values containing the given string. */
+  seoDescription_contains?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values ending with the given string. */
+  seoDescription_ends_with?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values that are contained in given list. */
+  seoDescription_in?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  seoDescription_not?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values not containing the given string. */
+  seoDescription_not_contains?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values not ending with the given string */
+  seoDescription_not_ends_with?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values that are not contained in given list. */
+  seoDescription_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars["String"]["input"]>>
+  >;
+  /** All values not starting with the given string. */
+  seoDescription_not_starts_with?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values starting with the given string. */
+  seoDescription_starts_with?: InputMaybe<Scalars["String"]["input"]>;
+  seoTitle?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values containing the given string. */
+  seoTitle_contains?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values ending with the given string. */
+  seoTitle_ends_with?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values that are contained in given list. */
+  seoTitle_in?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  seoTitle_not?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values not containing the given string. */
+  seoTitle_not_contains?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values not ending with the given string */
+  seoTitle_not_ends_with?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values that are not contained in given list. */
+  seoTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  /** All values not starting with the given string. */
+  seoTitle_not_starts_with?: InputMaybe<Scalars["String"]["input"]>;
+  /** All values starting with the given string. */
+  seoTitle_starts_with?: InputMaybe<Scalars["String"]["input"]>;
   slug?: InputMaybe<Scalars["String"]["input"]>;
   /** All values containing the given string. */
   slug_contains?: InputMaybe<Scalars["String"]["input"]>;
@@ -6582,6 +6646,8 @@ export type PageFragment = {
   slug: string;
   title: string;
   content?: string | null;
+  seoTitle?: string | null;
+  seoDescription?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -6989,6 +7055,8 @@ export type GetPageBySlugQuery = {
     slug: string;
     title: string;
     content?: string | null;
+    seoTitle?: string | null;
+    seoDescription?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -7264,6 +7332,8 @@ export const PageFragmentDoc = new TypedDocumentString(
   slug
   title
   content
+  seoTitle
+  seoDescription
   createdAt
   updatedAt
 }
@@ -7718,6 +7788,8 @@ export const GetPageBySlugDocument = new TypedDocumentString(`
   slug
   title
   content
+  seoTitle
+  seoDescription
   createdAt
   updatedAt
 }`) as unknown as TypedDocumentString<

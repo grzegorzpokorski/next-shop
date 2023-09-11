@@ -3,6 +3,8 @@ fragment Page on Page {
   slug
   title
   content
+  seoTitle
+  seoDescription
   createdAt
   updatedAt
 }
