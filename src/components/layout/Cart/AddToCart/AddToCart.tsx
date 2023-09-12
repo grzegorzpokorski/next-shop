@@ -26,7 +26,7 @@ export const AddToCart = ({ available, productId }: Props) => {
       aria-disabled={disabled}
     >
       <FaPlus
-        className={twMerge("mr-2", disabled && "motion-safe:animate-spin")}
+        className={twMerge("mr-2", isPending && "motion-safe:animate-spin")}
         aria-hidden
       />
       {isPending ? "Dodawanie do koszyka" : "Dodaj do koszyka"}
