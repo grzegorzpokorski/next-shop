@@ -12,6 +12,7 @@ export const getPageBySlug = async ({ slug }: Args) => {
     variables: {
       slug,
     },
+    cache: "force-cache",
     tags: [TAGS.pages],
   });
 
