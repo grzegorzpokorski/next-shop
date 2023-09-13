@@ -2,6 +2,7 @@ import type { ProductOrderByInput } from "@/lib/generated/graphql";
 import { GetProductsByCategorySlugDocument } from "@/lib/generated/graphql";
 import { fetcher } from "@/lib/fetcher";
 import { reshapeProductWithSummary } from "@/lib/mappers";
+import { TAGS } from "@/lib/constants";
 
 type Args = {
   limit: number;
@@ -24,6 +25,7 @@ export const getProductsByCategorySlug = async ({
       categorySlug,
       order,
     },
+    tags: [TAGS.categories, TAGS.products],
   });
 
   return {
