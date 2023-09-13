@@ -1,5 +1,5 @@
 query GetProductsByIds($ids: [ID]!) {
-  products(where: { id_in: $ids }, first: 100, skip: 0) {
+  products(stage: PUBLISHED, where: { id_in: $ids }, first: 100, skip: 0) {
     ...ProductSummary
   }
 }

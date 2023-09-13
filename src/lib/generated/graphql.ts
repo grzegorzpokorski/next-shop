@@ -3187,7 +3187,7 @@ export type Page = Node & {
   /** User that last published this document */
   publishedBy?: Maybe<User>;
   scheduledIn: Array<ScheduledOperation>;
-  seoDescription?: Maybe<Scalars["String"]["output"]>;
+  seoDescription: Scalars["String"]["output"];
   seoTitle?: Maybe<Scalars["String"]["output"]>;
   slug: Scalars["String"]["output"];
   /** System stage field */
@@ -3277,7 +3277,7 @@ export type PageCreateInput = {
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: InputMaybe<PageCreateLocalizationsInput>;
   /** seoDescription input for default locale (pl) */
-  seoDescription?: InputMaybe<Scalars["String"]["input"]>;
+  seoDescription: Scalars["String"]["input"];
   /** seoTitle input for default locale (pl) */
   seoTitle?: InputMaybe<Scalars["String"]["input"]>;
   slug: Scalars["String"]["input"];
@@ -3289,7 +3289,7 @@ export type PageCreateInput = {
 export type PageCreateLocalizationDataInput = {
   content?: InputMaybe<Scalars["String"]["input"]>;
   createdAt?: InputMaybe<Scalars["DateTime"]["input"]>;
-  seoDescription?: InputMaybe<Scalars["String"]["input"]>;
+  seoDescription: Scalars["String"]["input"];
   seoTitle?: InputMaybe<Scalars["String"]["input"]>;
   title: Scalars["String"]["input"];
   updatedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
@@ -6647,7 +6647,7 @@ export type PageFragment = {
   title: string;
   content?: string | null;
   seoTitle?: string | null;
-  seoDescription?: string | null;
+  seoDescription: string;
   createdAt: string;
   updatedAt: string;
 };
@@ -7056,7 +7056,7 @@ export type GetPageBySlugQuery = {
     title: string;
     content?: string | null;
     seoTitle?: string | null;
-    seoDescription?: string | null;
+    seoDescription: string;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -7902,7 +7902,7 @@ fragment ProductSummary on Product {
 >;
 export const GetProductsByIdsDocument = new TypedDocumentString(`
     query GetProductsByIds($ids: [ID]!) {
-  products(where: {id_in: $ids}, first: 100, skip: 0) {
+  products(stage: PUBLISHED, where: {id_in: $ids}, first: 100, skip: 0) {
     ...ProductSummary
   }
 }
