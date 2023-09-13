@@ -7,6 +7,7 @@ export const useFilters = () => {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const sortingSlugs = sorting.map((item) => item.slug);
   const currentSortSlug = searchParams.get("sort") || defaultSort.slug;
 
   const changeSortingMethod = (sortSlug: string) => {
@@ -17,7 +18,9 @@ export const useFilters = () => {
   };
 
   return {
-    currentSortSlug,
+    currentSortSlug: sortingSlugs.includes(currentSortSlug)
+      ? currentSortSlug
+      : defaultSort.slug,
     sortingOptions: sorting,
     changeSortingMethod,
   };
