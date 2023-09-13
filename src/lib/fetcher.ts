@@ -22,7 +22,7 @@ export async function fetcher<Result, Variables>({
   query,
   variables,
   headers,
-  cache = "force-cache",
+  cache,
   method = "POST",
   tags,
 }: {

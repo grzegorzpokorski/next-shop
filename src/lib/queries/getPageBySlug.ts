@@ -1,5 +1,6 @@
 import { GetPageBySlugDocument } from "@/lib/generated/graphql";
 import { fetcher } from "@/lib/fetcher";
+import { TAGS } from "@/lib/constants";
 
 type Args = {
   slug: string;
@@ -11,6 +12,7 @@ export const getPageBySlug = async ({ slug }: Args) => {
     variables: {
       slug,
     },
+    tags: [TAGS.pages],
   });
 
   return result.page ? result.page : null;

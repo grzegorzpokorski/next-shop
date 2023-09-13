@@ -39,6 +39,7 @@ export const TAGS = {
   products: "products",
   categories: "categories",
   cart: "cart",
+  pages: "pages",
 };
 
 const productionHost = "next-shop-gp.vercel.app";

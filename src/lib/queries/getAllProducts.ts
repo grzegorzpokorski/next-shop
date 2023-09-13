@@ -1,3 +1,4 @@
+import { TAGS } from "@/lib/constants";
 import type { ProductOrderByInput } from "@/lib/generated/graphql";
 import { GetAllProductsDocument } from "@/lib/generated/graphql";
 import { fetcher } from "@/lib/fetcher";
@@ -24,6 +25,7 @@ export const getAllProducts = async ({
       order,
       searchQuery: searchQuery || "",
     },
+    tags: [TAGS.products],
   });
 
   return {
