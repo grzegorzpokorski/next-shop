@@ -1,12 +1,18 @@
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { Stripe } from "stripe";
-import { siteUrl } from "@/lib/constants";
 import { env } from "@/lib/env.mjs";
+import { siteUrl } from "@/lib/constants";
 
 const stripe = new Stripe(env.STRIPE_SECRET_KEY, { apiVersion: "2023-08-16" });
 
-export async function POST() {
-  console.log("hey");
+export async function POST(request: NextRequest) {
+  const host =
+    request.headers.get("host") === "localhost:3000"
+      ? "http://localhost:3000"
+      : `https://${request.headers.get("host")}` ?? siteUrl;
+
+  console.log(host);
   // const cookieStore = cookies();
   // const cookieWithCartId = cookieStore.get("cartId");
   // const cartId = cookieWithCartId?.value;
@@ -39,8 +45,8 @@ export async function POST() {
         },
       ],
       mode: "payment",
-      success_url: `${siteUrl}/cart/?success=true`,
-      cancel_url: `${siteUrl}/cart/?canceled=true`,
+      success_url: `${host}/cart/?success=true`,
+      cancel_url: `${host}/cart/?canceled=true`,
     });
 
     console.log(session);
