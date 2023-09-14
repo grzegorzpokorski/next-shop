@@ -1,0 +1,8 @@
+mutation UpdateProductAvailableQuantity($productId: ID!, $quantity: Int!) {
+  updateProduct(
+    where: { id: $productId }
+    data: { quantityAvailable: $quantity }
+  ) {
+    ...ProductSummary
+  }
+}
