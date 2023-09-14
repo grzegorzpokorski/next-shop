@@ -1,10 +1,16 @@
-import type { NextRequest } from "next/server";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import { Stripe } from "stripe";
 import { env } from "@/lib/env.mjs";
+import { getCartById } from "@/lib/queries/getCartById";
 import { siteUrl } from "@/lib/constants";
+import { notEmpty } from "@/lib/types";
 
-const stripe = new Stripe(env.STRIPE_SECRET_KEY, { apiVersion: "2023-08-16" });
+const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
+  apiVersion: "2023-08-16",
+  typescript: true,
+});
 
 export async function POST(request: NextRequest) {
   const host =
@@ -12,79 +18,77 @@ export async function POST(request: NextRequest) {
       ? "http://localhost:3000"
       : `https://${request.headers.get("host")}` ?? siteUrl;
 
-  console.log(host);
-  // const cookieStore = cookies();
-  // const cookieWithCartId = cookieStore.get("cartId");
-  // const cartId = cookieWithCartId?.value;
+  const cookieStore = cookies();
+  const cookieWithCartId = cookieStore.get("cartId");
+  const cartId = cookieWithCartId?.value;
 
-  // if (!cartId) return new Response("", { status: 500 });
+  if (!cartId) return new Response("brak id kosza", { status: 500 });
 
   try {
-    // const cart = await getCartById({ id: cartId });
+    const cart = await getCartById({ id: cartId });
 
-    // if (!cart || !cart.items) return new Response("", { status: 500 });
+    if (!cart || !cart.items)
+      return new Response("brak kosza", { status: 500 });
 
-    const session = await stripe.checkout.sessions.create({
-      line_items: [
-        {
+    const items = cart.items.map((item) => {
+      return (
+        item.product && {
           price_data: {
-            unit_amount: 2137,
-            currency: "PLN",
+            unit_amount: item.product.price * 100,
+            currency: item.product.currency,
             product_data: {
-              name: "title",
-              description: "desc",
-              images: [
-                "https://next-shop-gp.vercel.app/_next/image?url=https%3A%2F%2Fmedia.graphassets.com%2Foutput%3Dformat%3Awebp%2FvUonHzwzS4iJ65NLomjm&w=640&q=75",
-              ],
+              name: item.product.name,
+              images: [item.product.thumbnail.url],
             },
           },
           adjustable_quantity: {
             enabled: false,
           },
-          quantity: 1,
-        },
-      ],
-      mode: "payment",
-      success_url: `${host}/cart/?success=true`,
-      cancel_url: `${host}/cart/?canceled=true`,
+          quantity: item.quantity,
+        }
+      );
     });
 
-    console.log(session);
-    if (!session || !session.url) return new Response("", { status: 500 });
+    const session = await stripe.checkout.sessions.create({
+      line_items: items.filter(notEmpty),
+      // line_items: [
+      //   {
+      //     price_data: {
+      //       unit_amount: 2137,
+      //       currency: "PLN",
+      //       product_data: {
+      //         name: "title",
+      //         description: "desc",
+      //         images: [
+      //           "https://next-shop-gp.vercel.app/_next/image?url=https%3A%2F%2Fmedia.graphassets.com%2Foutput%3Dformat%3Awebp%2FvUonHzwzS4iJ65NLomjm&w=640&q=75",
+      //         ],
+      //       },
+      //     },
+      //     adjustable_quantity: {
+      //       enabled: false,
+      //     },
+      //     quantity: 1,
+      //   },
+      // ],
+      mode: "payment",
+      shipping_address_collection: {
+        allowed_countries: ["PL"],
+      },
+      phone_number_collection: {
+        enabled: true,
+      },
+      success_url: `${host}/cart/success`,
+      cancel_url: `${host}/cart/canceled`,
+    });
 
-    return NextResponse.redirect(session.url);
+    // console.log(session);
+    if (!session || !session.url) return new Response("", { status: 500 });
+    // console.log(session.url);
+    return NextResponse.redirect(session.url, 303);
   } catch (err) {
     console.log(err);
-    return new Response("", { status: 500 });
+    return new Response("err", { status: 500 });
   }
   // const host = request.headers.get("host") ?? siteUrl;
   // return new Response(host, { status: 200 });
 }
-
-// const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-
-// export default async function handler(req, res) {
-//   if (req.method === "POST") {
-//     try {
-//       // Create Checkout Sessions from body params.
-//       const session = await stripe.checkout.sessions.create({
-//         line_items: [
-//           {
-//             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-//             price: "{{PRICE_ID}}",
-//             quantity: 1,
-//           },
-//         ],
-//         mode: "payment",
-//         success_url: `${req.headers.origin}/?success=true`,
-//         cancel_url: `${req.headers.origin}/?canceled=true`,
-//       });
-//       res.redirect(303, session.url);
-//     } catch (err) {
-//       res.status(err.statusCode || 500).json(err.message);
-//     }
-//   } else {
-//     res.setHeader("Allow", "POST");
-//     res.status(405).end("Method Not Allowed");
-//   }
-// }

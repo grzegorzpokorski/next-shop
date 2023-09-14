@@ -56,3 +56,16 @@ export type Cart = {
   totalQty: number;
   items: CartItem[];
 };
+
+// export const notEmpty = <TValue>(
+//   value: TValue | null | undefined,
+// ): value is TValue => {
+//   if (value === null || value === undefined) return false;
+//   return true;
+// };
+
+export const notEmpty = <TValue>(
+  value: TValue | null | undefined,
+): value is TValue => {
+  return value !== null && value !== undefined;
+};
