@@ -33,8 +33,12 @@ export const CartSummary = ({ total, stickToTheBottom, modal }: Props) => {
       <p className="text-primary/80 text-xs mt-1">
         Koszty dostawy zostaną obliczone w kolejnym kroku.
       </p>
-      <div className="mt-6 grid @sm:grid-cols-1 @md:grid-cols-2 gap-2 text-center">
-        <Button variant="indigo" className="lg:order-2">
+      <form
+        className="mt-6 grid @sm:grid-cols-1 @md:grid-cols-2 gap-2 text-center"
+        action="/api/checkout"
+        method="POST"
+      >
+        <Button variant="indigo" className="lg:order-2" type="submit">
           Złóż zamówienie
         </Button>
         <Button asChild variant="outline" className="lg:order-1">
@@ -44,7 +48,7 @@ export const CartSummary = ({ total, stickToTheBottom, modal }: Props) => {
             <a href="/products">Kontynuuj zakupy</a>
           )}
         </Button>
-      </div>
+      </form>
     </div>
   );
 };

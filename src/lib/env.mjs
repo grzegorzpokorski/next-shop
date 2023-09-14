@@ -8,9 +8,12 @@ export const env = createEnv({
     CRON_SECRET: z.string(),
     COOKIE_MAX_AGE_IN_DAYS: z.coerce.number().int().min(1),
     VERCEL_ENV: z.string().optional(),
+    STRIPE_SECRET_KEY: z.string(),
+    STRIPE_WEBHOOK_SECRET: z.string(),
   },
   client: {
     NODE_ENV: z.enum(["development", "test", "production"]),
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string(),
   },
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
@@ -19,5 +22,9 @@ export const env = createEnv({
     CRON_SECRET: process.env.CRON_SECRET,
     COOKIE_MAX_AGE_IN_DAYS: process.env.COOKIE_MAX_AGE_IN_DAYS,
     VERCEL_ENV: process.env.VERCEL_ENV,
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
+      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+    STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
   },
 });
