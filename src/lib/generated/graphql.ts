@@ -6914,6 +6914,52 @@ export type DeleteCartsByDateTimeMutation = {
   deleteManyCarts: { count: unknown };
 };
 
+export type PublishProductsMutationVariables = Exact<{
+  ids?: InputMaybe<
+    | Array<InputMaybe<Scalars["ID"]["input"]>>
+    | InputMaybe<Scalars["ID"]["input"]>
+  >;
+}>;
+
+export type PublishProductsMutation = {
+  publishManyProductsConnection: {
+    edges: Array<{
+      node: {
+        id: string;
+        name: string;
+        slug: string;
+        price: number;
+        currency: Currency;
+        quantityAvailable: number;
+        updatedAt: string;
+        createdAt: string;
+        gallery: Array<{
+          id: string;
+          mimeType?: string | null;
+          url: string;
+          width?: number | null;
+          height?: number | null;
+          fileName: string;
+        }>;
+        category?: {
+          id: string;
+          name: string;
+          slug: string;
+          description?: string | null;
+          thumbnail: {
+            id: string;
+            mimeType?: string | null;
+            url: string;
+            width?: number | null;
+            height?: number | null;
+            fileName: string;
+          };
+        } | null;
+      };
+    }>;
+  };
+};
+
 export type UpdateCartItemQuantityMutationVariables = Exact<{
   cartId: Scalars["ID"]["input"];
   itemId: Scalars["ID"]["input"];
@@ -7699,6 +7745,52 @@ export const DeleteCartsByDateTimeDocument = new TypedDocumentString(`
     `) as unknown as TypedDocumentString<
   DeleteCartsByDateTimeMutation,
   DeleteCartsByDateTimeMutationVariables
+>;
+export const PublishProductsDocument = new TypedDocumentString(`
+    mutation PublishProducts($ids: [ID]) {
+  publishManyProductsConnection(where: {id_in: $ids}, to: PUBLISHED, first: 100) {
+    edges {
+      node {
+        ...ProductSummary
+      }
+    }
+  }
+}
+    fragment CategoryDetails on Category {
+  id
+  name
+  slug
+  description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
+}
+fragment ProductSummary on Product {
+  id
+  name
+  slug
+  price
+  currency
+  gallery(first: 1) {
+    ...ImageDetails
+  }
+  quantityAvailable
+  category {
+    ...CategoryDetails
+  }
+  updatedAt
+  createdAt
+}`) as unknown as TypedDocumentString<
+  PublishProductsMutation,
+  PublishProductsMutationVariables
 >;
 export const UpdateCartItemQuantityDocument = new TypedDocumentString(`
     mutation UpdateCartItemQuantity($cartId: ID!, $itemId: ID!, $qty: Int!) {

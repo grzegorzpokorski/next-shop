@@ -7,6 +7,7 @@ import { Heading } from "@/components/ui/Heading/Heading";
 import { deleteCartById } from "@/lib/queries/deleteCartById";
 import { updateProdcutById } from "@/lib/queries/updateProductById";
 import { TAGS } from "@/lib/constants";
+import { publishProducts } from "@/lib/queries/publishProducts";
 
 export default async function Page() {
   const cookieStore = cookies();
@@ -36,6 +37,15 @@ export default async function Page() {
       );
 
       if (!updatedProducts) throw new Error();
+
+      const updatedProductIds = updatedProducts.flatMap((product) =>
+        product !== null ? [product.id] : [],
+      );
+      const publishedProducts = await publishProducts({
+        ids: updatedProductIds,
+      });
+
+      if (!publishedProducts) throw new Error();
 
       revalidateTag(TAGS.cart);
       revalidateTag(TAGS.products);

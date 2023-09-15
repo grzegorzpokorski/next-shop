@@ -34,6 +34,8 @@ const documents = {
     types.DeteteCartItemDocument,
   "mutation DeleteCartsByDateTime($boundaryDate: DateTime!) {\n  deleteManyCarts(where: {updatedAt_lt: $boundaryDate}) {\n    count\n  }\n}":
     types.DeleteCartsByDateTimeDocument,
+  "mutation PublishProducts($ids: [ID]) {\n  publishManyProductsConnection(where: {id_in: $ids}, to: PUBLISHED, first: 100) {\n    edges {\n      node {\n        ...ProductSummary\n      }\n    }\n  }\n}":
+    types.PublishProductsDocument,
   "mutation UpdateCartItemQuantity($cartId: ID!, $itemId: ID!, $qty: Int!) {\n  update: updateCart(\n    where: {id: $cartId}\n    data: {items: {update: [{CartItem: {where: {id: $itemId}, data: {quantity: $qty}}}]}}\n  ) {\n    ...Cart\n  }\n}":
     types.UpdateCartItemQuantityDocument,
   "mutation UpdateProductById($id: ID!, $data: ProductUpdateInput!) {\n  updateProduct(where: {id: $id}, data: $data) {\n    ...ProductSummary\n  }\n}":
@@ -122,6 +124,12 @@ export function graphql(
 export function graphql(
   source: "mutation DeleteCartsByDateTime($boundaryDate: DateTime!) {\n  deleteManyCarts(where: {updatedAt_lt: $boundaryDate}) {\n    count\n  }\n}",
 ): typeof import("./graphql").DeleteCartsByDateTimeDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "mutation PublishProducts($ids: [ID]) {\n  publishManyProductsConnection(where: {id_in: $ids}, to: PUBLISHED, first: 100) {\n    edges {\n      node {\n        ...ProductSummary\n      }\n    }\n  }\n}",
+): typeof import("./graphql").PublishProductsDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
