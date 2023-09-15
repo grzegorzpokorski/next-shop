@@ -36,8 +36,8 @@ const documents = {
     types.DeleteCartsByDateTimeDocument,
   "mutation UpdateCartItemQuantity($cartId: ID!, $itemId: ID!, $qty: Int!) {\n  update: updateCart(\n    where: {id: $cartId}\n    data: {items: {update: [{CartItem: {where: {id: $itemId}, data: {quantity: $qty}}}]}}\n  ) {\n    ...Cart\n  }\n}":
     types.UpdateCartItemQuantityDocument,
-  "mutation UpdateProductAvailableQuantity($productId: ID!, $quantity: Int!) {\n  updateProduct(where: {id: $productId}, data: {quantityAvailable: $quantity}) {\n    ...ProductSummary\n  }\n}":
-    types.UpdateProductAvailableQuantityDocument,
+  "mutation UpdateProductById($id: ID!, $data: ProductUpdateInput!) {\n  updateProduct(where: {id: $id}, data: $data) {\n    ...ProductSummary\n  }\n}":
+    types.UpdateProductByIdDocument,
   "query GetAllProducts($limit: Int!, $skip: Int!, $order: ProductOrderByInput = price_DESC, $searchQuery: String) {\n  products(\n    stage: PUBLISHED\n    locales: pl\n    first: $limit\n    skip: $skip\n    orderBy: $order\n    where: {name_contains: $searchQuery}\n  ) {\n    ...ProductSummary\n  }\n  productsConnection(stage: PUBLISHED, where: {name_contains: $searchQuery}) {\n    aggregate {\n      count\n    }\n  }\n}":
     types.GetAllProductsDocument,
   "query GetCartById($cartId: ID!) {\n  cart(where: {id: $cartId}) {\n    ...Cart\n  }\n}":
@@ -132,8 +132,8 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "mutation UpdateProductAvailableQuantity($productId: ID!, $quantity: Int!) {\n  updateProduct(where: {id: $productId}, data: {quantityAvailable: $quantity}) {\n    ...ProductSummary\n  }\n}",
-): typeof import("./graphql").UpdateProductAvailableQuantityDocument;
+  source: "mutation UpdateProductById($id: ID!, $data: ProductUpdateInput!) {\n  updateProduct(where: {id: $id}, data: $data) {\n    ...ProductSummary\n  }\n}",
+): typeof import("./graphql").UpdateProductByIdDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

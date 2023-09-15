@@ -1,21 +1,19 @@
 import { fetcher } from "@/lib/fetcher";
-import { UpdateProductAvailableQuantityDocument } from "@/lib/generated/graphql";
+import type { ProductUpdateInput } from "@/lib/generated/graphql";
+import { UpdateProductByIdDocument } from "@/lib/generated/graphql";
 import { reshapeProductWithSummary } from "@/lib/mappers";
 
 type Args = {
   productId: string;
-  quantity: number;
+  data: ProductUpdateInput;
 };
 
-export const updateProdcutAvailableQuantity = async ({
-  productId,
-  quantity,
-}: Args) => {
+export const updateProdcutById = async ({ productId, data }: Args) => {
   const result = await fetcher({
-    query: UpdateProductAvailableQuantityDocument,
+    query: UpdateProductByIdDocument,
     variables: {
-      productId,
-      quantity,
+      id: productId,
+      data,
     },
     cache: "no-store",
   });

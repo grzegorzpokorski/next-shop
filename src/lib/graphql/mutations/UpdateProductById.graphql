@@ -1,0 +1,5 @@
+mutation UpdateProductById($id: ID!, $data: ProductUpdateInput!) {
+  updateProduct(where: { id: $id }, data: $data) {
+    ...ProductSummary
+  }
+}

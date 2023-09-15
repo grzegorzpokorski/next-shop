@@ -6962,12 +6962,12 @@ export type UpdateCartItemQuantityMutation = {
   } | null;
 };
 
-export type UpdateProductAvailableQuantityMutationVariables = Exact<{
-  productId: Scalars["ID"]["input"];
-  quantity: Scalars["Int"]["input"];
+export type UpdateProductByIdMutationVariables = Exact<{
+  id: Scalars["ID"]["input"];
+  data: ProductUpdateInput;
 }>;
 
-export type UpdateProductAvailableQuantityMutation = {
+export type UpdateProductByIdMutation = {
   updateProduct?: {
     id: string;
     name: string;
@@ -7757,9 +7757,9 @@ fragment ProductSummary on Product {
   UpdateCartItemQuantityMutation,
   UpdateCartItemQuantityMutationVariables
 >;
-export const UpdateProductAvailableQuantityDocument = new TypedDocumentString(`
-    mutation UpdateProductAvailableQuantity($productId: ID!, $quantity: Int!) {
-  updateProduct(where: {id: $productId}, data: {quantityAvailable: $quantity}) {
+export const UpdateProductByIdDocument = new TypedDocumentString(`
+    mutation UpdateProductById($id: ID!, $data: ProductUpdateInput!) {
+  updateProduct(where: {id: $id}, data: $data) {
     ...ProductSummary
   }
 }
@@ -7796,8 +7796,8 @@ fragment ProductSummary on Product {
   updatedAt
   createdAt
 }`) as unknown as TypedDocumentString<
-  UpdateProductAvailableQuantityMutation,
-  UpdateProductAvailableQuantityMutationVariables
+  UpdateProductByIdMutation,
+  UpdateProductByIdMutationVariables
 >;
 export const GetAllProductsDocument = new TypedDocumentString(`
     query GetAllProducts($limit: Int!, $skip: Int!, $order: ProductOrderByInput = price_DESC, $searchQuery: String) {

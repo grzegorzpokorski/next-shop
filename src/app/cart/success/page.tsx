@@ -5,7 +5,7 @@ import { DeteteCartCookieOnClient } from "./DeteteCartCookieOnClient";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { deleteCartById } from "@/lib/queries/deleteCartById";
-import { updateProdcutAvailableQuantity } from "@/lib/queries/updateProductAvailableQuantity";
+import { updateProdcutById } from "@/lib/queries/updateProductById";
 import { TAGS } from "@/lib/constants";
 
 export default async function Page() {
@@ -21,18 +21,21 @@ export default async function Page() {
 
   if (cart.items) {
     try {
-      const result = await Promise.all(
+      const updatedProducts = await Promise.all(
         cart.items.flatMap((item) => {
           return item.product
-            ? updateProdcutAvailableQuantity({
+            ? updateProdcutById({
                 productId: item.product.id,
-                quantity: item.product.quantityAvailable - item.quantity,
+                data: {
+                  quantityAvailable:
+                    item.product.quantityAvailable - item.quantity,
+                },
               })
             : [];
         }),
       );
 
-      if (!result) throw new Error();
+      if (!updatedProducts) throw new Error();
 
       revalidateTag(TAGS.cart);
       revalidateTag(TAGS.products);
