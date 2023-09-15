@@ -9,12 +9,6 @@ import { updateProdcutAvailableQuantity } from "@/lib/queries/updateProductAvail
 import { TAGS } from "@/lib/constants";
 
 export default async function Page() {
-  // TODO:
-  // display order summary
-  // decrease available items
-  // remove cart from db
-  // destroy cart stored in cookie
-
   const cookieStore = cookies();
   const cookieWithCartId = cookieStore.get("cartId");
   const cartId = cookieWithCartId?.value;
