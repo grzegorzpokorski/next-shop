@@ -55,8 +55,8 @@ export async function POST(request: NextRequest) {
       phone_number_collection: {
         enabled: true,
       },
-      success_url: `${host}/cart/success`,
-      cancel_url: `${host}/cart/canceled`,
+      success_url: `${host}/cart/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${host}/cart/canceled?session_id={CHECKOUT_SESSION_ID}`,
     });
 
     if (!session || !session.url) return new Response("", { status: 500 });
