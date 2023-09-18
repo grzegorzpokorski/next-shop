@@ -4,7 +4,11 @@ import { Button } from "@/components/ui/Button/Button";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
 
-export default function Error({ reset }: { reset: () => void }) {
+type Props = {
+  reset: () => void;
+};
+
+export default function Error({ reset }: Props) {
   return (
     <Container as="section" aria-labelledby="title">
       <div className="mx-auto my-4 flex max-w-xl flex-col gap-4 rounded border bg-white p-8 dark:bg-black md:p-12">
