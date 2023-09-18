@@ -1,12 +1,10 @@
 import { FaCheckCircle } from "react-icons/fa";
 import { cookies } from "next/headers";
-import { revalidateTag } from "next/cache";
 import { DeteteCartCookieOnClient } from "./DeteteCartCookieOnClient";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { deleteCartById } from "@/lib/queries/deleteCartById";
 import { updateProdcutById } from "@/lib/queries/updateProductById";
-import { TAGS } from "@/lib/constants";
 import { publishProducts } from "@/lib/queries/publishProducts";
 
 export default async function Page() {
@@ -14,11 +12,10 @@ export default async function Page() {
   const cookieWithCartId = cookieStore.get("cartId");
   const cartId = cookieWithCartId?.value;
 
-  if (!cartId) throw new Error();
+  if (!cartId) throw new Error("There is no cartId provided.");
 
   const cart = await deleteCartById({ id: cartId });
-
-  if (!cart) throw new Error();
+  if (!cart) throw new Error("Invalid cartId provided.");
 
   if (cart.items) {
     try {
@@ -46,11 +43,8 @@ export default async function Page() {
       });
 
       if (!publishedProducts) throw new Error();
-
-      revalidateTag(TAGS.cart);
-      revalidateTag(TAGS.products);
     } catch (e) {
-      throw new Error();
+      console.log(e);
     }
   }
 
