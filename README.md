@@ -38,7 +38,6 @@ This repository contains the source code of the website showcasing a simple e-co
 ## To do:
 
 - Restore intercepted & parallel cart when Next.js team fix [bugs](https://github.com/vercel/next.js/issues/52591) related to that kind of routes and server actions, etc. OR: Rebuild cart in intercepted & parallel route to only display content of the cart and omit management functionality.
-- Integrate with Stripe payment provider.
 - Refactor project architecture.
 - Add units tests.
 - Add stories to Storybook.
