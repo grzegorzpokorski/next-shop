@@ -52,7 +52,7 @@ export const CartSummary = ({
         method="POST"
       >
         <PlaceOrderButton invalidProductsAmount={invalidProductsAmount} />
-        <Button asChild variant="outline" className="lg:order-1">
+        <Button asChild variant="outline" className="@md:order-1">
           {modal ? (
             <a href="/cart">Edytuj koszyk</a>
           ) : (
