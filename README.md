@@ -16,6 +16,8 @@ This repository contains the source code of the website showcasing a simple e-co
 - The use of HTTP streaming (Suspense) that enables users to interact with the page while other parts of the web page are being downloaded from the server in the background.
 - To execute mutations on database used server actions which simplify whole process and does not require special endpoints to operate.
 - Fully type-safe queries thanks to [GraphQL Code Generator](https://the-guild.dev/graphql/codegen).
+- Automatically remove expired carts from database using Vercel cron.
+- Integration with stripe payment provider.
 
 ## Performance results 📈
 
@@ -40,5 +42,4 @@ This repository contains the source code of the website showcasing a simple e-co
 - Restore intercepted & parallel cart when Next.js team fix [bugs](https://github.com/vercel/next.js/issues/52591) related to that kind of routes and server actions, etc. OR: Rebuild cart in intercepted & parallel route to only display content of the cart and omit management functionality.
 - Refactor project architecture.
 - Add units tests.
-- Add stories to Storybook.
 - Create E2E tests in Playwright.
