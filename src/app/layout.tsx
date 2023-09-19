@@ -50,7 +50,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pl" suppressHydrationWarning className={`${inter.variable}`}>
-      <body className="bg-neutral-100 dark:bg-neutral-900 min-h-screen flex flex-col">
+      <body className="bg-neutral-100 dark:bg-neutral-900 min-h-[100dvh] flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <SkipLink />
           <Header />
