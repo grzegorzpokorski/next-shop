@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { twMerge } from "tailwind-merge";
-import { FaCheckCircle } from "react-icons/fa";
-import { FaCircleXmark } from "react-icons/fa6";
 import { ProductsList } from "@/components/blocks/ProductsList/ProductsList";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
@@ -10,9 +8,10 @@ import { formatPrice } from "@/utils/formatPrice";
 import { badgeVariants } from "@/components/ui/Badge/Badge";
 import { Gallery } from "@/components/blocks/Gallery/Gallery";
 import { AddToCart } from "@/components/layout/Cart/AddToCart/AddToCart";
-import type { ProductWithDetails, ProductWithSummary } from "@/lib/types";
-import { getCartById } from "@/lib/queries/getCartById";
 import { Button } from "@/components/ui/Button/Button";
+import { StockAvailabilityIndicator } from "@/components/blocks/StockAvailabilityIndicator/StockAvailabilityIndicator";
+import { getCartById } from "@/lib/queries/getCartById";
+import type { ProductWithDetails, ProductWithSummary } from "@/lib/types";
 
 type Props = {
   product: ProductWithDetails;
@@ -81,17 +80,9 @@ export const ProductPageTemplate = async ({
               className="prose prose-neutral dark:prose-invert max-w-none"
               dangerouslySetInnerHTML={{ __html: product.description.html }}
             />
-            {product.quantityAvailable > 0 ? (
-              <p className="flex gap-1.5 items-center font-medium text-green-500">
-                <FaCheckCircle aria-hidden />
-                <span className="text-sm">towar na stanie</span>
-              </p>
-            ) : (
-              <p className="flex gap-1.5 items-center font-medium text-red-500">
-                <FaCircleXmark aria-hidden />
-                <span className="text-sm">towar niedostępny</span>
-              </p>
-            )}
+            <StockAvailabilityIndicator
+              available={product.quantityAvailable > 0}
+            />
             {blockAddToCart ? (
               <Button variant="indigo" size="lg" asChild>
                 <Link href="/cart">Edytuj ilość produktu w koszyku</Link>
