@@ -53,7 +53,7 @@ export const QuantityChangerForm = ({
             });
           }
         }}
-        aria-disabled={optimisticQuantity === maxQuantity}
+        aria-disabled={optimisticQuantity >= maxQuantity}
       >
         <span className="sr-only">zwiększ ilość</span>
         <FaPlus aria-hidden />

@@ -17,7 +17,12 @@ export default async function Page() {
   }
 
   const cart = await getCartById({ id: cartId });
+
   if (!cart) return <EmptyCart />;
+
+  const invalidProductsAmount = cart.items.some(
+    (item) => item.quantity > (item.product?.quantityAvailable ?? 0),
+  );
 
   return (
     <CartModal>
@@ -40,6 +45,7 @@ export default async function Page() {
             total={{ amount: cart.totalValue, currency: "PLN" }}
             stickToTheBottom
             modal
+            invalidProductsAmount={invalidProductsAmount}
           />
         )}
       </div>

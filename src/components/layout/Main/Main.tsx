@@ -5,5 +5,9 @@ type Props = {
 };
 
 export const Main = ({ children }: Props) => {
-  return <main id="main">{children}</main>;
+  return (
+    <main id="main" className="flex-grow">
+      {children}
+    </main>
+  );
 };

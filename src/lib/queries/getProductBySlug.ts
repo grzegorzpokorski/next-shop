@@ -11,7 +11,6 @@ export const getProductBySlug = async ({ slug }: Args) => {
   const result = await fetcher({
     query: GetProductBySlugDocument,
     variables: { slug },
-    cache: "force-cache",
     tags: [TAGS.products],
   });
 

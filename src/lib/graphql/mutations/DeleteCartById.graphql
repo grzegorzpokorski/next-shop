@@ -1,0 +1,5 @@
+mutation DeleteCartById($id: ID!) {
+  deleteCart(where: { id: $id }) {
+    ...Cart
+  }
+}

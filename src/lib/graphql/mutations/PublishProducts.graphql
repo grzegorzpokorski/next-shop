@@ -1,0 +1,13 @@
+mutation PublishProducts($ids: [ID]) {
+  publishManyProductsConnection(
+    where: { id_in: $ids }
+    to: PUBLISHED
+    first: 100
+  ) {
+    edges {
+      node {
+        ...ProductSummary
+      }
+    }
+  }
+}

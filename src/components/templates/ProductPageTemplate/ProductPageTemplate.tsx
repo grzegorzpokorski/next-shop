@@ -51,12 +51,12 @@ export const ProductPageTemplate = async ({
             dangerouslySetInnerHTML={{ __html: product.description.html }}
           />
           {product.quantityAvailable > 0 ? (
-            <p className="flex gap-1.5 items-center text-green-500">
+            <p className="flex gap-1.5 items-center font-medium text-green-500">
               <FaCheckCircle aria-hidden />
               <span className="text-sm">towar na stanie</span>
             </p>
           ) : (
-            <p className="flex gap-1.5 items-center text-red-500">
+            <p className="flex gap-1.5 items-center font-medium text-red-500">
               <FaCircleXmark aria-hidden />
               <span className="text-sm">towar niedostępny</span>
             </p>

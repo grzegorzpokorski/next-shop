@@ -1,4 +1,5 @@
 import { twMerge } from "tailwind-merge";
+import { PlaceOrderButton } from "./PlaceOrderButton";
 import { Button } from "@/components/ui/Button/Button";
 import { formatPrice } from "@/utils/formatPrice";
 import { Skeleton } from "@/components/ui/Skeleton/Skeleton";
@@ -10,9 +11,15 @@ type Props = {
   };
   stickToTheBottom?: boolean;
   modal?: boolean;
+  invalidProductsAmount: boolean;
 };
 
-export const CartSummary = ({ total, stickToTheBottom, modal }: Props) => {
+export const CartSummary = ({
+  total,
+  stickToTheBottom,
+  modal,
+  invalidProductsAmount,
+}: Props) => {
   return (
     <div
       className={twMerge(
@@ -30,13 +37,21 @@ export const CartSummary = ({ total, stickToTheBottom, modal }: Props) => {
           })}
         </p>
       </div>
+      {invalidProductsAmount && (
+        <p className="text-red-500 text-xs mt-1">
+          Nieprawidłowa ilość produktów. Sprawdź, czy produkty są dostępne,
+          jeśli nie zmienjsz ich ilość lub usuń z koszyka.
+        </p>
+      )}
       <p className="text-primary/80 text-xs mt-1">
         Koszty dostawy zostaną obliczone w kolejnym kroku.
       </p>
-      <div className="mt-6 grid @sm:grid-cols-1 @md:grid-cols-2 gap-2 text-center">
-        <Button variant="indigo" className="lg:order-2">
-          Złóż zamówienie
-        </Button>
+      <form
+        className="mt-6 grid @sm:grid-cols-1 @md:grid-cols-2 gap-2 text-center"
+        action="/api/checkout"
+        method="POST"
+      >
+        <PlaceOrderButton invalidProductsAmount={invalidProductsAmount} />
         <Button asChild variant="outline" className="lg:order-1">
           {modal ? (
             <a href="/cart">Edytuj koszyk</a>
@@ -44,7 +59,7 @@ export const CartSummary = ({ total, stickToTheBottom, modal }: Props) => {
             <a href="/products">Kontynuuj zakupy</a>
           )}
         </Button>
-      </div>
+      </form>
     </div>
   );
 };

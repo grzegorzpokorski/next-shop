@@ -38,6 +38,10 @@ export default async function Page() {
   const cart = await getCartById({ id: cartId });
   if (!cart || cart.items.length === 0) return <Empty />;
 
+  const invalidProductsAmount = cart.items.some(
+    (item) => item.quantity > (item.product?.quantityAvailable ?? 0),
+  );
+
   return (
     <Container as="div">
       <header
@@ -57,7 +61,10 @@ export default async function Page() {
         </Heading>
         <div className="bg-white dark:bg-black rounded-t">
           <CartItemsTemplate items={cart.items} />
-          <CartSummary total={{ amount: cart.totalValue, currency: "PLN" }} />
+          <CartSummary
+            total={{ amount: cart.totalValue, currency: "PLN" }}
+            invalidProductsAmount={invalidProductsAmount}
+          />
         </div>
       </section>
     </Container>

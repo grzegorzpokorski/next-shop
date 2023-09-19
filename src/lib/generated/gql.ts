@@ -28,12 +28,18 @@ const documents = {
     types.AddItemToCartDocument,
   "mutation CreateEmptyCart {\n  createCart(data: {items: {}}) {\n    ...Cart\n  }\n}":
     types.CreateEmptyCartDocument,
+  "mutation DeleteCartById($id: ID!) {\n  deleteCart(where: {id: $id}) {\n    ...Cart\n  }\n}":
+    types.DeleteCartByIdDocument,
   "mutation DeteteCartItem($cartId: ID!, $itemId: ID!) {\n  updateCart(\n    where: {id: $cartId}\n    data: {items: {delete: {CartItem: {id: $itemId}}}}\n  ) {\n    ...Cart\n  }\n}":
     types.DeteteCartItemDocument,
   "mutation DeleteCartsByDateTime($boundaryDate: DateTime!) {\n  deleteManyCarts(where: {updatedAt_lt: $boundaryDate}) {\n    count\n  }\n}":
     types.DeleteCartsByDateTimeDocument,
+  "mutation PublishProducts($ids: [ID]) {\n  publishManyProductsConnection(where: {id_in: $ids}, to: PUBLISHED, first: 100) {\n    edges {\n      node {\n        ...ProductSummary\n      }\n    }\n  }\n}":
+    types.PublishProductsDocument,
   "mutation UpdateCartItemQuantity($cartId: ID!, $itemId: ID!, $qty: Int!) {\n  update: updateCart(\n    where: {id: $cartId}\n    data: {items: {update: [{CartItem: {where: {id: $itemId}, data: {quantity: $qty}}}]}}\n  ) {\n    ...Cart\n  }\n}":
     types.UpdateCartItemQuantityDocument,
+  "mutation UpdateProductById($id: ID!, $data: ProductUpdateInput!) {\n  updateProduct(where: {id: $id}, data: $data) {\n    ...ProductSummary\n  }\n}":
+    types.UpdateProductByIdDocument,
   "query GetAllProducts($limit: Int!, $skip: Int!, $order: ProductOrderByInput = price_DESC, $searchQuery: String) {\n  products(\n    stage: PUBLISHED\n    locales: pl\n    first: $limit\n    skip: $skip\n    orderBy: $order\n    where: {name_contains: $searchQuery}\n  ) {\n    ...ProductSummary\n  }\n  productsConnection(stage: PUBLISHED, where: {name_contains: $searchQuery}) {\n    aggregate {\n      count\n    }\n  }\n}":
     types.GetAllProductsDocument,
   "query GetCartById($cartId: ID!) {\n  cart(where: {id: $cartId}) {\n    ...Cart\n  }\n}":
@@ -104,6 +110,12 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
+  source: "mutation DeleteCartById($id: ID!) {\n  deleteCart(where: {id: $id}) {\n    ...Cart\n  }\n}",
+): typeof import("./graphql").DeleteCartByIdDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
   source: "mutation DeteteCartItem($cartId: ID!, $itemId: ID!) {\n  updateCart(\n    where: {id: $cartId}\n    data: {items: {delete: {CartItem: {id: $itemId}}}}\n  ) {\n    ...Cart\n  }\n}",
 ): typeof import("./graphql").DeteteCartItemDocument;
 /**
@@ -116,8 +128,20 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
+  source: "mutation PublishProducts($ids: [ID]) {\n  publishManyProductsConnection(where: {id_in: $ids}, to: PUBLISHED, first: 100) {\n    edges {\n      node {\n        ...ProductSummary\n      }\n    }\n  }\n}",
+): typeof import("./graphql").PublishProductsDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
   source: "mutation UpdateCartItemQuantity($cartId: ID!, $itemId: ID!, $qty: Int!) {\n  update: updateCart(\n    where: {id: $cartId}\n    data: {items: {update: [{CartItem: {where: {id: $itemId}, data: {quantity: $qty}}}]}}\n  ) {\n    ...Cart\n  }\n}",
 ): typeof import("./graphql").UpdateCartItemQuantityDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "mutation UpdateProductById($id: ID!, $data: ProductUpdateInput!) {\n  updateProduct(where: {id: $id}, data: $data) {\n    ...ProductSummary\n  }\n}",
+): typeof import("./graphql").UpdateProductByIdDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
