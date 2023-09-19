@@ -29,7 +29,7 @@ export const AddToCart = ({ available, productId }: Props) => {
         className={twMerge("mr-2", isPending && "motion-safe:animate-spin")}
         aria-hidden
       />
-      {isPending ? "Dodawanie do koszyka" : "Dodaj do koszyka"}
+      Dodaj do koszyka
     </Button>
   );
 };
