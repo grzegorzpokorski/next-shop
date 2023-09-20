@@ -35,7 +35,7 @@ export function generateMetadata({
   }
 
   return {
-    title: `Oferta: strona ${page}`,
+    title: `Oferta: strona ${currentPage}`,
     alternates: {
       canonical: `/products/${currentPage}`,
     },
