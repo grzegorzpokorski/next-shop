@@ -1,19 +1,29 @@
 "use client";
 
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
+import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
 import { twMerge } from "tailwind-merge";
 import { Button } from "@/components/ui/Button/Button";
 import { addNewItemToCart } from "@/lib/actions";
 
 type Props = {
-  available: boolean;
+  availableQuantity: number;
   productId: string;
 };
 
-export const AddToCart = ({ available, productId }: Props) => {
+export const AddToCart = ({ availableQuantity, productId }: Props) => {
   const [isPending, startTransition] = useTransition();
-  const disabled = !available || isPending;
+  const [block, setBlock] = useState(!Boolean(availableQuantity));
+  const disabled = !Boolean(availableQuantity) || isPending;
+
+  if (block) {
+    return (
+      <Button variant="indigo" size="lg" asChild>
+        <Link href="/cart">Edytuj ilość produktu w koszyku</Link>
+      </Button>
+    );
+  }
 
   return (
     <Button
@@ -21,7 +31,12 @@ export const AddToCart = ({ available, productId }: Props) => {
       size="lg"
       onClick={() => {
         if (disabled) return;
-        startTransition(() => addNewItemToCart(productId));
+        startTransition(async () => {
+          const currentItemQuantityInCart = await addNewItemToCart(productId);
+          if (currentItemQuantityInCart) {
+            setBlock(currentItemQuantityInCart >= availableQuantity);
+          }
+        });
       }}
       aria-disabled={disabled}
     >

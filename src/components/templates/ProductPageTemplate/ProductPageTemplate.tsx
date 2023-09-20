@@ -90,7 +90,7 @@ export const ProductPageTemplate = async ({
             ) : (
               <AddToCart
                 productId={product.id}
-                available={Boolean(product.quantityAvailable)}
+                availableQuantity={product.quantityAvailable}
               />
             )}
           </div>

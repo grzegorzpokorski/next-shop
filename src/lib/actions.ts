@@ -72,7 +72,9 @@ export const addNewItemToCart = async (productId: string) => {
       revalidateTag(TAGS.cart);
       refreshCookie();
     }
-    return;
+    return updatedCart?.items.filter(
+      (item) => item.product && item.product.id === productId,
+    )[0].quantity;
   }
 
   const updatedCart = await addItemToCart({
