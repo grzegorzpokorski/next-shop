@@ -6,7 +6,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "@/utils/cn";
 
 const linkVariants = cva(
-  "flex flex-row transition-colors motion-reduce:transition-none",
+  "inline-flex transition-colors motion-reduce:transition-none",
   {
     variants: {
       variant: {
