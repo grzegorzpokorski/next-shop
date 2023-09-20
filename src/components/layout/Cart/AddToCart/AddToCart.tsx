@@ -17,6 +17,20 @@ export const AddToCart = ({ availableQuantity, productId }: Props) => {
   const [block, setBlock] = useState(!Boolean(availableQuantity));
   const disabled = !Boolean(availableQuantity) || isPending;
 
+  const addToCart = () => {
+    if (disabled) return;
+
+    startTransition(async () => {
+      const currentItemQuantityInCart = await addNewItemToCart(productId);
+      if (
+        currentItemQuantityInCart &&
+        currentItemQuantityInCart >= availableQuantity
+      ) {
+        setBlock(true);
+      }
+    });
+  };
+
   if (block) {
     return (
       <Button variant="indigo" size="lg" asChild>
@@ -29,15 +43,7 @@ export const AddToCart = ({ availableQuantity, productId }: Props) => {
     <Button
       variant="indigo"
       size="lg"
-      onClick={() => {
-        if (disabled) return;
-        startTransition(async () => {
-          const currentItemQuantityInCart = await addNewItemToCart(productId);
-          if (currentItemQuantityInCart) {
-            setBlock(currentItemQuantityInCart >= availableQuantity);
-          }
-        });
-      }}
+      onClick={addToCart}
       aria-disabled={disabled}
     >
       <FaPlus

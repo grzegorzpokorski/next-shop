@@ -9,80 +9,112 @@ import { createEmptyCart } from "@/lib/queries/createEmptyCart";
 import { getCartById } from "@/lib/queries/getCartById";
 import { addItemToCart } from "@/lib/queries/addItemToCart";
 import { env } from "@/lib/env.mjs";
+import type { Cart, CartItem } from "@/lib/types";
 
 const expirationTimeInSeconds = 60 * 60 * 24 * env.COOKIE_MAX_AGE_IN_DAYS;
 
-const getCart = async () => {
+const getCartIdFromCookie = () => {
   const cookieStore = cookies();
   const cookieWithCartId = cookieStore.get("cartId");
-  const cartId = cookieWithCartId?.value;
+  return cookieWithCartId?.value;
+};
 
-  const setNewCart = async () => {
-    const cart = await createEmptyCart();
-    if (cart) {
-      cookieStore.set("cartId", cart.id, { maxAge: expirationTimeInSeconds });
-      return cart;
-    }
-    throw new Error("Cannot set new cart.");
-  };
+const setCartIdInCookie = (cartId: string) => {
+  const cookieStore = cookies();
+  cookieStore.set("cartId", cartId, { maxAge: expirationTimeInSeconds });
+};
 
-  if (cartId) {
-    const currentCart = await getCartById({ id: cartId });
-    if (currentCart) return currentCart;
-    return await setNewCart();
+const createNewCart = async () => {
+  const cart = await createEmptyCart();
+
+  if (cart) {
+    setCartIdInCookie(cart.id);
+    return cart;
   }
 
-  return await setNewCart();
+  throw new Error("Cannot set new cart.");
+};
+
+const getCart = async () => {
+  const cartId = getCartIdFromCookie();
+
+  if (!cartId) return await createNewCart();
+
+  const currentCart = await getCartById({ id: cartId });
+  if (currentCart) return currentCart;
+
+  return await createNewCart();
 };
 
 const refreshCookie = () => {
-  const cookieStore = cookies();
-  const cookieWithCartId = cookieStore.get("cartId");
-  const cartId = cookieWithCartId?.value;
+  const cartId = getCartIdFromCookie();
 
   if (cartId) {
+    const cookieStore = cookies();
     cookieStore.set("cartId", cartId, { maxAge: expirationTimeInSeconds });
   }
+};
+
+export const increaseProductQuantityInExistingCartItem = async ({
+  cart,
+  existingCartItem,
+  productId,
+}: {
+  cart: Cart;
+  existingCartItem: CartItem;
+  productId: string;
+}) => {
+  if (
+    existingCartItem.quantity === existingCartItem.product?.quantityAvailable
+  ) {
+    return existingCartItem.quantity;
+  }
+
+  const updatedCart = await updateCartItemQuantity({
+    cartId: cart.id,
+    itemId: existingCartItem.id,
+    qty: existingCartItem.quantity + 1,
+  });
+
+  if (updatedCart) {
+    revalidateTag(TAGS.cart);
+    refreshCookie();
+  }
+
+  const updatedCartItem = updatedCart?.items.find(
+    (item) => item.product && item.product.id === productId,
+  );
+
+  if (updatedCartItem) {
+    return updatedCartItem.quantity;
+  }
+
+  throw new Error("Can not return updated cart item.");
 };
 
 export const addNewItemToCart = async (productId: string) => {
   const cart = await getCart();
   if (!cart) throw new Error(`Cannot add product to cart.`);
 
-  const currentlyExistedCartItemWithGivenProduct = cart.items.filter(
+  const currentlyExistedCartItemWithGivenProduct = cart.items.find(
     (item) => item.product && item.product.id === productId,
   );
 
-  if (currentlyExistedCartItemWithGivenProduct.length > 0) {
-    if (
-      currentlyExistedCartItemWithGivenProduct[0].quantity ===
-      currentlyExistedCartItemWithGivenProduct[0].product?.quantityAvailable
-    ) {
-      return;
-    }
-
-    const { id: itemId, quantity } =
-      currentlyExistedCartItemWithGivenProduct[0];
-    const updatedCart = await updateCartItemQuantity({
-      cartId: cart.id,
-      itemId,
-      qty: quantity + 1,
+  if (currentlyExistedCartItemWithGivenProduct) {
+    return increaseProductQuantityInExistingCartItem({
+      cart,
+      existingCartItem: currentlyExistedCartItemWithGivenProduct,
+      productId,
     });
-    if (updatedCart) {
-      revalidateTag(TAGS.cart);
-      refreshCookie();
-    }
-    return updatedCart?.items.filter(
-      (item) => item.product && item.product.id === productId,
-    )[0].quantity;
   }
 
-  const updatedCart = await addItemToCart({
+  const updatedCartWithNewlyAddedItem = await addItemToCart({
     cartId: cart.id,
     productId: productId,
     productQty: 1,
   });
-  if (updatedCart) {
+
+  if (updatedCartWithNewlyAddedItem) {
     revalidateTag(TAGS.cart);
     refreshCookie();
   }
@@ -93,6 +125,7 @@ export const removeItemFromCart = async (itemId: string) => {
   if (!cart) throw new Error(`Cannot remove item from cart.`);
 
   const updatedCart = await deleteCartItem({ cartId: cart.id, itemId });
+
   if (updatedCart) {
     revalidateTag(TAGS.cart);
     refreshCookie();
@@ -114,6 +147,7 @@ export const updateItemQuantity = async ({
     itemId,
     qty: quantity,
   });
+
   if (updatedCart) {
     revalidateTag(TAGS.cart);
     refreshCookie();
