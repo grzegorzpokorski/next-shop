@@ -10,15 +10,25 @@ import { addNewItemToCart } from "@/lib/actions";
 type Props = {
   availableQuantity: number;
   productId: string;
+  currentQuantityInCart: number;
 };
 
-export const AddToCart = ({ availableQuantity, productId }: Props) => {
+export const AddToCart = ({
+  availableQuantity,
+  productId,
+  currentQuantityInCart,
+}: Props) => {
   const [isPending, startTransition] = useTransition();
-  const [block, setBlock] = useState(!Boolean(availableQuantity));
-  const disabled = !Boolean(availableQuantity) || isPending;
+  const [visibleButtonToCart, setVisibleButtonToCart] = useState(
+    currentQuantityInCart === availableQuantity && availableQuantity > 0,
+  );
+  const isDisabled =
+    availableQuantity === 0 ||
+    isPending ||
+    currentQuantityInCart >= availableQuantity;
 
   const addToCart = () => {
-    if (disabled) return;
+    if (isDisabled) return;
 
     startTransition(async () => {
       const currentItemQuantityInCart = await addNewItemToCart(productId);
@@ -26,12 +36,12 @@ export const AddToCart = ({ availableQuantity, productId }: Props) => {
         currentItemQuantityInCart &&
         currentItemQuantityInCart >= availableQuantity
       ) {
-        setBlock(true);
+        setVisibleButtonToCart(true);
       }
     });
   };
 
-  if (block) {
+  if (visibleButtonToCart) {
     return (
       <Button variant="indigo" size="lg" asChild>
         <Link href="/cart">Edytuj ilość produktu w koszyku</Link>
@@ -44,7 +54,7 @@ export const AddToCart = ({ availableQuantity, productId }: Props) => {
       variant="indigo"
       size="lg"
       onClick={addToCart}
-      aria-disabled={disabled}
+      aria-disabled={isDisabled}
     >
       <FaPlus
         className={twMerge("mr-2", isPending && "motion-safe:animate-spin")}

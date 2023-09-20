@@ -8,7 +8,6 @@ import { formatPrice } from "@/utils/formatPrice";
 import { badgeVariants } from "@/components/ui/Badge/Badge";
 import { Gallery } from "@/components/blocks/Gallery/Gallery";
 import { AddToCart } from "@/components/layout/Cart/AddToCart/AddToCart";
-import { Button } from "@/components/ui/Button/Button";
 import { StockAvailabilityIndicator } from "@/components/blocks/StockAvailabilityIndicator/StockAvailabilityIndicator";
 import { getCartById } from "@/lib/queries/getCartById";
 import type { ProductWithDetails, ProductWithSummary } from "@/lib/types";
@@ -25,29 +24,22 @@ export const ProductPageTemplate = async ({
   const cookieStore = cookies();
   const cartId = cookieStore.get("cartId")?.value;
 
-  const checkIfBlockAddToCartButton = async ({
-    cartId,
-    productId,
-  }: {
-    cartId: string;
-    productId: string;
-  }) => {
-    const cart = await getCartById({ id: cartId });
-    if (!cart || cart.items.length < 1) return false;
+  const getQuantityOfProductInCart = async () => {
+    if (!cartId) return 0;
 
-    return cart.items.some(
-      (cartItem) =>
-        cartItem.product?.id === productId &&
-        cartItem.quantity >= cartItem.product.quantityAvailable,
+    const cart = await getCartById({ id: cartId });
+    if (!cart || cart.items.length < 1) return 0;
+
+    const currentProductInCartItem = cart.items.find(
+      (cartItem) => cartItem.product?.id === product.id,
     );
+
+    if (!currentProductInCartItem) return 0;
+
+    return currentProductInCartItem.quantity;
   };
 
-  const blockAddToCart = cartId
-    ? await checkIfBlockAddToCartButton({
-        cartId,
-        productId: product.id,
-      })
-    : false;
+  const currentQuantityInCart = await getQuantityOfProductInCart();
 
   return (
     <div className="flex flex-col gap-8 py-8">
@@ -83,16 +75,11 @@ export const ProductPageTemplate = async ({
             <StockAvailabilityIndicator
               available={product.quantityAvailable > 0}
             />
-            {blockAddToCart ? (
-              <Button variant="indigo" size="lg" asChild>
-                <Link href="/cart">Edytuj ilość produktu w koszyku</Link>
-              </Button>
-            ) : (
-              <AddToCart
-                productId={product.id}
-                availableQuantity={product.quantityAvailable}
-              />
-            )}
+            <AddToCart
+              productId={product.id}
+              availableQuantity={product.quantityAvailable}
+              currentQuantityInCart={currentQuantityInCart}
+            />
           </div>
         </div>
       </Container>
