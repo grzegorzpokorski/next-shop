@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useTransition } from "react";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
 import { twMerge } from "tailwind-merge";
+import { useAddToCart } from "./useAddToCart";
 import { Button } from "@/components/ui/Button/Button";
-import { addNewItemToCart } from "@/lib/actions";
 
 type Props = {
   availableQuantity: number;
@@ -18,28 +17,12 @@ export const AddToCart = ({
   productId,
   currentQuantityInCart,
 }: Props) => {
-  const [isPending, startTransition] = useTransition();
-  const [visibleButtonToCart, setVisibleButtonToCart] = useState(
-    currentQuantityInCart === availableQuantity && availableQuantity > 0,
-  );
-  const isDisabled =
-    availableQuantity === 0 ||
-    isPending ||
-    currentQuantityInCart >= availableQuantity;
-
-  const addToCart = () => {
-    if (isDisabled) return;
-
-    startTransition(async () => {
-      const currentItemQuantityInCart = await addNewItemToCart(productId);
-      if (
-        currentItemQuantityInCart &&
-        currentItemQuantityInCart >= availableQuantity
-      ) {
-        setVisibleButtonToCart(true);
-      }
+  const { visibleButtonToCart, addToCart, isDisabled, isPending } =
+    useAddToCart({
+      availableQuantity,
+      productId,
+      currentQuantityInCart,
     });
-  };
 
   if (visibleButtonToCart) {
     return (

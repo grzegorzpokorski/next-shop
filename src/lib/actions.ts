@@ -58,16 +58,14 @@ const refreshCookie = () => {
 export const increaseProductQuantityInExistingCartItem = async ({
   cart,
   existingCartItem,
-  productId,
 }: {
   cart: Cart;
   existingCartItem: CartItem;
-  productId: string;
 }) => {
   if (
     existingCartItem.quantity === existingCartItem.product?.quantityAvailable
   ) {
-    return existingCartItem.quantity;
+    return cart;
   }
 
   const updatedCart = await updateCartItemQuantity({
@@ -79,14 +77,7 @@ export const increaseProductQuantityInExistingCartItem = async ({
   if (updatedCart) {
     revalidateTag(TAGS.cart);
     refreshCookie();
-  }
-
-  const updatedCartItem = updatedCart?.items.find(
-    (item) => item.product && item.product.id === productId,
-  );
-
-  if (updatedCartItem) {
-    return updatedCartItem.quantity;
+    return updatedCart;
   }
 
   throw new Error("Can not return updated cart item.");
@@ -104,7 +95,6 @@ export const addNewItemToCart = async (productId: string) => {
     return increaseProductQuantityInExistingCartItem({
       cart,
       existingCartItem: currentlyExistedCartItemWithGivenProduct,
-      productId,
     });
   }
 
@@ -117,7 +107,10 @@ export const addNewItemToCart = async (productId: string) => {
   if (updatedCartWithNewlyAddedItem) {
     revalidateTag(TAGS.cart);
     refreshCookie();
+    return updatedCartWithNewlyAddedItem;
   }
+
+  return null;
 };
 
 export const removeItemFromCart = async (itemId: string) => {
