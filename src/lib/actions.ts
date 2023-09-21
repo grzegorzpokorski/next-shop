@@ -50,8 +50,7 @@ const refreshCookie = () => {
   const cartId = getCartIdFromCookie();
 
   if (cartId) {
-    const cookieStore = cookies();
-    cookieStore.set("cartId", cartId, { maxAge: expirationTimeInSeconds });
+    setCartIdInCookie(cartId);
   }
 };
 
