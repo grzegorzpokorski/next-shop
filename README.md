@@ -6,6 +6,10 @@ This repository contains the source code of the website showcasing a simple e-co
 
 [https://next-shop-gp.vercel.app/](https://next-shop-gp.vercel.app/)
 
+## Storybook docs:
+
+[https://next-shop-gp-storybook.vercel.app/](https://next-shop-gp-storybook.vercel.app/)
+
 ## Features
 
 - Shopping cart stored in a database - this enhances the conversion rate and enables the shop owner to analyze users' shopping choices, especially in situations when they abandon their carts.
@@ -46,4 +50,4 @@ This repository contains the source code of the website showcasing a simple e-co
 - Add units tests.
 - Create E2E tests in Playwright.
 - Internationalization.
-- Contact form
+- Contact form.
