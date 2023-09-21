@@ -1,10 +1,8 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { revalidateTag } from "next/cache";
 import { updateCartItemQuantity } from "@/lib/queries/updateCartItemQuantity";
 import { deleteCartItem } from "@/lib/queries/deteteCartItem";
-import { TAGS } from "@/lib/constants";
 import { createEmptyCart } from "@/lib/queries/createEmptyCart";
 import { getCartById } from "@/lib/queries/getCartById";
 import { addItemToCart } from "@/lib/queries/addItemToCart";
@@ -74,7 +72,6 @@ export const increaseProductQuantityInExistingCartItem = async ({
   });
 
   if (updatedCart) {
-    revalidateTag(TAGS.cart);
     refreshCookie();
     return updatedCart;
   }
@@ -104,7 +101,6 @@ export const addNewItemToCart = async (productId: string) => {
   });
 
   if (updatedCartWithNewlyAddedItem) {
-    revalidateTag(TAGS.cart);
     refreshCookie();
     return updatedCartWithNewlyAddedItem;
   }
@@ -119,7 +115,6 @@ export const removeItemFromCart = async (itemId: string) => {
   const updatedCart = await deleteCartItem({ cartId: cart.id, itemId });
 
   if (updatedCart) {
-    revalidateTag(TAGS.cart);
     refreshCookie();
   }
 };
@@ -141,7 +136,6 @@ export const updateItemQuantity = async ({
   });
 
   if (updatedCart) {
-    revalidateTag(TAGS.cart);
     refreshCookie();
   }
 };
