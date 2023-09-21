@@ -1,6 +1,6 @@
 # Next-Shop
 
-This repository contains the source code of the website showcasing a simple e-commerce platform. The project utilizes the latest features of the Next.js framework, including the app router, intercepting and parallel routes, as well as server components. Data is fetched from the Hygraph CMS using GraphQL, with a focus on maximizing the advantages provided by server components.
+This repository contains the source code of the website showcasing a simple e-commerce platform. The project utilizes the latest features of the Next.js framework, including the app router, intercepting and parallel routes, server components as well as server actions. Data is fetched from the Hygraph CMS using GraphQL, with a focus on maximizing the advantages provided by server components.
 
 ## Live 🌐
 
@@ -17,7 +17,7 @@ This repository contains the source code of the website showcasing a simple e-co
 - To execute mutations on database used server actions which simplify whole process and does not require special endpoints to operate.
 - Fully type-safe queries thanks to [GraphQL Code Generator](https://the-guild.dev/graphql/codegen).
 - Automatically remove expired carts from database using Vercel cron.
-- Integration with stripe payment provider.
+- Integration with Stripe payment provider.
 
 ## Performance results 📈
 
