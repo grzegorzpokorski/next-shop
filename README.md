@@ -45,3 +45,5 @@ This repository contains the source code of the website showcasing a simple e-co
 - Refactor project architecture.
 - Add units tests.
 - Create E2E tests in Playwright.
+- Internationalization.
+- Contact form
