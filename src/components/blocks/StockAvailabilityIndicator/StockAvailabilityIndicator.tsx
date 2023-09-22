@@ -8,16 +8,16 @@ type Props = {
 export const StockAvailabilityIndicator = ({ available }: Props) => {
   if (available) {
     return (
-      <p className="flex gap-1.5 items-center font-medium text-green-500">
-        <FaCheckCircle aria-hidden />
+      <p className="flex gap-1.5 items-center font-medium">
+        <FaCheckCircle className="text-green-500" aria-hidden />
         <span className="text-sm">towar na stanie</span>
       </p>
     );
   }
 
   return (
-    <p className="flex gap-1.5 items-center font-medium text-red-500">
-      <FaCircleXmark aria-hidden />
+    <p className="flex gap-1.5 items-center font-medium">
+      <FaCircleXmark className="text-red-500" aria-hidden />
       <span className="text-sm">towar niedostępny</span>
     </p>
   );
