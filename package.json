@@ -62,7 +62,7 @@
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/client-preset": "^4.1.0",
     "@graphql-typed-document-node/core": "^3.2.0",
-    "@playwright/test": "^1.38.0",
+    "@playwright/test": "^1.38.1",
     "@storybook/addon-a11y": "7.4.5",
     "@storybook/addon-essentials": "7.4.5",
     "@storybook/addon-interactions": "7.4.5",
@@ -85,7 +85,7 @@
     "@types/testing-library__jest-dom": "^5.14.9",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
     "@typescript-eslint/parser": "^6.7.2",
-    "@vitejs/plugin-react": "^4.0.4",
+    "@vitejs/plugin-react": "^4.1.0",
     "eslint-config-next": "13.5.3",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-storybook": "^0.6.14",
@@ -97,6 +97,6 @@
     "storybook": "7.4.5",
     "tailwind-merge": "^1.14.0",
     "typescript": "5.2.2",
-    "vitest": "^0.34.4"
+    "vitest": "^0.34.5"
   }
 }
