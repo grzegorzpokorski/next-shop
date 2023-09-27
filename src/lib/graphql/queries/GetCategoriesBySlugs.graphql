@@ -1,0 +1,5 @@
+query GetCategoriesBySlugs($slugs: [String]) {
+  categories(stage: PUBLISHED, first: 100, where: { slug_in: $slugs }) {
+    ...CategoryDetails
+  }
+}

@@ -7156,6 +7156,30 @@ export type GetCategoriesQuery = {
   }>;
 };
 
+export type GetCategoriesBySlugsQueryVariables = Exact<{
+  slugs?: InputMaybe<
+    | Array<InputMaybe<Scalars["String"]["input"]>>
+    | InputMaybe<Scalars["String"]["input"]>
+  >;
+}>;
+
+export type GetCategoriesBySlugsQuery = {
+  categories: Array<{
+    id: string;
+    name: string;
+    slug: string;
+    description?: string | null;
+    thumbnail: {
+      id: string;
+      mimeType?: string | null;
+      url: string;
+      width?: number | null;
+      height?: number | null;
+      fileName: string;
+    };
+  }>;
+};
+
 export type GetCategoryNameBySlugQueryVariables = Exact<{
   categorySlug: Scalars["String"]["input"];
 }>;
@@ -8024,6 +8048,32 @@ fragment ImageDetails on Asset {
 }`) as unknown as TypedDocumentString<
   GetCategoriesQuery,
   GetCategoriesQueryVariables
+>;
+export const GetCategoriesBySlugsDocument = new TypedDocumentString(`
+    query GetCategoriesBySlugs($slugs: [String]) {
+  categories(stage: PUBLISHED, first: 100, where: {slug_in: $slugs}) {
+    ...CategoryDetails
+  }
+}
+    fragment CategoryDetails on Category {
+  id
+  name
+  slug
+  description
+  thumbnail {
+    ...ImageDetails
+  }
+}
+fragment ImageDetails on Asset {
+  id
+  mimeType
+  url(transformation: {document: {output: {format: webp}}})
+  width
+  height
+  fileName
+}`) as unknown as TypedDocumentString<
+  GetCategoriesBySlugsQuery,
+  GetCategoriesBySlugsQueryVariables
 >;
 export const GetCategoryNameBySlugDocument = new TypedDocumentString(`
     query GetCategoryNameBySlug($categorySlug: String!) {

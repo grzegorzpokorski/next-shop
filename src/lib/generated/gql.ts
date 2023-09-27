@@ -46,6 +46,8 @@ const documents = {
     types.GetCartByIdDocument,
   "query GetCategories {\n  categories(stage: PUBLISHED, first: 100) {\n    ...CategoryDetails\n  }\n}":
     types.GetCategoriesDocument,
+  "query GetCategoriesBySlugs($slugs: [String]) {\n  categories(stage: PUBLISHED, first: 100, where: {slug_in: $slugs}) {\n    ...CategoryDetails\n  }\n}":
+    types.GetCategoriesBySlugsDocument,
   "query GetCategoryNameBySlug($categorySlug: String!) {\n  category(stage: PUBLISHED, where: {slug: $categorySlug}) {\n    ...CategoryDetails\n  }\n}":
     types.GetCategoryNameBySlugDocument,
   "query GetPageBySlug($slug: String!) {\n  page(where: {slug: $slug}) {\n    ...Page\n  }\n}":
@@ -160,6 +162,12 @@ export function graphql(
 export function graphql(
   source: "query GetCategories {\n  categories(stage: PUBLISHED, first: 100) {\n    ...CategoryDetails\n  }\n}",
 ): typeof import("./graphql").GetCategoriesDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "query GetCategoriesBySlugs($slugs: [String]) {\n  categories(stage: PUBLISHED, first: 100, where: {slug_in: $slugs}) {\n    ...CategoryDetails\n  }\n}",
+): typeof import("./graphql").GetCategoriesBySlugsDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
