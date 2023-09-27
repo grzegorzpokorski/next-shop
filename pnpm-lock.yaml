@@ -200,7 +200,7 @@ devDependencies:
     specifier: 0.18.2
     version: 0.18.2(graphql@16.8.1)
   husky:
-    specifier: ^8.0.3
+    specifier: 8.0.3
     version: 8.0.3
   jsdom:
     specifier: ^22.1.0
