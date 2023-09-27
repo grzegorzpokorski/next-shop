@@ -51,6 +51,9 @@ export const HeaderMenu = () => {
           <HeaderMenuItem href="/products" onClick={closeMobileMenu}>
             Oferta
           </HeaderMenuItem>
+          <HeaderMenuItem href="/categories" onClick={closeMobileMenu}>
+            Kategorie
+          </HeaderMenuItem>
           <HeaderMenuItem href="/category/klawiatury" onClick={closeMobileMenu}>
             Klawiatury
           </HeaderMenuItem>
