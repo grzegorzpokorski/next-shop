@@ -47,7 +47,7 @@
     "next": "13.5.3",
     "next-mdx-remote": "^4.4.1",
     "next-themes": "^0.2.1",
-    "postcss": "8.4.30",
+    "postcss": "8.4.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-focus-lock": "^2.9.5",
@@ -97,6 +97,6 @@
     "storybook": "7.4.5",
     "tailwind-merge": "^1.14.0",
     "typescript": "5.2.2",
-    "vitest": "^0.34.5"
+    "vitest": "^0.34.6"
   }
 }
