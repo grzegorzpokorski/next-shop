@@ -15,7 +15,7 @@ export const useAddToCart = ({
   currentQuantityInCart,
 }: Args) => {
   const [isPending, startTransition] = useTransition();
-  const [visibleButtonToCart, setVisibleButtonToCart] = useState(
+  const [isVisibleLinkToCart, setIsVisibleLinkToCart] = useState(
     currentQuantityInCart > 0 && availableQuantity > 0,
   );
   const isDisabled = availableQuantity === 0 || isPending;
@@ -28,10 +28,10 @@ export const useAddToCart = ({
         (item) => item.product?.id === productId,
       );
       if (isProductAddedToCart) {
-        setVisibleButtonToCart(true);
+        setIsVisibleLinkToCart(true);
       }
     });
   };
 
-  return { visibleButtonToCart, addToCart, isDisabled, isPending };
+  return { isVisibleLinkToCart, addToCart, isDisabled, isPending };
 };

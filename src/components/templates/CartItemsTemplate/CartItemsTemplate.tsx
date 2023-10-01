@@ -13,7 +13,7 @@ type Props = {
   modal?: boolean;
 };
 
-export const CartItemsTemplate = ({ items, modal }: Props) => {
+export const CartItemsTemplate = ({ items, modal = false }: Props) => {
   return (
     <CartList>
       {items.map(

@@ -15,7 +15,11 @@ export const CartOpener = async () => {
   return <Btn qty={cart.totalQty} />;
 };
 
-const Btn = ({ qty = 0 }: { qty?: number }) => {
+type BtnProps = {
+  qty?: number;
+};
+
+const Btn = ({ qty = 0 }: BtnProps) => {
   return (
     <Button variant="outline" size="icon" asChild className="relative">
       <Link href="/cart">

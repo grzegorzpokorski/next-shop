@@ -20,6 +20,11 @@ export const CartSummary = ({
   modal,
   invalidProductsAmount,
 }: Props) => {
+  const formatedPrice = formatPrice({
+    currency: total.currency,
+    price: total.amount,
+  });
+
   return (
     <div
       className={twMerge(
@@ -30,12 +35,7 @@ export const CartSummary = ({
     >
       <div className="flex justify-between text-base font-medium">
         <p>Razem do zapłaty:</p>
-        <p>
-          {formatPrice({
-            currency: total.currency,
-            price: total.amount,
-          })}
-        </p>
+        <p>{formatedPrice}</p>
       </div>
       {invalidProductsAmount && (
         <p className="text-red-500 text-xs mt-1">

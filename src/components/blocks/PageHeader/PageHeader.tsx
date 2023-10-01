@@ -32,8 +32,12 @@ export const PageHeaderTitle = ({
   );
 };
 
+type PageHeaderDescriptionProps = {
+  children: ReactNode;
+};
+
 export const PageHeaderDescription = ({
   children,
-}: Pick<Props, "children">) => {
+}: PageHeaderDescriptionProps) => {
   return <p>{children}</p>;
 };

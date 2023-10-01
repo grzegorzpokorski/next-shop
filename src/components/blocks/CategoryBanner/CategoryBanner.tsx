@@ -6,16 +6,16 @@ import { Heading } from "@/components/ui/Heading/Heading";
 
 type Props = {
   link: string;
-  thumbnail?: ImageType;
   title: string;
+  thumbnail?: ImageType;
   fullWidth?: boolean;
   priority?: boolean;
 };
 
 export const CategoryBanner = ({
   link,
-  thumbnail,
   title,
+  thumbnail,
   fullWidth,
   priority,
 }: Props) => {

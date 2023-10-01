@@ -17,14 +17,14 @@ export const AddToCart = ({
   productId,
   currentQuantityInCart,
 }: Props) => {
-  const { visibleButtonToCart, addToCart, isDisabled, isPending } =
+  const { isVisibleLinkToCart, addToCart, isDisabled, isPending } =
     useAddToCart({
       availableQuantity,
       productId,
       currentQuantityInCart,
     });
 
-  if (visibleButtonToCart) {
+  if (isVisibleLinkToCart) {
     return (
       <Button variant="indigo" size="lg" asChild>
         <Link href="/cart">Edytuj ilość produktu w koszyku</Link>

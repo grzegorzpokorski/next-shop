@@ -21,16 +21,15 @@ export const ProductsList = ({ products, slider }: ProductsListProps) => {
         )}
         role="list"
       >
-        {products.length > 0 &&
-          products.map((product) => {
-            return (
-              <ProductListItem
-                key={product.name}
-                product={product}
-                slider={slider}
-              />
-            );
-          })}
+        {products.map((product) => {
+          return (
+            <ProductListItem
+              key={product.name}
+              product={product}
+              slider={slider}
+            />
+          );
+        })}
       </ul>
     );
   }

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
-import { twMerge } from "tailwind-merge";
 import { ProductsList } from "@/components/blocks/ProductsList/ProductsList";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
@@ -40,6 +39,10 @@ export const ProductPageTemplate = async ({
   };
 
   const currentQuantityInCart = await getQuantityOfProductInCart();
+  const formatedPrice = formatPrice({
+    price: product.price,
+    currency: product.currency,
+  });
 
   return (
     <div className="flex flex-col gap-8 py-8">
@@ -62,12 +65,7 @@ export const ProductPageTemplate = async ({
                 {product.name}
               </Heading>
             </header>
-            <p className={twMerge("text-2xl font-medium")}>
-              {formatPrice({
-                price: product.price,
-                currency: product.currency,
-              })}
-            </p>
+            <p className="text-2xl font-medium">{formatedPrice}</p>
             <div
               className="prose prose-neutral dark:prose-invert max-w-none"
               dangerouslySetInnerHTML={{ __html: product.description.html }}
