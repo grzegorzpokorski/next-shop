@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
-import { getAllProducts } from "@/lib/queries/getAllProducts";
+import { getAllProducts } from "@/lib/queries/products/getAllProducts";
 import { siteUrl } from "@/lib/constants";
-import { getCategories } from "@/lib/queries/getCategories";
+import { getCategories } from "@/lib/queries/categories/getCategories";
 import { env } from "@/lib/env.mjs";
-import { getProductsByCategorySlug } from "@/lib/queries/getProductsByCategorySlug";
+import { getProductsByCategorySlug } from "@/lib/queries/products/getProductsByCategorySlug";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const routes = [""];

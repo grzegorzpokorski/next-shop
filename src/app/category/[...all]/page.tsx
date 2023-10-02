@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getProductsByCategorySlug } from "@/lib/queries/getProductsByCategorySlug";
+import { getProductsByCategorySlug } from "@/lib/queries/products/getProductsByCategorySlug";
 import { env } from "@/lib/env.mjs";
-import { getCategoryNameBySlug } from "@/lib/queries/getCategoryNameBySlug";
+import { getCategoryNameBySlug } from "@/lib/queries/categories/getCategoryNameBySlug";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { ProductsList } from "@/components/blocks/ProductsList/ProductsList";

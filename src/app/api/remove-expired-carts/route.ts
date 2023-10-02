@@ -1,5 +1,5 @@
 import { env } from "@/lib/env.mjs";
-import { deleteCartsByDateTime } from "@/lib/queries/deleteCartsByDateTime";
+import { deleteCartsByDateTime } from "@/lib/queries/cart/deleteCartsByDateTime";
 
 export async function GET(request: Request) {
   const cronSecret = request.headers.get("Authorization")?.split(" ")[1];

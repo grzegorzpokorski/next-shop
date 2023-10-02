@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next/types";
 import { ContentPageTemplate } from "@/components/templates/ContentPageTemplate/ContentPageTemplate";
-import { getPageBySlug } from "@/lib/queries/getPageBySlug";
+import { getPageBySlug } from "@/lib/queries/pages/getPageBySlug";
 
 export const generateMetadata = async ({
   params: { slug },

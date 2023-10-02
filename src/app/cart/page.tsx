@@ -2,7 +2,7 @@ import type { Metadata } from "next/types";
 import { cookies } from "next/headers";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
-import { getCartById } from "@/lib/queries/getCartById";
+import { getCartById } from "@/lib/queries/cart/getCartById";
 import { CartSummary } from "@/components/layout/Cart/CartSummary/CartSummary";
 import { EmptyCartInfo } from "@/components/layout/Cart/EmptyCartInfo/EmptyCartInfo";
 import { CartItemsTemplate } from "@/components/templates/CartItemsTemplate/CartItemsTemplate";

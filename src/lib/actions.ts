@@ -1,11 +1,11 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { updateCartItemQuantity } from "@/lib/queries/updateCartItemQuantity";
-import { deleteCartItem } from "@/lib/queries/deteteCartItem";
-import { createEmptyCart } from "@/lib/queries/createEmptyCart";
-import { getCartById } from "@/lib/queries/getCartById";
-import { addItemToCart } from "@/lib/queries/addItemToCart";
+import { updateCartItemQuantity } from "@/lib/queries/cart/updateCartItemQuantity";
+import { deleteCartItem } from "@/lib/queries/cart/deteteCartItem";
+import { createEmptyCart } from "@/lib/queries/cart/createEmptyCart";
+import { getCartById } from "@/lib/queries/cart/getCartById";
+import { addItemToCart } from "@/lib/queries/cart/addItemToCart";
 import { env } from "@/lib/env.mjs";
 import type { Cart, CartItem } from "@/lib/types";
 

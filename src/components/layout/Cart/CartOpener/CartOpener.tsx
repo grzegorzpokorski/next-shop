@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FaShoppingCart } from "react-icons/fa";
 import { cookies } from "next/headers";
 import { Button } from "@/components/ui/Button/Button";
-import { getCartById } from "@/lib/queries/getCartById";
+import { getCartById } from "@/lib/queries/cart/getCartById";
 
 export const CartOpener = async () => {
   const cookieStore = cookies();

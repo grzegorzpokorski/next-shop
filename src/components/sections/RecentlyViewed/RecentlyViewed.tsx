@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { ProductsList } from "@/components/blocks/ProductsList/ProductsList";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
-import { getProductsByIds } from "@/lib/queries/getProductsByIds";
+import { getProductsByIds } from "@/lib/queries/products/getProductsByIds";
 import { validateRecentViewedCookieValue } from "@/utils/validateRecentViewedCookieValue";
 
 export const RecentlyViewed = async () => {

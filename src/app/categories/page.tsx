@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
-import { getCategories } from "@/lib/queries/getCategories";
+import { getCategories } from "@/lib/queries/categories/getCategories";
 import { CategoriesList } from "@/components/sections/CategoriesList/CategoriesList";
 
 export function generateMetadata(): Metadata {

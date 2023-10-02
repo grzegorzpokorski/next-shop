@@ -8,7 +8,7 @@ import { badgeVariants } from "@/components/ui/Badge/Badge";
 import { Gallery } from "@/components/blocks/Gallery/Gallery";
 import { AddToCart } from "@/components/layout/Cart/AddToCart/AddToCart";
 import { StockAvailabilityIndicator } from "@/components/blocks/StockAvailabilityIndicator/StockAvailabilityIndicator";
-import { getCartById } from "@/lib/queries/getCartById";
+import { getCartById } from "@/lib/queries/cart/getCartById";
 import type { ProductWithDetails, ProductWithSummary } from "@/lib/types";
 
 type Props = {

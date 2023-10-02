@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getAllProducts } from "@/lib/queries/getAllProducts";
+import { getAllProducts } from "@/lib/queries/products/getAllProducts";
 import { env } from "@/lib/env.mjs";
 import { ProductsList } from "@/components/blocks/ProductsList/ProductsList";
 import { Container } from "@/components/ui/Container/Container";

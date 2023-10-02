@@ -4,7 +4,7 @@ import { CartSummary } from "@/components/layout/Cart/CartSummary/CartSummary";
 import { CloseButton } from "@/components/layout/Cart/CloseButton/CloseButton";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { EmptyCartInfo } from "@/components/layout/Cart/EmptyCartInfo/EmptyCartInfo";
-import { getCartById } from "@/lib/queries/getCartById";
+import { getCartById } from "@/lib/queries/cart/getCartById";
 import { CartItemsTemplate } from "@/components/templates/CartItemsTemplate/CartItemsTemplate";
 
 export default async function Page() {

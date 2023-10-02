@@ -3,9 +3,9 @@ import { cookies } from "next/headers";
 import { DeteteCartCookieOnClient } from "./DeteteCartCookieOnClient";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
-import { deleteCartById } from "@/lib/queries/deleteCartById";
-import { updateProdcutById } from "@/lib/queries/updateProductById";
-import { publishProducts } from "@/lib/queries/publishProducts";
+import { deleteCartById } from "@/lib/queries/cart/deleteCartById";
+import { updateProdcutById } from "@/lib/queries/products/updateProductById";
+import { publishProducts } from "@/lib/queries/products/publishProducts";
 
 export default async function Page() {
   const cookieStore = cookies();

@@ -2,8 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { ProductPageTemplate } from "@/components/templates/ProductPageTemplate/ProductPageTemplate";
-import { getProductBySlug } from "@/lib/queries/getProductBySlug";
-import { getProductsByCategorySlug } from "@/lib/queries/getProductsByCategorySlug";
+import { getProductBySlug } from "@/lib/queries/products/getProductBySlug";
+import { getProductsByCategorySlug } from "@/lib/queries/products/getProductsByCategorySlug";
 import { RecentlyViewedCookieSetter } from "@/components/sections/RecentlyViewed/RecentlyViewedCookieSetter";
 
 type Props = {
