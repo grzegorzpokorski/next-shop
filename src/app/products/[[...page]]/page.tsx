@@ -54,6 +54,16 @@ export function generateMetadata({
   };
 }
 
+const resultPluralized: Record<Intl.LDMLPluralRule, string> = {
+  zero: "wyników",
+  one: "wynik",
+  two: "wyniki",
+  many: "wyników",
+  few: "wyniki",
+  other: "wyniki",
+};
+const pluralRules = new Intl.PluralRules("pl-PL");
+
 export default async function Page({ params: { page }, searchParams }: Props) {
   const currentPage = typeof page === "undefined" ? 1 : parseInt(page);
   if (Number.isNaN(currentPage) || currentPage < 1) return notFound();
@@ -78,7 +88,9 @@ export default async function Page({ params: { page }, searchParams }: Props) {
       >
         <Heading as="h1" size="3xl" id="page-title">
           {searchQuery
-            ? `Znaleziono ${count} wyników dla frazy: ${searchQuery}`
+            ? `Znaleziono ${count} ${
+                resultPluralized[pluralRules.select(count)]
+              } dla frazy: ${searchQuery}`
             : "Wszytkie produkty"}
         </Heading>
       </header>
