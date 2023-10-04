@@ -8,6 +8,25 @@ import { useHeaderMenu } from "@/components/layout/Header/components/HeaderMenu/
 import { HeaderMenuItem } from "@/components/layout/Header/components/HeaderMenu/components/HeaderMenuItem/HeaderMenuItem";
 import { HeaderMenuToggler } from "@/components/layout/Header/components/HeaderMenu/components/HeaderMenuToggler/HeaderMenuToggler";
 
+const links = [
+  {
+    label: "Oferta",
+    href: "/products",
+  },
+  {
+    label: "Kategorie",
+    href: "/categories",
+  },
+  {
+    label: "O nas",
+    href: "/o-nas",
+  },
+  {
+    label: "Kontakt",
+    href: "/kontakt",
+  },
+];
+
 export const HeaderMenu = () => {
   const { closeMobileMenu, isMobileMenuOpen, toggleMobileMenu } =
     useHeaderMenu();
@@ -48,24 +67,16 @@ export const HeaderMenu = () => {
           role="list"
           id="menu"
         >
-          <HeaderMenuItem href="/products" onClick={closeMobileMenu}>
-            Oferta
-          </HeaderMenuItem>
-          <HeaderMenuItem href="/categories" onClick={closeMobileMenu}>
-            Kategorie
-          </HeaderMenuItem>
-          <HeaderMenuItem href="/category/klawiatury" onClick={closeMobileMenu}>
-            Klawiatury
-          </HeaderMenuItem>
-          <HeaderMenuItem href="/category/myszki" onClick={closeMobileMenu}>
-            Myszki
-          </HeaderMenuItem>
-          <HeaderMenuItem href="/o-nas" onClick={closeMobileMenu}>
-            O nas
-          </HeaderMenuItem>
-          <HeaderMenuItem href="/kontakt" onClick={closeMobileMenu}>
-            Kontakt
-          </HeaderMenuItem>
+          {links.length > 0 &&
+            links.map((link) => (
+              <HeaderMenuItem
+                key={link.href}
+                href={link.href}
+                onClick={closeMobileMenu}
+              >
+                {link.label}
+              </HeaderMenuItem>
+            ))}
         </ul>
       </div>
     </ReactFocusLock>
