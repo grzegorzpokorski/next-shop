@@ -40,6 +40,7 @@ export async function fetcher<Result, Variables>({
     method,
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${env.HYGRAPH_AUTH_TOKEN}`,
       ...headers,
     },
     body: JSON.stringify({
