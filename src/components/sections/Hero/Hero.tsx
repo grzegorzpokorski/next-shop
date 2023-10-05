@@ -31,6 +31,7 @@ export const Hero = () => {
             alt="klawiatura i mysz komputerowa na podkładce"
             width={1080}
             height={1080}
+            priority
           />
         </div>
       </div>
