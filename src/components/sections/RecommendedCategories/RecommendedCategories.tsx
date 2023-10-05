@@ -22,13 +22,22 @@ export const RecommendedCategories = ({ categories }: Props) => {
                 link={`/category/${category.slug}`}
                 title={category.name}
                 thumbnail={category.thumbnail}
-                fullWidth={
-                  categories.length % 2 === 1 && categories.at(-1) == category
-                }
+                fullWidth={false}
                 priority={idx < 4}
               />
             );
           })}
+        <CategoryBanner
+          link={`/categories`}
+          title="wszystkie kategorie"
+          thumbnail={{
+            url: "/images/hero.png",
+            width: 1080,
+            height: 1080,
+            alt: "kalawiatura i mysz komputerowa",
+          }}
+          fullWidth={categories.length % 2 === 0}
+        />
       </div>
     </Container>
   );
