@@ -30,8 +30,8 @@ export const Hero = () => {
             className="md:absolute md:left-0 md:top-0 md:w-[57rem] max-w-auto md:max-w-none rounded-md min-w-[100%] w-auto"
             src="/images/hero.png"
             alt="klawiatura i mysz komputerowa na podkładce"
-            width={1080}
-            height={1080}
+            width={540}
+            height={540}
             sizes="(max-width: 768px) 100vw, 50vw"
             priority
           />
