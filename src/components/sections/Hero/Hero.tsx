@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/Container/Container";
 export const Hero = () => {
   return (
     <Container as="section" aria-labelledby="hero-title">
-      <div className="relative isolate overflow-hidden bg-white dark:bg-black rounded-md gap-6 md:px-12 lg:px-24 md:pt-0 mt-8 grid md:grid-cols-2 shadow-xl border">
+      <div className="relative isolate overflow-hidden bg-white dark:bg-black rounded-md gap-6 md:px-12 lg:px-24 md:pt-0 mt-3 lg:mt-8 grid md:grid-cols-2 shadow-xl border">
         <div className="mx-auto max-w-md text-center md:mx-0 md:flex-auto pt-4 pb-16 md:py-32 md:text-left px-6 max-md:order-2">
           <h2
             className="text-3xl font-bold tracking-tight sm:text-4xl"
