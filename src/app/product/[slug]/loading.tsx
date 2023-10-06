@@ -3,7 +3,11 @@ import { Skeleton } from "@/components/ui/Skeleton/Skeleton";
 
 export default function Page() {
   return (
-    <div className="flex flex-col gap-8 py-8" role="status">
+    <div
+      className="flex flex-col gap-8 py-8"
+      role="status"
+      aria-label="ładowanie"
+    >
       <Container as="article" aria-labelledby="product-title">
         <div className="flex flex-col md:flex-row gap-8 bg-white dark:bg-black p-8 rounded-md border">
           <div className="flex flex-col h-full w-full md:w-1/2 overflow-hidden md:sticky md:top-20">

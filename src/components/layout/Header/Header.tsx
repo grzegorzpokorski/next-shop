@@ -22,7 +22,12 @@ export const Header = () => {
               <SearchForm />
             </div>
             <Suspense
-              fallback={<Skeleton className="aspect-square h-11 w-11" />}
+              fallback={
+                <Skeleton
+                  className="aspect-square h-11 w-11"
+                  aria-label="ładowanie"
+                />
+              }
             >
               <CartOpener />
             </Suspense>

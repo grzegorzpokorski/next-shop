@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/Skeleton/Skeleton";
 
 export const RecentlyViewedSkeleton = () => {
   return (
-    <div className="mt-8" role="status">
+    <div className="mt-8" role="status" aria-label="ładowanie">
       <Container as="div">
         <Skeleton className="w-80 h-8" />
         <div className="list-none py-4 gap-3 md:gap-4 flex flex-row overflow-x-auto">

@@ -4,7 +4,7 @@ import { env } from "@/lib/env.mjs";
 
 export default function Page() {
   return (
-    <div role="status">
+    <div role="status" aria-label="ładowanie">
       <Container as="div">
         <div className="flex flex-col gap-4 justify-between pt-16 pb-12 max-w-3xl">
           <Skeleton className="w-[70%] h-10 rounded-md" />
