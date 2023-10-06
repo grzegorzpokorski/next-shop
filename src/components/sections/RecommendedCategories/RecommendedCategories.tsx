@@ -23,7 +23,7 @@ export const RecommendedCategories = ({ categories }: Props) => {
                 title={category.name}
                 thumbnail={category.thumbnail}
                 fullWidth={false}
-                priority={idx < 4}
+                priority={idx < 3}
               />
             );
           })}
