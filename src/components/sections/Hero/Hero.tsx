@@ -6,8 +6,8 @@ import { Container } from "@/components/ui/Container/Container";
 export const Hero = () => {
   return (
     <Container as="section" aria-labelledby="hero-title">
-      <div className="relative isolate overflow-hidden bg-white dark:bg-black px-6 rounded-md sm:px-16 gap-6 md:px-24 md:pt-0 mt-8 grid md:grid-cols-2 shadow-xl">
-        <div className="mx-auto max-w-md text-center md:mx-0 md:flex-auto py-16 md:py-32 md:text-left">
+      <div className="relative isolate overflow-hidden bg-white dark:bg-black rounded-md gap-6 md:px-24 md:pt-0 mt-8 grid md:grid-cols-2 shadow-xl">
+        <div className="mx-auto max-w-md text-center md:mx-0 md:flex-auto pt-8 pb-16 md:py-32 md:text-left px-6 max-md:order-2">
           <h2
             className="text-3xl font-bold tracking-tight sm:text-4xl"
             id="hero-title"
@@ -24,9 +24,10 @@ export const Hero = () => {
             </Button>
           </div>
         </div>
-        <div className="hidden md:block relative">
+        <div className="block relative inset-0 max-md:h-60 max-md:overflow-hidden">
+          <div className="md:hidden bg-gradient-to-t from-neutral-900 dark:from-black/80 absolute inset-0 z-10"></div>
           <Image
-            className="absolute left-0 top-0 w-[57rem] max-w-none rounded-md"
+            className="md:absolute md:left-0 md:top-0 md:w-[57rem] max-w-auto md:max-w-none rounded-md min-w-[100%] w-auto"
             src="/images/hero.png"
             alt="klawiatura i mysz komputerowa na podkładce"
             width={1080}
