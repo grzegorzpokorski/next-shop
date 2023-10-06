@@ -25,7 +25,7 @@ export const Hero = () => {
           </div>
         </div>
         <div className="block relative inset-0 max-md:h-60 max-md:overflow-hidden">
-          <div className="md:hidden bg-gradient-to-t from-neutral-900 dark:from-black/80 absolute inset-0 z-10"></div>
+          <div className="bg-gradient-to-t md:bg-gradient-to-r from-white dark:from-black absolute inset-0 z-10"></div>
           <Image
             className="md:absolute md:left-0 md:top-0 md:w-[57rem] max-w-auto md:max-w-none rounded-md min-w-[100%] w-auto"
             src="/images/hero.png"
