@@ -7,7 +7,7 @@ export const getCategories = async () => {
   const result = await fetcher({
     query: GetCategoriesDocument,
     variables: {},
-    tags: [TAGS.categories],
+    next: { tags: [TAGS.categories] },
   });
 
   return result.categories.map((category) => reshapeCategory(category));

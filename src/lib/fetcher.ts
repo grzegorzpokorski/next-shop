@@ -24,18 +24,15 @@ export async function fetcher<Result, Variables>({
   headers,
   cache,
   method = "POST",
-  tags,
+  next,
 }: {
   method?: HTTPRequestMethods;
   query: TypedDocumentString<Result, Variables>;
   variables: Variables;
   headers?: HeadersInit;
   cache?: RequestCache;
-  tags?: NextFetchRequestConfig["tags"];
+  next?: NextFetchRequestConfig;
 }): Promise<Result> {
-  const options = cache
-    ? { cache, next: { tags } }
-    : { next: { revalidate: 900, tags } };
   const result = await fetch(endpoint, {
     method,
     headers: {
@@ -47,7 +44,8 @@ export async function fetcher<Result, Variables>({
       query: query.toString(),
       ...(variables && { variables }),
     }),
-    ...options,
+    cache,
+    next,
   });
 
   const body = (await result.json()) as GraphQlErrorRespone<Result>;

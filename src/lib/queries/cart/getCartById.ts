@@ -14,7 +14,7 @@ export const getCartById = async ({ id }: Args) => {
       cartId: id,
     },
     cache: "no-store",
-    tags: [TAGS.cart],
+    next: { tags: [TAGS.cart] },
   });
 
   return result.cart ? reshapeCart(result.cart) : null;

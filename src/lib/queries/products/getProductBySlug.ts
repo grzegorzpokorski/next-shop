@@ -11,7 +11,7 @@ export const getProductBySlug = async ({ slug }: Args) => {
   const result = await fetcher({
     query: GetProductBySlugDocument,
     variables: { slug },
-    tags: [TAGS.products],
+    next: { tags: [TAGS.products], revalidate: 300 },
   });
 
   return result.product ? reshapeProductWithDetails(result.product) : null;
