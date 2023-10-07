@@ -40,7 +40,7 @@ export const CartSummary = ({
       {invalidProductsAmount && (
         <p className="text-red-500 text-xs mt-1">
           Nieprawidłowa ilość produktów. Sprawdź, czy produkty są dostępne,
-          jeśli nie zmienjsz ich ilość lub usuń z koszyka.
+          jeśli nie zmniejsz ich ilość lub usuń z koszyka.
         </p>
       )}
       <p className="text-primary/80 text-xs mt-1">
