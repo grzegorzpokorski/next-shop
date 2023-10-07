@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
   const isValid = verifyWebhookSignature({
     body: json,
     signature: gcmsSignature,
-    secret: env.CRON_SECRET,
+    secret: env.HYGRAPH_WEBHOOK_SECRET,
   });
 
   console.log("isValid", isValid);
