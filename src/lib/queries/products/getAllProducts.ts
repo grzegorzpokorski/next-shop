@@ -25,7 +25,7 @@ export const getAllProducts = async ({
       order,
       searchQuery: searchQuery || "",
     },
-    tags: [TAGS.products],
+    next: { tags: [TAGS.products], revalidate: 60 },
   });
 
   return {

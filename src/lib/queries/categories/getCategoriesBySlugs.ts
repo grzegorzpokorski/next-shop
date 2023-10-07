@@ -13,7 +13,7 @@ export const getCategoriesBySlugs = async ({ slugs }: Args) => {
     variables: {
       slugs,
     },
-    tags: [TAGS.categories],
+    next: { tags: [TAGS.categories] },
   });
 
   return result.categories.map((category) => reshapeCategory(category));

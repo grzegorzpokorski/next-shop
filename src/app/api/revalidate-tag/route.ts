@@ -1,33 +1,60 @@
 import type { NextRequest } from "next/server";
 import { revalidateTag } from "next/cache";
+import { verifyWebhookSignature } from "@hygraph/utils";
 import { env } from "@/lib/env.mjs";
 import { TAGS } from "@/lib/constants";
 
 export async function POST(request: NextRequest) {
-  const cronSecret = request.headers.get("Authorization")?.split(" ")[1];
-  const tag = request.nextUrl.searchParams.get("tag");
+  const gcmsSignature = request.headers.get("gcms-signature");
 
-  if (cronSecret !== env.CRON_SECRET) {
+  if (!gcmsSignature) {
     return new Response("Forbidden", { status: 403 });
   }
 
-  if (!tag || !Object.values(TAGS).includes(tag))
-    return new Response("Bad Request", { status: 400 });
+  const json: unknown = await request.json();
 
-  switch (tag) {
+  console.log(json);
+
+  if (
+    !json ||
+    !(json instanceof Object && "data" in json) ||
+    !(json.data instanceof Object && "__typename" in json.data)
+  ) {
+    return Response.json({ status: 204 });
+  }
+
+  const isValid = verifyWebhookSignature({
+    body: json,
+    signature: gcmsSignature,
+    secret: env.CRON_SECRET,
+  });
+
+  console.log("isValid", isValid);
+
+  if (!isValid) {
+    return Response.json({ status: 204 });
+  }
+
+  switch (json.data.__typename) {
     case TAGS.cart:
       revalidateTag(TAGS.cart);
+      console.log("revalidateTag(TAGS.cart);");
       break;
-    case TAGS.categories:
+    case "Category":
       revalidateTag(TAGS.categories);
+      console.log("revalidateTag(TAGS.categories);");
       break;
-    case TAGS.pages:
+    case "Page":
       revalidateTag(TAGS.pages);
+      console.log("revalidateTag(TAGS.pages);");
       break;
-    case TAGS.products:
+    case "Product":
       revalidateTag(TAGS.products);
+      console.log("revalidateTag(TAGS.products);");
       break;
   }
+
+  console.log("revalidation done");
 
   return new Response(null, { status: 204 });
 }

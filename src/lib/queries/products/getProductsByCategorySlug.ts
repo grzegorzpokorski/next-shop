@@ -25,7 +25,7 @@ export const getProductsByCategorySlug = async ({
       categorySlug,
       order,
     },
-    tags: [TAGS.categories, TAGS.products],
+    next: { tags: [TAGS.categories, TAGS.products], revalidate: 60 },
   });
 
   return {

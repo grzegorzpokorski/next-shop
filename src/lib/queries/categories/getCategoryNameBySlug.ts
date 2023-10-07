@@ -11,7 +11,7 @@ export const getCategoryNameBySlug = async ({ slug }: Args) => {
   const result = await fetcher({
     query: GetCategoryNameBySlugDocument,
     variables: { categorySlug: slug },
-    tags: [TAGS.categories],
+    next: { tags: [TAGS.categories] },
   });
 
   return result.category ? reshapeCategory(result.category) : null;

@@ -7,6 +7,7 @@ export const env = createEnv({
     HYGRAPH_AUTH_TOKEN: z.string(),
     PRODUCTS_PER_PAGE: z.coerce.number().int().min(1).optional().default(8),
     CRON_SECRET: z.string(),
+    HYGRAPH_WEBHOOK_SECRET: z.string(),
     COOKIE_MAX_AGE_IN_DAYS: z.coerce.number().int().min(1),
     VERCEL_ENV: z.string().optional(),
     STRIPE_SECRET_KEY: z.string(),
@@ -22,6 +23,7 @@ export const env = createEnv({
     HYGRAPH_AUTH_TOKEN: process.env.HYGRAPH_AUTH_TOKEN,
     PRODUCTS_PER_PAGE: process.env.PRODUCTS_PER_PAGE,
     CRON_SECRET: process.env.CRON_SECRET,
+    HYGRAPH_WEBHOOK_SECRET: process.env.HYGRAPH_WEBHOOK_SECRET,
     COOKIE_MAX_AGE_IN_DAYS: process.env.COOKIE_MAX_AGE_IN_DAYS,
     VERCEL_ENV: process.env.VERCEL_ENV,
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
