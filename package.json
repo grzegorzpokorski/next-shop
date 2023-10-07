@@ -40,7 +40,7 @@
     "autoprefixer": "10.4.16",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "eslint": "8.50.0",
+    "eslint": "8.51.0",
     "graphql": "^16.8.1",
     "js-cookie": "^3.0.5",
     "keen-slider": "^6.8.6",
