@@ -51,7 +51,7 @@ export const ProductPageTemplate = async ({
           <div className="flex flex-col h-full w-full md:w-1/2 overflow-hidden md:sticky md:top-20">
             <Gallery images={product.images} />
           </div>
-          <div className="flex flex-col items-start justify-center gap-4 w-full md:w-1/2">
+          <div className="flex flex-col items-start justify-center gap-4 w-full md:w-1/2 md:py-4">
             {product.category && (
               <Link
                 href={`/category/${product.category?.slug}`}
