@@ -10,7 +10,6 @@ export const getProductsByIds = async ({ ids }: Args) => {
   const result = await fetcher({
     query: GetProductsByIdsDocument,
     variables: { ids },
-    cache: "no-store",
   });
 
   return result.products.map((product) => {
