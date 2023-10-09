@@ -63,7 +63,7 @@ export const Gallery = ({ images }: Props) => {
 
   if (images.length === 1) {
     return (
-      <div ref={sliderRef} className="keen-slider rounded-md">
+      <div ref={sliderRef} className="keen-slider rounded-md aspect-square">
         {images.length > 0 &&
           images.map((image, idx) => {
             return (
@@ -73,7 +73,7 @@ export const Gallery = ({ images }: Props) => {
                 alt={image.alt}
                 width={image.width}
                 height={image.height}
-                className={`relative m-auto object-contain keen-slider__slide slide-${idx}`}
+                className={`relative m-auto aspect-square object-contain keen-slider__slide slide-${idx}`}
                 priority={idx === 0}
               />
             );
@@ -94,7 +94,7 @@ export const Gallery = ({ images }: Props) => {
                 alt={image.alt}
                 width={image.width}
                 height={image.height}
-                className={`relative m-auto object-contain keen-slider__slide slide-${idx}`}
+                className={`relative m-auto aspect-square object-contain keen-slider__slide slide-${idx}`}
                 priority={idx === 0}
               />
             );
@@ -110,7 +110,7 @@ export const Gallery = ({ images }: Props) => {
             return (
               <div
                 key={image.url}
-                className={`keen-slider__slide slide-${idx} w-24 border hover:border-indigo-500 motion-safe:transition-colors motion-fase:duration-300 ease-in-out rounded-md cursor-pointer group`}
+                className={`keen-slider__slide slide-${idx} w-24 border hover:border-indigo-500 motion-safe:transition-colors motion-fase:duration-300 ease-in-out rounded-md cursor-pointer group aspect-square`}
               >
                 <Image
                   key={image.url}
@@ -118,7 +118,7 @@ export const Gallery = ({ images }: Props) => {
                   alt={image.alt}
                   width={image.width}
                   height={image.height}
-                  className="m-auto object-contain motion-safe:group-hover:scale-105 motion-safe:transition motion-reduce:duration-300 ease-in-out"
+                  className="m-auto object-contain h-full w-full motion-safe:group-hover:scale-105 motion-safe:transition motion-reduce:duration-300 ease-in-out"
                   priority={idx === 0}
                 />
               </div>
