@@ -84,7 +84,7 @@ export const Gallery = ({ images }: Props) => {
 
   return (
     <>
-      <div ref={sliderRef} className="keen-slider rounded-md">
+      <div ref={sliderRef} className="keen-slider rounded-md aspect-square">
         {images.length > 0 &&
           images.map((image, idx) => {
             return (
@@ -96,6 +96,7 @@ export const Gallery = ({ images }: Props) => {
                 height={image.height}
                 className={`relative m-auto aspect-square object-contain keen-slider__slide slide-${idx}`}
                 priority={idx === 0}
+                loading="eager"
               />
             );
           })}
@@ -120,6 +121,7 @@ export const Gallery = ({ images }: Props) => {
                   height={image.height}
                   className="m-auto object-contain h-full w-full motion-safe:group-hover:scale-105 motion-safe:transition motion-reduce:duration-300 ease-in-out"
                   priority={idx === 0}
+                  loading="eager"
                 />
               </div>
             );
