@@ -1,4 +1,5 @@
 import { twMerge } from "tailwind-merge";
+import Link from "next/link";
 import { PlaceOrderButton } from "./PlaceOrderButton";
 import { Button } from "@/components/ui/Button/Button";
 import { formatPrice } from "@/utils/formatPrice";
@@ -56,7 +57,7 @@ export const CartSummary = ({
           {modal ? (
             <a href="/cart">Edytuj koszyk</a>
           ) : (
-            <a href="/products">Kontynuuj zakupy</a>
+            <Link href="/products">Kontynuuj zakupy</Link>
           )}
         </Button>
       </form>
