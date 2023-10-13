@@ -2,6 +2,7 @@
 
 import { experimental_useOptimistic as useOptimistic } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button/Button";
 import { updateItemQuantity } from "@/lib/actions";
 
@@ -17,6 +18,7 @@ export const QuantityChangerForm = ({
   maxQuantity,
 }: Props) => {
   const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(quantity);
+  const router = useRouter();
 
   return (
     <form className="flex items-center gap-1">
@@ -30,6 +32,7 @@ export const QuantityChangerForm = ({
               itemId,
               quantity: optimisticQuantity - 1,
             });
+            router.refresh();
           }
         }}
         aria-disabled={optimisticQuantity === 1}
@@ -51,6 +54,7 @@ export const QuantityChangerForm = ({
               itemId,
               quantity: optimisticQuantity + 1,
             });
+            router.refresh();
           }
         }}
         aria-disabled={optimisticQuantity >= maxQuantity}
