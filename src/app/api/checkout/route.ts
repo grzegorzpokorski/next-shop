@@ -5,7 +5,7 @@ import { env } from "@/lib/env.mjs";
 import { getCartById } from "@/lib/queries/cart/getCartById";
 
 const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
-  apiVersion: "2023-08-16",
+  apiVersion: "2023-10-16",
   typescript: true,
 });
 
