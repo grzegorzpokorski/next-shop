@@ -5,6 +5,7 @@ import { ProductPageTemplate } from "@/components/templates/ProductPageTemplate/
 import { getProductBySlug } from "@/lib/queries/products/getProductBySlug";
 import { getProductsByCategorySlug } from "@/lib/queries/products/getProductsByCategorySlug";
 import { RecentlyViewedCookieSetter } from "@/components/sections/RecentlyViewed/RecentlyViewedCookieSetter";
+import { getAllProducts } from "@/lib/queries/products/getAllProducts";
 
 type Props = {
   params: {
@@ -39,6 +40,13 @@ export const generateMetadata = async ({
       canonical: `/product/${slug}`,
     },
   };
+};
+
+export const generateStaticParams = async () => {
+  const products = await getAllProducts({ limit: 20, skip: 0 });
+  return products.products.map((product) => ({
+    slug: product.slug,
+  }));
 };
 
 export default async function Page({ params: { slug } }: Props) {
