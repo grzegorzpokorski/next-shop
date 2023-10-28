@@ -3,10 +3,10 @@
 import { twMerge } from "tailwind-merge";
 import ReactFocusLock from "react-focus-lock";
 import { SearchForm } from "@/components/layout/Header/components/SearchForm/SearchForm";
-import { useIsAboveBreakpoint } from "@/hooks/useIsAboveBreakpoint";
 import { useHeaderMenu } from "@/components/layout/Header/components/HeaderMenu/hooks/useHeaderMenu";
 import { HeaderMenuItem } from "@/components/layout/Header/components/HeaderMenu/components/HeaderMenuItem/HeaderMenuItem";
 import { HeaderMenuToggler } from "@/components/layout/Header/components/HeaderMenu/components/HeaderMenuToggler/HeaderMenuToggler";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const links = [
   {
@@ -30,12 +30,12 @@ const links = [
 export const HeaderMenu = () => {
   const { closeMobileMenu, isMobileMenuOpen, toggleMobileMenu } =
     useHeaderMenu();
-  const isAboveBreakpoint = useIsAboveBreakpoint({ breakpoint: 1024 });
+  const isDesktopView = useMediaQuery("(min-width: 1024px)");
 
   return (
     <ReactFocusLock
       as="nav"
-      disabled={!isMobileMenuOpen || isAboveBreakpoint}
+      disabled={!isMobileMenuOpen || isDesktopView}
       returnFocus
       className="relative"
     >
@@ -52,7 +52,7 @@ export const HeaderMenu = () => {
           "flex flex-col items-center justify-between lg:flex-row gap-4",
           "overflow-y-auto",
           "transition-all",
-          isMobileMenuOpen && !isAboveBreakpoint
+          isMobileMenuOpen && !isDesktopView
             ? "translate-x-0 lg:translate-x-0 bg-white dark:bg-neutral-900"
             : "-translate-x-full lg:translate-x-0",
           "list-none gap-6 overflow-y-auto w-full lg:w-auto text-center",
