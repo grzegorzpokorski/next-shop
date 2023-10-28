@@ -15,11 +15,15 @@ export const Header = () => {
             <div className="mx-auto lg:mx-0">
               <HeaderLogo>Next Shop</HeaderLogo>
             </div>
-            <HeaderMenu />
+            <Suspense>
+              <HeaderMenu />
+            </Suspense>
           </div>
           <div className="flex flex-row justify-end items-center lg:gap-4 lg:w-full">
             <div className="hidden lg:flex w-full justify-end">
-              <SearchForm />
+              <Suspense>
+                <SearchForm />
+              </Suspense>
             </div>
             <Suspense
               fallback={
