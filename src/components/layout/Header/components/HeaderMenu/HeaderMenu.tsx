@@ -30,7 +30,7 @@ const links = [
 export const HeaderMenu = () => {
   const { closeMobileMenu, isMobileMenuOpen, toggleMobileMenu } =
     useHeaderMenu();
-  const isAboveBreakpoint = useIsAboveBreakpoint({ breakpoint: 768 });
+  const isAboveBreakpoint = useIsAboveBreakpoint({ breakpoint: 1024 });
 
   return (
     <ReactFocusLock
@@ -52,7 +52,7 @@ export const HeaderMenu = () => {
           "flex flex-col items-center justify-between lg:flex-row gap-4",
           "overflow-y-auto",
           "transition-all",
-          isMobileMenuOpen
+          isMobileMenuOpen && !isAboveBreakpoint
             ? "translate-x-0 lg:translate-x-0 bg-white dark:bg-neutral-900"
             : "-translate-x-full lg:translate-x-0",
           "list-none gap-6 overflow-y-auto w-full lg:w-auto text-center",
