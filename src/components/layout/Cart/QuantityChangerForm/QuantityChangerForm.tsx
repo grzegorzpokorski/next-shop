@@ -1,6 +1,6 @@
 "use client";
 
-import { useOptimistic as useOptimistic } from "react";
+import { useOptimistic } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button/Button";
