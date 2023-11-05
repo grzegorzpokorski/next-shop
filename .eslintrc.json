@@ -38,5 +38,14 @@
         "checksVoidReturn": false
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["e2e/**/*.{ts,tsx}"],
+      "extends": ["plugin:playwright/recommended"],
+      "rules": {
+        "@typescript-eslint/await-thenable": "off"
+      }
+    }
+  ]
 }

@@ -21,7 +21,13 @@ type BtnProps = {
 
 const Btn = ({ qty = 0 }: BtnProps) => {
   return (
-    <Button variant="outline" size="icon" asChild className="relative">
+    <Button
+      variant="outline"
+      size="icon"
+      asChild
+      className="relative"
+      data-testid="cart-counter"
+    >
       <Link href="/cart">
         <FaShoppingCart />
         <span className="sr-only">Otwóż koszyk</span>

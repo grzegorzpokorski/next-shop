@@ -8,10 +8,9 @@ export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,
   workers: 1,
-  reporter: [
-    ["line"],
-    ["json", { outputFile: "test-results/test-results.json" }],
-  ],
+  reporter: process.env.CI
+    ? [["html"], ["github"], ["list"]]
+    : [["html"], ["list"]],
   use: {
     baseURL: siteUrl,
     trace: "on-first-retry",
