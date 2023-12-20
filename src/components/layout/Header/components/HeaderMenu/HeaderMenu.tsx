@@ -47,7 +47,7 @@ export const HeaderMenu = () => {
       <div
         className={twMerge(
           "fixed lg:relative z-30 lg:auto",
-          "inset-0 h-[100dvh] lg:h-auto py-16 lg:py-0",
+          "inset-0 h-dvh lg:h-auto py-16 lg:py-0",
           "lg:bg-transparent",
           "flex flex-col items-center justify-between lg:flex-row gap-4",
           "overflow-y-auto",
