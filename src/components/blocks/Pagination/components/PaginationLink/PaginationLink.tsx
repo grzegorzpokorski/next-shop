@@ -22,8 +22,8 @@ export const PaginationLink = ({ page, currentPage }: Props) => {
         currentPage - 1 === page
           ? ", poprzednia"
           : currentPage + 1 === page
-          ? ", kolejna"
-          : ""
+            ? ", kolejna"
+            : ""
       }`}
     >
       {page}

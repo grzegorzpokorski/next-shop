@@ -81,8 +81,8 @@ export const Pagination = ({ pagination }: Props) => {
                     pagination.currentPage - 1 === page
                       ? ", poprzednia"
                       : pagination.currentPage + 1 === page
-                      ? ", kolejna"
-                      : ""
+                        ? ", kolejna"
+                        : ""
                   }`}
                 >
                   {page}
