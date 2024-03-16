@@ -1,13 +1,40 @@
-import { FaCheckCircle } from "react-icons/fa";
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { cookies } from "next/headers";
+import { notFound, redirect } from "next/navigation";
+import Stripe from "stripe";
 import { DeteteCartCookieOnClient } from "./DeteteCartCookieOnClient";
+import { env } from "@/lib/env.mjs";
 import { Container } from "@/components/ui/Container/Container";
 import { Heading } from "@/components/ui/Heading/Heading";
 import { deleteCartById } from "@/lib/queries/cart/deleteCartById";
 import { updateProdcutById } from "@/lib/queries/products/updateProductById";
 import { publishProducts } from "@/lib/queries/products/publishProducts";
+import { formatPrice } from "@/utils/formatPrice";
 
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { session_id?: string | undefined | string[] };
+}) {
+  if (typeof searchParams.session_id !== "string") {
+    redirect("/");
+  }
+
+  const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
+    apiVersion: "2023-10-16",
+    typescript: true,
+  });
+
+  const checkout = await stripe.checkout.sessions
+    .retrieve(searchParams.session_id, {
+      expand: ["invoice", "line_items"],
+      // expand: ["invoice", "line_items", "line_items.data.discounts"],
+    })
+    .catch((err) => {
+      console.error(err);
+      notFound();
+    });
+
   const cookieStore = cookies();
   const cookieWithCartId = cookieStore.get("cartId");
   const cartId = cookieWithCartId?.value;
@@ -61,8 +88,59 @@ export default async function Page() {
             Twoja płatność powiodła się!
           </Heading>
           <p className="my-2">
-            Twoje zamówienie zostało przyjęte i wkrótce zostanie wysłane.
+            Zamówienie zostało przyjęte i wkrótce zostanie wysłane. Poniżej
+            podsumowanie zamówienia:
           </p>
+          <table className="table-auto">
+            <tbody className="">
+              <tr className="border-b last:border-none">
+                <td className="py-1.5">Kupujący:</td>
+                <td className="py-1.5">{checkout.customer_details?.name}</td>
+              </tr>
+              <tr className="border-b last:border-none">
+                <td className="py-1.5">Adres:</td>
+                <td className="py-1.5">
+                  {checkout.customer_details?.address?.line1}
+                  {checkout.customer_details?.address?.line2},{" "}
+                  {checkout.customer_details?.address?.postal_code}{" "}
+                  {checkout.customer_details?.address?.city}
+                </td>
+              </tr>
+              <tr className="border-b last:border-none">
+                <td className="py-1.5">Email:</td>
+                <td className="py-1.5">{checkout.customer_details?.email}</td>
+              </tr>
+              <tr className="border-b last:border-none">
+                <td className="py-1.5">Numer telefonu:</td>
+                <td className="py-1.5">{checkout.customer_details?.phone}</td>
+              </tr>
+              <tr className="border-b last:border-none">
+                <td className="py-1.5">Wartość zamówienia:</td>
+                <td className="py-1.5">
+                  {formatPrice({
+                    price: (checkout.amount_total ?? 0) / 100,
+                    currency: checkout.currency ?? "PLN",
+                  })}
+                </td>
+              </tr>
+              <tr className="border-b last:border-none">
+                <td className="py-1.5">Status płatności:</td>
+                <td className="py-1.5 flex gap-1 items-center">
+                  {checkout.payment_status === "paid" ? (
+                    <>
+                      <FaCheckCircle aria-hidden className="text-green-500" />{" "}
+                      opłacone
+                    </>
+                  ) : (
+                    <>
+                      <FaTimesCircle aria-hidden className="text-red-500" />{" "}
+                      nieopłacone
+                    </>
+                  )}
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </Container>
     </>
