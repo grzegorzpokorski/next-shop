@@ -63,6 +63,8 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.redirect(session.url, 303);
   } catch (err) {
-    return NextResponse.json({ status: 500 });
+    if (err instanceof Error) {
+      return NextResponse.json({ status: 500 });
+    }
   }
 }

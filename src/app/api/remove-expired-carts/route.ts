@@ -19,6 +19,8 @@ export async function GET(request: Request) {
     });
     return new Response("OK", { status: 200 });
   } catch (e) {
-    return new Response("Error", { status: 500 });
+    if (e instanceof Error) {
+      return new Response("Error", { status: 500 });
+    }
   }
 }

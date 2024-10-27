@@ -32,7 +32,9 @@ export const RecentlyViewed = async () => {
         <ProductsList products={products} slider />
       </Container>
     );
-  } catch (err) {
-    return null;
+  } catch (e) {
+    if (e instanceof Error) {
+      return null;
+    }
   }
 };

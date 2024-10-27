@@ -40,9 +40,11 @@ export const RecentlyViewedCookieSetter = ({ productId, cookie }: Props) => {
           path: "/",
         });
       }
-    } catch (err) {
-      Cookies.remove("recentlyViewed", { path: "/" });
-      return null;
+    } catch (e) {
+      if (e instanceof Error) {
+        Cookies.remove("recentlyViewed", { path: "/" });
+        return null;
+      }
     }
   }
 

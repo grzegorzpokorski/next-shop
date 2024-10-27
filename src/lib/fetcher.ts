@@ -51,7 +51,7 @@ export async function fetcher<Result, Variables>({
   const body = (await result.json()) as GraphQlErrorRespone<Result>;
 
   if ("errors" in body) {
-    throw body.errors[0];
+    throw Error(body.errors[0].message);
   }
 
   return body.data;
