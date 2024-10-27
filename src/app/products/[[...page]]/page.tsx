@@ -10,16 +10,16 @@ import { Filters } from "@/components/blocks/Filters/Filters";
 import { defaultSort, sorting } from "@/lib/constants";
 
 type Props = {
-  params: {
+  params: Promise<{
     page: string | undefined;
-  };
-  searchParams?: Record<string, string>;
+  }>;
+  searchParams?: Promise<Record<string, string>>;
 };
 
-export function generateMetadata({
-  params: { page },
-  searchParams,
-}: Props): Metadata {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const searchParams = await props.searchParams;
+  const { page } = await props.params;
+
   const currentPage = typeof page === "undefined" ? 1 : parseInt(page);
   if (Number.isNaN(currentPage) || currentPage < 1) return notFound();
   const searchQuery = searchParams?.q;
@@ -64,7 +64,12 @@ const resultPluralized: Record<Intl.LDMLPluralRule, string> = {
 };
 const pluralRules = new Intl.PluralRules("pl-PL");
 
-export default async function Page({ params: { page }, searchParams }: Props) {
+export default async function Page(props: Props) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
+
+  const { page } = params;
+
   const currentPage = typeof page === "undefined" ? 1 : parseInt(page);
   if (Number.isNaN(currentPage) || currentPage < 1) return notFound();
 

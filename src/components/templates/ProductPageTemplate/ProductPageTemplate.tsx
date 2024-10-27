@@ -20,7 +20,7 @@ export const ProductPageTemplate = async ({
   product,
   relatedProducts,
 }: Props) => {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cartId = cookieStore.get("cartId")?.value;
 
   const getQuantityOfProductInCart = async () => {

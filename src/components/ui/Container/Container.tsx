@@ -1,4 +1,4 @@
-import type { AriaAttributes, ReactNode } from "react";
+import type { AriaAttributes, JSX, ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
 type Props = {

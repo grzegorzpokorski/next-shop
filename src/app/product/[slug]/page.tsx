@@ -8,14 +8,12 @@ import { RecentlyViewedCookieSetter } from "@/components/sections/RecentlyViewed
 import { getAllProducts } from "@/lib/queries/products/getAllProducts";
 
 type Props = {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 };
 
-export const generateMetadata = async ({
-  params: { slug },
-}: Props): Promise<Metadata> => {
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
+  const { slug } = await props.params;
+
   const product = await getProductBySlug({ slug });
   if (!product) return notFound();
 
@@ -49,7 +47,8 @@ export const generateStaticParams = async () => {
   }));
 };
 
-export default async function Page({ params: { slug } }: Props) {
+export default async function Page(props: Props) {
+  const { slug } = await props.params;
   const product = await getProductBySlug({ slug });
 
   if (!product) return notFound();
@@ -81,7 +80,7 @@ export default async function Page({ params: { slug } }: Props) {
     },
   };
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cookieWithRecentlyViewed = cookieStore.get("recentlyViewed");
 
   return (

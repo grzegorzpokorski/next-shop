@@ -11,14 +11,14 @@ import type { Cart, CartItem } from "@/lib/types";
 
 const expirationTimeInSeconds = 60 * 60 * 24 * env.COOKIE_MAX_AGE_IN_DAYS;
 
-const getCartIdFromCookie = () => {
-  const cookieStore = cookies();
+const getCartIdFromCookie = async () => {
+  const cookieStore = await cookies();
   const cookieWithCartId = cookieStore.get("cartId");
   return cookieWithCartId?.value;
 };
 
-const setCartIdInCookie = (cartId: string) => {
-  const cookieStore = cookies();
+const setCartIdInCookie = async (cartId: string) => {
+  const cookieStore = await cookies();
   cookieStore.set("cartId", cartId, { maxAge: expirationTimeInSeconds });
 };
 
@@ -26,7 +26,7 @@ const createNewCart = async () => {
   const cart = await createEmptyCart();
 
   if (cart) {
-    setCartIdInCookie(cart.id);
+    await setCartIdInCookie(cart.id);
     return cart;
   }
 
@@ -34,7 +34,7 @@ const createNewCart = async () => {
 };
 
 const getCart = async () => {
-  const cartId = getCartIdFromCookie();
+  const cartId = await getCartIdFromCookie();
 
   if (!cartId) return await createNewCart();
 
@@ -44,11 +44,11 @@ const getCart = async () => {
   return await createNewCart();
 };
 
-const refreshCookie = () => {
-  const cartId = getCartIdFromCookie();
+const refreshCookie = async () => {
+  const cartId = await getCartIdFromCookie();
 
   if (cartId) {
-    setCartIdInCookie(cartId);
+    await setCartIdInCookie(cartId);
   }
 };
 
@@ -72,7 +72,7 @@ export const increaseProductQuantityInExistingCartItem = async ({
   });
 
   if (updatedCart) {
-    refreshCookie();
+    await refreshCookie();
     return updatedCart;
   }
 
@@ -101,7 +101,7 @@ export const addNewItemToCart = async (productId: string) => {
   });
 
   if (updatedCartWithNewlyAddedItem) {
-    refreshCookie();
+    await refreshCookie();
     return updatedCartWithNewlyAddedItem;
   }
 
@@ -115,7 +115,7 @@ export const removeItemFromCart = async (itemId: string) => {
   const updatedCart = await deleteCartItem({ cartId: cart.id, itemId });
 
   if (updatedCart) {
-    refreshCookie();
+    await refreshCookie();
   }
 };
 
@@ -136,6 +136,6 @@ export const updateItemQuantity = async ({
   });
 
   if (updatedCart) {
-    refreshCookie();
+    await refreshCookie();
   }
 };

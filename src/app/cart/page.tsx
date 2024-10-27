@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cookieWithCartId = cookieStore.get("cartId");
   const cartId = cookieWithCartId?.value;
 

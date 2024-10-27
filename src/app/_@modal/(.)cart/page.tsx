@@ -8,7 +8,7 @@ import { getCartById } from "@/lib/queries/cart/getCartById";
 import { CartItemsTemplate } from "@/components/templates/CartItemsTemplate/CartItemsTemplate";
 
 export default async function Page() {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cookieWithCartId = cookieStore.get("cartId");
   const cartId = cookieWithCartId?.value;
 

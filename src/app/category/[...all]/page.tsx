@@ -11,17 +11,19 @@ import { Filters } from "@/components/blocks/Filters/Filters";
 import { defaultSort, sorting } from "@/lib/constants";
 
 type Props = {
-  params: {
+  params: Promise<{
     all: string[];
-  };
-  searchParams: Record<string, string>;
+  }>;
+  searchParams: Promise<Record<string, string>>;
 };
 
-export const generateMetadata = async ({
-  params: {
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
+  const params = await props.params;
+
+  const {
     all: [categorySlug],
-  },
-}: Props): Promise<Metadata> => {
+  } = params;
+
   const category = await getCategoryNameBySlug({ slug: categorySlug });
 
   if (!category) return notFound();
@@ -47,12 +49,14 @@ export const generateMetadata = async ({
   };
 };
 
-export default async function Page({
-  params: {
+export default async function Page(props: Props) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
+
+  const {
     all: [categorySlug, page],
-  },
-  searchParams,
-}: Props) {
+  } = params;
+
   const currentPage = typeof page === "undefined" ? 1 : parseInt(page);
   if (Number.isNaN(currentPage) || currentPage < 1) return notFound();
 

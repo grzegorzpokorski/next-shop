@@ -6,7 +6,7 @@ import { getProductsByIds } from "@/lib/queries/products/getProductsByIds";
 import { validateRecentViewedCookieValue } from "@/utils/validateRecentViewedCookieValue";
 
 export const RecentlyViewed = async () => {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cookieWithRecentlyViewed = cookieStore.get("recentlyViewed");
 
   if (!cookieWithRecentlyViewed) return null;

@@ -3,11 +3,10 @@ import type { Metadata } from "next/types";
 import { ContentPageTemplate } from "@/components/templates/ContentPageTemplate/ContentPageTemplate";
 import { getPageBySlug } from "@/lib/queries/pages/getPageBySlug";
 
-export const generateMetadata = async ({
-  params: { slug },
-}: {
-  params: { slug: string };
+export const generateMetadata = async (props: {
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> => {
+  const { slug } = await props.params;
   const page = await getPageBySlug({ slug });
 
   if (!page) return notFound();
@@ -33,11 +32,10 @@ export const generateMetadata = async ({
   };
 };
 
-export default async function Page({
-  params: { slug },
-}: {
-  params: { slug: string };
+export default async function Page(props: {
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await props.params;
   const page = await getPageBySlug({ slug });
 
   if (!page) return notFound();

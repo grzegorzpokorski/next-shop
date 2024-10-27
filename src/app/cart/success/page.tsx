@@ -11,11 +11,10 @@ import { updateProdcutById } from "@/lib/queries/products/updateProductById";
 import { publishProducts } from "@/lib/queries/products/publishProducts";
 import { formatPrice } from "@/utils/formatPrice";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: { session_id?: string | undefined | string[] };
+export default async function Page(props: {
+  searchParams: Promise<{ session_id?: string | undefined | string[] }>;
 }) {
+  const searchParams = await props.searchParams;
   if (typeof searchParams.session_id !== "string") {
     redirect("/");
   }
@@ -35,7 +34,7 @@ export default async function Page({
       notFound();
     });
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cookieWithCartId = cookieStore.get("cartId");
   const cartId = cookieWithCartId?.value;
 

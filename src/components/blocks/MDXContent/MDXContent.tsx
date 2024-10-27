@@ -1,6 +1,7 @@
 import type { MDXRemoteProps } from "next-mdx-remote/rsc";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import type { MDXComponents } from "mdx/types";
+import type { JSX } from "react";
 import { Heading } from "@/components/ui/Heading/Heading";
 
 const components = {

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button/Button";
 import { getCartById } from "@/lib/queries/cart/getCartById";
 
 export const CartOpener = async () => {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cartId = cookieStore.get("cartId")?.value;
   if (!cartId) return <Btn />;
 
