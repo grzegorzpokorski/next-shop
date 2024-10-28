@@ -1,7 +1,12 @@
+import type { NextConfig } from "next";
 import "./src/lib/env.mjs";
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
+  experimental: {
+    staleTimes: {
+      dynamic: 30,
+    },
+  },
   images: {
     remotePatterns: [{ hostname: "media.graphassets.com", protocol: "https" }],
     unoptimized: process.env.VERCEL_ENV !== "production",
