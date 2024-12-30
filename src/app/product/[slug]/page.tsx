@@ -41,7 +41,7 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
 };
 
 export const generateStaticParams = async () => {
-  const products = await getAllProducts({ limit: 20, skip: 0 });
+  const products = await getAllProducts({ limit: 8, skip: 0 });
   return products.products.map((product) => ({
     slug: product.slug,
   }));
