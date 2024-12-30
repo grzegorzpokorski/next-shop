@@ -8,7 +8,12 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
-    remotePatterns: [{ hostname: "media.graphassets.com", protocol: "https" }],
+    remotePatterns: [
+      {
+        hostname: "eu-central-1-shared-euc1-02.graphassets.com",
+        protocol: "https",
+      },
+    ],
     unoptimized: process.env.VERCEL_ENV !== "production",
   },
 };
