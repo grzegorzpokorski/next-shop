@@ -6,7 +6,7 @@ This repository contains the source code of the website showcasing a simple e-co
 
 [https://next-shop-gp.vercel.app/](https://next-shop-gp.vercel.app/)
 
-## Storybook docs:
+## Storybook docs (outdated, currently not maintained):
 
 [https://next-shop-gp-storybook.vercel.app/](https://next-shop-gp-storybook.vercel.app/)
 
